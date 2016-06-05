@@ -1,5 +1,6 @@
 package com.haier.test;
 
+import com.haier.service.ThridSysConfig;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
@@ -9,9 +10,9 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class ServiceTest {
     public static void main(String[]args){
         ApplicationContext ap = new ClassPathXmlApplicationContext("applicationContext.xml");
-        TestService service = ap.getBean(TestService.class);
+        ThridSysConfig service = ap.getBean(ThridSysConfig.class);
         try {
-            service.save();
+           System.out.print(service.getHpToken());
         } catch (Exception e) {
             e.printStackTrace();
         }
