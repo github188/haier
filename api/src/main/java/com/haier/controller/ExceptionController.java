@@ -1,6 +1,7 @@
 package com.haier.controller;
 
-import com.haier.common.ResponseMsg;
+import com.haier.common.exception.ApiException;
+import com.haier.common.response.ResponseMsg;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
