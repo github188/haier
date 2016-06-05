@@ -16,7 +16,7 @@
 
     <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource">
         <property name="driverClass" value="com.mysql.jdbc.Driver" />
-        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/jeesite?characterEncoding=utf8" />
+        <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/haier?characterEncoding=utf8" />
         <property name="username" value="root" />
         <property name="password" value="20160531haier" />
         <property name="idleConnectionTestPeriodInMinutes" value="${idleConnectionTestPeriodInMinutes}" />
