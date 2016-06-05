@@ -1,6 +1,8 @@
 package com.haier.domain;
 
 
+import com.google.common.base.Strings;
+
 import java.util.Date;
 
 /**
@@ -23,7 +25,13 @@ public class ServiceOrder{
     private String service_address;
     private String require_service_desc;
     private String service_time;
-
+    public boolean check(){
+        return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
+                ||null == getRequire_time() || Strings.isNullOrEmpty(getCotact_name())
+                || Strings.isNullOrEmpty(getMobile_phone())||Strings.isNullOrEmpty(getDistrict())
+                || Strings.isNullOrEmpty(getService_address()) || Strings.isNullOrEmpty(getRequire_service_desc())
+                ||Strings.isNullOrEmpty(getService_time());
+    }
     public ServiceOrder(){
         this.user_id = "0";
     }
