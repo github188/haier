@@ -1,4 +1,4 @@
-package com.haier.domain;
+package com.haier.weixin.web.domain;
 
 
 import com.google.common.base.Strings;
@@ -8,7 +8,7 @@ import java.util.Date;
 /**
  * Created by bright on 16-6-5.
  */
-public class ServiceOrder{
+public class ServiceOrder {
     private int id;
     private String apply_id;
     private String order_code;
@@ -16,7 +16,7 @@ public class ServiceOrder{
     private String user_id;
     private String service_type;
     private Date require_time;
-    private Date order_time;
+    private Date order_time=new Date();
     private String arrive_time="";
     private String service_man_id;
     private String cotact_name;
@@ -25,6 +25,7 @@ public class ServiceOrder{
     private String service_address;
     private String require_service_desc;
     private String service_time;
+
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
                 ||null == getRequire_time() || Strings.isNullOrEmpty(getCotact_name())

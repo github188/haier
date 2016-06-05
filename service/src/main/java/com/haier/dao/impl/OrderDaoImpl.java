@@ -53,6 +53,5 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 return ps;
             }
         }, keyHolder);
-
     }
 }
