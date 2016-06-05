@@ -29,8 +29,8 @@ import java.util.Map;
 public abstract  class HEAbstractHttpClient {
     private static String defaultUTF="utf-8";
     private static Charset UTF_8=Charset.forName(defaultUTF);
-    private static int socket_timeout=6000;
-    private static int connection_timeout=6000;
+    private static int socket_timeout=60000;
+    private static int connection_timeout=60000;
 
 
     public static CloseableHttpClient getHttpClient(){

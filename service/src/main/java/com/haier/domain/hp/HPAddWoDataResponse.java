@@ -40,4 +40,15 @@ public class HPAddWoDataResponse {
     public void setData(String data) {
         this.data = data;
     }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("HPAddWoDataResponse{");
+        sb.append("status='").append(status).append('\'');
+        sb.append(", code='").append(code).append('\'');
+        sb.append(", msg='").append(msg).append('\'');
+        sb.append(", data='").append(data).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }
