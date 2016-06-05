@@ -1,26 +1,11 @@
 package com.haier.controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-
-import com.haier.common.ResponseBody;
-import com.haier.common.ResponseConstantCode;
-import com.haier.common.ResponseMsg;
+import com.haier.common.response.ResponseBody;
+import com.haier.common.response.ResponseConstantCode;
+import com.haier.common.response.ResponseMsg;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
-import com.alibaba.fastjson.JSONObject;
 
 public class BaseController {
 

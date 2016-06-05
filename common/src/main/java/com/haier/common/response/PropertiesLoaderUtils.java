@@ -1,4 +1,4 @@
-package com.haier.common;
+package com.haier.common.response;
 
 import com.google.common.base.Preconditions;
 

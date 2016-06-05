@@ -1,4 +1,4 @@
-package com.haier.common;
+package com.haier.common.response;
 
 import com.alibaba.fastjson.serializer.NameFilter;
 import com.google.common.collect.Lists;

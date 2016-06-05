@@ -1,4 +1,4 @@
-package com.haier.common;
+package com.haier.common.response;
 
 public class ResponseConstantCode {
 

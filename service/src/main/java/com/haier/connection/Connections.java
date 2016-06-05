@@ -1,7 +1,7 @@
 package com.haier.connection;
 
 import com.google.common.base.Strings;
-import com.haier.common.PropertiesLoaderUtils;
+import com.haier.common.response.PropertiesLoaderUtils;
 import com.jolbox.bonecp.BoneCP;
 import com.jolbox.bonecp.BoneCPConfig;
 
