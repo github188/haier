@@ -15,8 +15,10 @@ import java.io.PrintWriter;
  */
 public class ResponseUtils {
     private static Logger logger = LoggerFactory.getLogger(ResponseUtils.class);
+    private static final String CHARSET = "GBK";
     public static void returnInfo( HttpServletResponse response, int httpStatusCode, String returnInfo) throws IOException {
         response.setStatus(httpStatusCode);
+        response.setCharacterEncoding(CHARSET);
         if (returnInfo != null && returnInfo.trim().length() > 0) {
             PrintWriter out = response.getWriter();
             logger.info("返回终端数据：" + returnInfo);

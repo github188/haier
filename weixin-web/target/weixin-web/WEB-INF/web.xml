@@ -6,6 +6,21 @@
     <session-config>
         <session-timeout>30</session-timeout>
     </session-config>
-
+    <servlet>
+        <servlet-name>serviceOrder</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinServiceOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>serviceOrder</servlet-name>
+        <url-pattern>/serviceOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>common</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinCommonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>common</servlet-name>
+        <url-pattern>/common</url-pattern>
+    </servlet-mapping>
 
 </web-app>

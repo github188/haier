@@ -14,5 +14,13 @@
         <servlet-name>serviceOrder</servlet-name>
         <url-pattern>/serviceOrder</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>common</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinCommonServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>common</servlet-name>
+        <url-pattern>/common</url-pattern>
+    </servlet-mapping>
 
 </web-app>
