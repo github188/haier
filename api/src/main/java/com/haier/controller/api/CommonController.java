@@ -23,7 +23,7 @@ import java.util.List;
  * Created by bright on 16-6-5.
  */
 @Controller
-@RequestMapping("/test/1.0/common")
+@RequestMapping("/haier/1.0/common")
 public class CommonController extends BaseController {
     Logger log = LoggerFactory.getLogger(CommonController.class);
 

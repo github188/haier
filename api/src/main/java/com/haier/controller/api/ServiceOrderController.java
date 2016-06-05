@@ -20,7 +20,7 @@ import java.util.Date;
  * Created by bright on 16-6-5.
  */
 @Controller
-@RequestMapping("/test/1.0/order")
+@RequestMapping("/haier/1.0/order")
 public class ServiceOrderController extends BaseController {
 
     Logger log = LoggerFactory.getLogger(getClass());
