@@ -25,8 +25,8 @@ public class CommonDaoImpl extends BaseDaoImpl implements CommonDao {
                 @Override
                 public Brand mapRow(ResultSet resultSet, int i) throws SQLException {
                     Brand brand = new Brand();
-                    brand.setCode(resultSet.getString("code"));
-                    brand.setName(resultSet.getString("name"));
+                    brand.setValue(resultSet.getString("code"));
+                    brand.setText(resultSet.getString("name"));
                     return brand;
                 }
             });
@@ -42,8 +42,8 @@ public class CommonDaoImpl extends BaseDaoImpl implements CommonDao {
                 @Override
                 public ProductType mapRow(ResultSet resultSet, int i) throws SQLException {
                     ProductType type = new ProductType();
-                    type.setCode(resultSet.getString("code"));
-                    type.setName(resultSet.getString("name"));
+                    type.setValue(resultSet.getString("code"));
+                    type.setText(resultSet.getString("name"));
                     return type;
                 }
             });
@@ -59,8 +59,8 @@ public class CommonDaoImpl extends BaseDaoImpl implements CommonDao {
                 @Override
                 public ProductSubType mapRow(ResultSet resultSet, int i) throws SQLException {
                     ProductSubType subType = new ProductSubType();
-                    subType.setCode(resultSet.getString("code"));
-                    subType.setName(resultSet.getString("name"));
+                    subType.setValue(resultSet.getString("code"));
+                    subType.setText(resultSet.getString("name"));
                     return subType;
                 }
             });

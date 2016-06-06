@@ -1,0 +1,8 @@
+/home/bright/haier/haier/common/src/main/java/com/haier/common/response/Page.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/response/ResponseBody.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/response/ResponseMsg.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/exception/ApiException.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/response/PropertiesLoaderUtils.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/httpclient/HEHttpClients.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/httpclient/HEAbstractHttpClient.java
+/home/bright/haier/haier/common/src/main/java/com/haier/common/response/ResponseConstantCode.java

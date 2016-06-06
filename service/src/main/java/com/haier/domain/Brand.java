@@ -4,24 +4,24 @@ package com.haier.domain;
  * Created by bright on 16-6-5.
  */
 public class Brand {
-    String code;
+    String value;
 
-    String name;
-
-    public String getName() {
-        return name;
+    public String getText() {
+        return text;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getCode() {
-        return code;
+    public String getValue() {
+        return value;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setValue(String value) {
+        this.value = value;
     }
+
+    String text;
 
 }
