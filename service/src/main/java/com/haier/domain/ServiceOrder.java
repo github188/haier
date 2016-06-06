@@ -15,7 +15,7 @@ public class ServiceOrder{
     private String product_id;
     private String user_id;
     private String service_type;
-    private Date require_time;
+    private Date require_service_date;
     private Date order_time=new Date();
     private String arrive_time="";
     private String service_man_id="-1";
@@ -27,7 +27,7 @@ public class ServiceOrder{
     private String service_time;
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
-                ||null == getRequire_time() || Strings.isNullOrEmpty(getContact_name())
+                ||null == getRequire_service_date() || Strings.isNullOrEmpty(getContact_name())
                 || Strings.isNullOrEmpty(getMobile_phone())||Strings.isNullOrEmpty(getDistrict())
                 || Strings.isNullOrEmpty(getAddress()) || Strings.isNullOrEmpty(getRequire_service_desc())
                 ||Strings.isNullOrEmpty(getService_time());
@@ -106,12 +106,12 @@ public class ServiceOrder{
         this.service_type = service_type;
     }
 
-    public Date getRequire_time() {
-        return require_time;
+    public Date getRequire_service_date() {
+        return require_service_date;
     }
 
-    public void setRequire_time(Date require_time) {
-        this.require_time = require_time;
+    public void setRequire_service_date(Date require_service_date) {
+        this.require_service_date = require_service_date;
     }
 
     public Date getOrder_time() {
@@ -181,7 +181,7 @@ public class ServiceOrder{
         sb.append(", product_id='").append(product_id).append('\'');
         sb.append(", user_id='").append(user_id).append('\'');
         sb.append(", service_type='").append(service_type).append('\'');
-        sb.append(", require_time=").append(require_time);
+        sb.append(", require_service_date=").append(require_service_date);
         sb.append(", order_time=").append(order_time);
         sb.append(", arrive_time='").append(arrive_time).append('\'');
         sb.append(", service_man_id='").append(service_man_id).append('\'');

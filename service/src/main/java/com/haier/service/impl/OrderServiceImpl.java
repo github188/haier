@@ -42,7 +42,7 @@ public class OrderServiceImpl implements OrderService{
     private HPAddWoDataRequest build(ServiceOrder serviceOrder){
         return HPAddWoDataRequestBuilder.create()
                 .setApply_id(serviceOrder.getApply_id()).setProduct_id(serviceOrder.getProduct_id())
-                .setService_type(serviceOrder.getService_type()).setRequire_service_date(sdf.format(serviceOrder.getRequire_time()))
+                .setService_type(serviceOrder.getService_type()).setRequire_service_date(sdf.format(serviceOrder.getRequire_service_date()))
                 .setCustomer_name(serviceOrder.getContact_name()).setMobile_phone(serviceOrder.getMobile_phone())
                 .setDistrict(serviceOrder.getDistrict()).setAddress(serviceOrder.getAddress()).setRequire_service_desc(serviceOrder.getRequire_service_desc())
                 .setService_time(serviceOrder.getService_time()).build();

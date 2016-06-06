@@ -40,7 +40,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setString(3, order.getProduct_id());
                 ps.setString(4, order.getUser_id());
                 ps.setString(5, order.getService_type());
-                ps.setTimestamp(6, new Timestamp(order.getRequire_time().getTime()));
+                ps.setTimestamp(6, new Timestamp(order.getRequire_service_date().getTime()));
                 ps.setTimestamp(7, new Timestamp(order.getOrder_time().getTime()));
                 ps.setString(8, order.getArrive_time());
                 ps.setString(9, order.getService_man_id());

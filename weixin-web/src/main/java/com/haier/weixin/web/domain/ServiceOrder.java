@@ -15,36 +15,41 @@ public class ServiceOrder {
     private String product_id;
     private String user_id;
     private String service_type;
-    private Date require_time;
+    private Date require_service_date;
     private Date order_time=new Date();
     private String arrive_time="";
-    private String service_man_id;
-    private String cotact_name;
+    private String service_man_id="-1";
+    private String contact_name;
     private String mobile_phone;
     private String district;
-    private String service_address;
+    private String address;
     private String require_service_desc;
     private String service_time;
-
-    public String getCotact_name() {
-        return cotact_name;
-    }
-
-    public void setCotact_name(String cotact_name) {
-        this.cotact_name = cotact_name;
-    }
-
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
-                ||null == getRequire_time() || Strings.isNullOrEmpty(getCotact_name())
+                ||null == getRequire_service_date() || Strings.isNullOrEmpty(getContact_name())
                 || Strings.isNullOrEmpty(getMobile_phone())||Strings.isNullOrEmpty(getDistrict())
-                || Strings.isNullOrEmpty(getService_address()) || Strings.isNullOrEmpty(getRequire_service_desc())
+                || Strings.isNullOrEmpty(getAddress()) || Strings.isNullOrEmpty(getRequire_service_desc())
                 ||Strings.isNullOrEmpty(getService_time());
     }
     public ServiceOrder(){
         this.user_id = "0";
     }
+    public String getContact_name() {
+        return contact_name;
+    }
 
+    public void setContact_name(String contact_name) {
+        this.contact_name = contact_name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public Date getUpdatetime() {
         return updatetime;
     }
@@ -101,12 +106,12 @@ public class ServiceOrder {
         this.service_type = service_type;
     }
 
-    public Date getRequire_time() {
-        return require_time;
+    public Date getRequire_service_date() {
+        return require_service_date;
     }
 
-    public void setRequire_time(Date require_time) {
-        this.require_time = require_time;
+    public void setRequire_service_date(Date require_service_date) {
+        this.require_service_date = require_service_date;
     }
 
     public Date getOrder_time() {
@@ -133,7 +138,6 @@ public class ServiceOrder {
         this.service_man_id = service_man_id;
     }
 
-
     public String getMobile_phone() {
         return mobile_phone;
     }
@@ -148,14 +152,6 @@ public class ServiceOrder {
 
     public void setDistrict(String district) {
         this.district = district;
-    }
-
-    public String getService_address() {
-        return service_address;
-    }
-
-    public void setService_address(String service_address) {
-        this.service_address = service_address;
     }
 
     public String getRequire_service_desc() {
@@ -174,5 +170,29 @@ public class ServiceOrder {
         this.service_time = service_time;
     }
 
-    private Date updatetime;
+    private Date updatetime=new Date();
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ServiceOrder{");
+        sb.append("id=").append(id);
+        sb.append(", apply_id='").append(apply_id).append('\'');
+        sb.append(", order_code='").append(order_code).append('\'');
+        sb.append(", product_id='").append(product_id).append('\'');
+        sb.append(", user_id='").append(user_id).append('\'');
+        sb.append(", service_type='").append(service_type).append('\'');
+        sb.append(", require_service_date=").append(require_service_date);
+        sb.append(", order_time=").append(order_time);
+        sb.append(", arrive_time='").append(arrive_time).append('\'');
+        sb.append(", service_man_id='").append(service_man_id).append('\'');
+        sb.append(", contact_name='").append(contact_name).append('\'');
+        sb.append(", mobile_phone='").append(mobile_phone).append('\'');
+        sb.append(", district='").append(district).append('\'');
+        sb.append(", address='").append(address).append('\'');
+        sb.append(", require_service_desc='").append(require_service_desc).append('\'');
+        sb.append(", service_time='").append(service_time).append('\'');
+        sb.append(", updatetime=").append(updatetime);
+        sb.append('}');
+        return sb.toString();
+    }
 }
