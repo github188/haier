@@ -67,7 +67,6 @@
     </dependencies>
     <build>
         <finalName>api</finalName>
-
         <plugins>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
@@ -91,7 +90,7 @@
                 <artifactId>tomcat-maven-plugin</artifactId>
                 <version>1.1</version>
                 <configuration>
-                    <path>/smart-app</path>
+                    <path>/api</path>
                     <port>9090</port>
                     <url>http://localhost:9090/manager/html</url>
                     <server>tomcat6</server>

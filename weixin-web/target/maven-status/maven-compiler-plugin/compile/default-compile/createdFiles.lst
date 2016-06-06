@@ -1,1 +1,11 @@
+<<<<<<< HEAD
 com\haier\weixin\web\TestHp.class
+=======
+com\haier\weixin\web\utils\ResponseUtils.class
+com\haier\weixin\web\servlet\WeiXinServiceOrderServlet.class
+com\haier\weixin\web\TestHp.class
+com\haier\weixin\web\utils\ObjectUtils.class
+com\haier\weixin\web\domain\ServiceOrder.class
+com\haier\weixin\web\utils\RequestUtils.class
+com\haier\weixin\web\servlet\WeiXinCommonServlet.class
+>>>>>>> d60b851233bcd7f6ba68047d8fe174b271cb3656
