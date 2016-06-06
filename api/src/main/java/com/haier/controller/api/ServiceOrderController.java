@@ -52,7 +52,7 @@ public class ServiceOrderController extends BaseController {
             orderService.saveOrder(serviceOrder);
         }catch(Exception ex){
             ex.printStackTrace();
-            return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE,ResponseConstantCode.INTERNAL_ERROR_DESC);
+            return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE, ex.getMessage());
         }
         return getSuccess();
     }

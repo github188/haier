@@ -19,16 +19,24 @@ public class ServiceOrder {
     private Date order_time=new Date();
     private String arrive_time="";
     private String service_man_id;
-    private String cotact_name;
+    private String contact_name;
     private String mobile_phone;
     private String district;
     private String service_address;
     private String require_service_desc;
     private String service_time;
 
+    public String getContact_name() {
+        return contact_name;
+    }
+
+    public void setContact_name(String contact_name) {
+        this.contact_name = contact_name;
+    }
+
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
-                ||null == getRequire_time() || Strings.isNullOrEmpty(getCotact_name())
+                ||null == getRequire_time() || Strings.isNullOrEmpty(getContact_name())
                 || Strings.isNullOrEmpty(getMobile_phone())||Strings.isNullOrEmpty(getDistrict())
                 || Strings.isNullOrEmpty(getService_address()) || Strings.isNullOrEmpty(getRequire_service_desc())
                 ||Strings.isNullOrEmpty(getService_time());
@@ -125,13 +133,6 @@ public class ServiceOrder {
         this.service_man_id = service_man_id;
     }
 
-    public String getCotact_name() {
-        return cotact_name;
-    }
-
-    public void setCotact_name(String cotact_name) {
-        this.cotact_name = cotact_name;
-    }
 
     public String getMobile_phone() {
         return mobile_phone;

@@ -16,7 +16,7 @@ public class ServiceOrder{
     private String user_id;
     private String service_type;
     private Date require_time;
-    private Date order_time;
+    private Date order_time=new Date();
     private String arrive_time="";
     private String service_man_id="-1";
     private String cotact_name;
