@@ -59,7 +59,7 @@ public abstract  class HEAbstractHttpClient {
     }
 
     public static HttpPost getHttpPost(String url,Map<String,String> params){
-        HttpPost post = getHttpPost(url);
+        HttpPost post = new HttpPost(url);
         HttpEntity entity = buildPostEntity(params);
         if(null != entity){
             post.setEntity(entity);

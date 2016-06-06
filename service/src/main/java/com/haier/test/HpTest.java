@@ -64,7 +64,7 @@ public class HpTest {
         serviceOrder.setRequire_service_desc("测试安装");
         serviceOrder.setOrder_time(new Date());
         serviceOrder.setService_time("2016-06-06 17:00:00-2016-06-06 17:00:00");
-        String  json =  HEHttpClients.httpGetExecute("http://localhost:9090/api/haier/1.0/order/newOrder", ObjectUtils.toMap(serviceOrder));
+        String  json =  HEHttpClients.httpPostExecute("http://localhost:9090/api/haier/1.0/order/newOrder", ObjectUtils.toMap(serviceOrder));
         System.out.println(json);
     }
 }

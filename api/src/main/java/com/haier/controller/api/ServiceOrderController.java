@@ -29,7 +29,7 @@ public class ServiceOrderController extends BaseController {
     @Autowired
     private OrderService orderService;
 
-    @RequestMapping(path = "/newOrder",method = RequestMethod.GET)
+    @RequestMapping(path = "/newOrder",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
     public ResponseBody newOrder(ServiceOrder serviceOrder){
         serviceOrder.setApply_id(ApplyIdGenerate.getDefaultApplyId());
