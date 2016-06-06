@@ -1,7 +1,5 @@
 package com.haier.service.impl;
 
-import com.haier.common.ObjectUtils;
-import com.haier.common.exception.ApiException;
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.hp.HPAddWoDataRequest;
@@ -16,7 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by bright on 16-6-5.
