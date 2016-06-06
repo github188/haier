@@ -1,11 +1,19 @@
 package com.haier.test;
 
+import com.google.common.collect.Maps;
+import com.haier.common.ObjectUtils;
+import com.haier.common.httpclient.HEHttpClients;
+import com.haier.domain.ServiceOrder;
 import com.haier.domain.hp.HPAddWoDataRequest;
 import com.haier.domain.hp.HPAddWoDataRequestBuilder;
 import com.haier.domain.hp.HPAddWoDataResponse;
 import com.haier.service.hp.HPFacade;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import java.lang.reflect.InvocationTargetException;
+import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by ehl on 2016/6/5.
@@ -23,14 +31,38 @@ public class HpTest {
 
     public static void main(String[]args){
 
-
-        ApplicationContext ap = new ClassPathXmlApplicationContext("applicationContext.xml");
-        HPFacade facade = ap.getBean(HPFacade.class);
         try {
-            HPAddWoDataResponse response = facade.executeAddWoData(getAddRequest());
-            System.out.print(response.toString());
+            hpOrderTest();
         } catch (Exception e) {
             e.printStackTrace();
         }
+//        Map<String,String> maps = Maps.newHashMap();
+//        maps.put()
+//
+//        ApplicationContext ap = new ClassPathXmlApplicationContext("applicationContext.xml");
+//        HPFacade facade = ap.getBean(HPFacade.class);
+//        try {
+//            HPAddWoDataResponse response = facade.executeAddWoData(getAddRequest());
+//            System.out.print(response.toString());
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+    }
+
+    public static void hpOrderTest() throws Exception {
+        ServiceOrder serviceOrder = new ServiceOrder();
+//                serviceOrder.setApply_id("leixwksdjaflsd");
+        serviceOrder.setProduct_id("16");
+        serviceOrder.setService_type("T01");
+        serviceOrder.setRequire_time(new Date());
+        serviceOrder.setCotact_name("雷晓武");
+        serviceOrder.setMobile_phone("15022086097");
+        serviceOrder.setDistrict("120103");
+        serviceOrder.setService_address("天津市河西区福建路4号");
+        serviceOrder.setRequire_service_desc("测试安装");
+        serviceOrder.setOrder_time(new Date());
+        serviceOrder.setService_time("2016-06-05 17:00:00-2016-06-05 17:00:00");
+        String  json =  HEHttpClients.httpGetExecute("http://localhost:9090/api/haier/1.0/order/newOrder", ObjectUtils.toMap(serviceOrder));
+        System.out.println(json);
     }
 }

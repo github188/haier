@@ -18,7 +18,7 @@ public class ServiceOrder{
     private Date require_time;
     private Date order_time;
     private String arrive_time="";
-    private String service_man_id;
+    private String service_man_id="-1";
     private String cotact_name;
     private String mobile_phone;
     private String district;
@@ -172,5 +172,29 @@ public class ServiceOrder{
         this.service_time = service_time;
     }
 
-    private Date updatetime;
+    private Date updatetime=new Date();
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("ServiceOrder{");
+        sb.append("id=").append(id);
+        sb.append(", apply_id='").append(apply_id).append('\'');
+        sb.append(", order_code='").append(order_code).append('\'');
+        sb.append(", product_id='").append(product_id).append('\'');
+        sb.append(", user_id='").append(user_id).append('\'');
+        sb.append(", service_type='").append(service_type).append('\'');
+        sb.append(", require_time=").append(require_time);
+        sb.append(", order_time=").append(order_time);
+        sb.append(", arrive_time='").append(arrive_time).append('\'');
+        sb.append(", service_man_id='").append(service_man_id).append('\'');
+        sb.append(", cotact_name='").append(cotact_name).append('\'');
+        sb.append(", mobile_phone='").append(mobile_phone).append('\'');
+        sb.append(", district='").append(district).append('\'');
+        sb.append(", service_address='").append(service_address).append('\'');
+        sb.append(", require_service_desc='").append(require_service_desc).append('\'');
+        sb.append(", service_time='").append(service_time).append('\'');
+        sb.append(", updatetime=").append(updatetime);
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -31,8 +31,9 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
         String url = getHpUrl();
         Map<String,String> req=getAddWoDataParams();
         req.putAll(params);
-        logger.info(req.size()+"\t"+req.get("timestamp"));
+
         String json= HEHttpClients.httpGetExecute(url,req);
+        logger.info("request hp result:"+json);
         if(Strings.isNullOrEmpty(json)){
             throw new Exception("return null");
         }
