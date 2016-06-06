@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title>cxSelect 联动下拉菜单 &raquo; 在线演示 - 前端开发仓库</title>
+<style>
+body{background:#ddd;font:14px/1.7 tahoma,'\5fae\8f6f\96c5\9ed1',sans-serif;}
+h1,h2,h3{font-size:36px;line-height:1;}
+h2{font-size:24px;}
+h3{font-size:18px;}
+fieldset{margin:2em 0;}
+fieldset legend{font-weight:bold;font-size:16px;line-height:2;}
+select,button{padding:0.5em;}
+a{color:#06f;text-decoration:none;}
+a:hover{color:#00f;}
+.wrap{width:900px;margin:0 auto;padding:20px 50px;border-radius:8px;background:#fff;box-shadow:0 0 10px rgba(0,0,0,0.2);}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>cxSelect 联动下拉菜单</h1>
+
+  <h2>示例</h2>
+
+  <fieldset id="city_china">
+    <legend>默认</legend>
+    <p>省份：<select class="province">
+      <option>请选择</option>
+    </select></p>
+    <p>城市：<select class="city">
+      <option>请选择</option>
+    </select></p>
+    <p>地区：<select class="area">
+      <option>请选择</option>
+    </select></p>
+  </fieldset>
+</div>
+
+<script src="http://cdn.staticfile.org/jquery/1.11.3/jquery.min.js"></script>
+<!-- <script src="http://cdn.staticfile.org/zepto/1.0/zepto.min.js"></script> -->
+<script src="js/jquery.cxselect.js"></script>
+<script>
+  (function() {
+    var urlChina = 'js/city.json';
+
+    $.cxSelect.defaults.url = urlChina;
+    // 默认
+    $('#city_china').cxSelect({
+      selects: ['province', 'city', 'area'],
+      jsonName: 'name',
+      jsonValue: 'code',
+      jsonSub: 'sub'
+    });
+  })();
+</script>
+</body>
+</html>

@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -27,6 +28,72 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                     t.setRole_id(resultSet.getString("role_id"));
                     t.setUser_id(resultSet.getString("user_id"));
                     return t;
+                }
+            });
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<HashMap<String, String>> findCity() {
+        try {
+            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct pro_code,city_code,city from t_region", new RowMapper<HashMap<String,String>>() {
+                @Override
+                public HashMap<String,String> mapRow(ResultSet resultSet, int i) throws SQLException {
+                    HashMap<String,String> map = new HashMap<String,String>();
+                    int n = 1;
+                    while(n<=resultSet.getMetaData().getColumnCount()){
+                        map.put(resultSet.getMetaData().getColumnLabel(n),resultSet.getString(resultSet.getMetaData().getColumnLabel(n)));
+                        n++;
+                    }
+                    return map;
+                }
+            });
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<HashMap<String, String>> findProvince() {
+        try {
+            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct pro_code,province from t_region", new RowMapper<HashMap<String,String>>() {
+                @Override
+                public HashMap<String,String> mapRow(ResultSet resultSet, int i) throws SQLException {
+                    HashMap<String,String> map = new HashMap<String,String>();
+                    int n = 1;
+                    while(n<=resultSet.getMetaData().getColumnCount()){
+                        map.put(resultSet.getMetaData().getColumnLabel(n),resultSet.getString(resultSet.getMetaData().getColumnLabel(n)));
+                        n++;
+                    }
+                    return map;
+                }
+            });
+            return list;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    @Override
+    public List<HashMap<String, String>> findRegion() {
+        try {
+            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct city_code,admin_code,region_name from t_region", new RowMapper<HashMap<String,String>>() {
+                @Override
+                public HashMap<String,String> mapRow(ResultSet resultSet, int i) throws SQLException {
+                    HashMap<String,String> map = new HashMap<String,String>();
+                    int n = 1;
+                    while(n<=resultSet.getMetaData().getColumnCount()){
+                        map.put(resultSet.getMetaData().getColumnLabel(n),resultSet.getString(resultSet.getMetaData().getColumnLabel(n)));
+                        n++;
+                    }
+                    return map;
                 }
             });
             return list;
