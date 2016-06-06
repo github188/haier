@@ -19,23 +19,37 @@ public class ServiceOrder{
     private Date order_time=new Date();
     private String arrive_time="";
     private String service_man_id="-1";
-    private String cotact_name;
+    private String contact_name;
     private String mobile_phone;
     private String district;
-    private String service_address;
+    private String address;
     private String require_service_desc;
     private String service_time;
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
-                ||null == getRequire_time() || Strings.isNullOrEmpty(getCotact_name())
+                ||null == getRequire_time() || Strings.isNullOrEmpty(getContact_name())
                 || Strings.isNullOrEmpty(getMobile_phone())||Strings.isNullOrEmpty(getDistrict())
-                || Strings.isNullOrEmpty(getService_address()) || Strings.isNullOrEmpty(getRequire_service_desc())
+                || Strings.isNullOrEmpty(getAddress()) || Strings.isNullOrEmpty(getRequire_service_desc())
                 ||Strings.isNullOrEmpty(getService_time());
     }
     public ServiceOrder(){
         this.user_id = "0";
     }
+    public String getContact_name() {
+        return contact_name;
+    }
 
+    public void setContact_name(String contact_name) {
+        this.contact_name = contact_name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
     public Date getUpdatetime() {
         return updatetime;
     }
@@ -124,14 +138,6 @@ public class ServiceOrder{
         this.service_man_id = service_man_id;
     }
 
-    public String getCotact_name() {
-        return cotact_name;
-    }
-
-    public void setCotact_name(String cotact_name) {
-        this.cotact_name = cotact_name;
-    }
-
     public String getMobile_phone() {
         return mobile_phone;
     }
@@ -146,14 +152,6 @@ public class ServiceOrder{
 
     public void setDistrict(String district) {
         this.district = district;
-    }
-
-    public String getService_address() {
-        return service_address;
-    }
-
-    public void setService_address(String service_address) {
-        this.service_address = service_address;
     }
 
     public String getRequire_service_desc() {
@@ -187,10 +185,10 @@ public class ServiceOrder{
         sb.append(", order_time=").append(order_time);
         sb.append(", arrive_time='").append(arrive_time).append('\'');
         sb.append(", service_man_id='").append(service_man_id).append('\'');
-        sb.append(", cotact_name='").append(cotact_name).append('\'');
+        sb.append(", contact_name='").append(contact_name).append('\'');
         sb.append(", mobile_phone='").append(mobile_phone).append('\'');
         sb.append(", district='").append(district).append('\'');
-        sb.append(", service_address='").append(service_address).append('\'');
+        sb.append(", address='").append(address).append('\'');
         sb.append(", require_service_desc='").append(require_service_desc).append('\'');
         sb.append(", service_time='").append(service_time).append('\'');
         sb.append(", updatetime=").append(updatetime);

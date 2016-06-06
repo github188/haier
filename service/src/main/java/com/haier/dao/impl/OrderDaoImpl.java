@@ -44,10 +44,10 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setTimestamp(7, new Timestamp(order.getOrder_time().getTime()));
                 ps.setString(8, order.getArrive_time());
                 ps.setString(9, order.getService_man_id());
-                ps.setString(10, order.getCotact_name());
+                ps.setString(10, order.getContact_name());
                 ps.setString(11, order.getMobile_phone());
                 ps.setString(12, order.getDistrict());
-                ps.setString(13, order.getService_address());
+                ps.setString(13, order.getAddress());
                 ps.setString(14, order.getRequire_service_desc());
                 ps.setString(15, order.getService_time());
                 return ps;

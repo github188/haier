@@ -15,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
+import java.util.Map;
 
 /**
  * Created by bright on 16-6-5.
@@ -33,7 +35,6 @@ public class ServiceOrderController extends BaseController {
     @org.springframework.web.bind.annotation.ResponseBody
     public ResponseBody newOrder(ServiceOrder serviceOrder){
         serviceOrder.setApply_id(ApplyIdGenerate.getDefaultApplyId());
-
         if(serviceOrder.check()){
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
