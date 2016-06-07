@@ -63,7 +63,9 @@ function ajax_area_Data(obj){
 				obj.innerText = items[0].text;
 				var id = obj.getAttribute("id");
 				$("#"+id+"-hidden").val(items[0].value);
+				$(obj).css("color","#000"); 
 			});
+			
 		}
 	}); 
 }
@@ -84,6 +86,7 @@ function ajax_shi_Data(obj,sheng_val){
 				obj.innerText = items[0].text;
 				var id = obj.getAttribute("id");
 				$("#"+id+"-hidden").val(items[0].value);
+				$(obj).css("color","#000"); 
 			});
 		}
 	}); 
@@ -113,6 +116,7 @@ function ajax_areaa_Data(obj,sheng_val,shi_val){
 				obj.innerText = items[0].text;
 				var id = obj.getAttribute("id");
 				$("#"+id+"-hidden").val(items[0].value);
+				$(obj).css("color","#000"); 
 			});
 		}
 	}); 

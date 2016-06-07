@@ -21,7 +21,10 @@
 			"js/jquery-1.11.1.min.js",
 			"data/pinpai.json",
 			"data/type1.json",
-			"data/city.json"
+			"data/city.json",
+			"js/scale.js",
+			"css/iconfont.css",
+			"fonts/iconfont.ttf"
 		],
 		"refer": [
 			"pages/maintence.html"

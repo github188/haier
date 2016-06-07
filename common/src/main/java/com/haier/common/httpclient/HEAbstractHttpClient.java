@@ -14,7 +14,9 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.impl.conn.PoolingHttpClientConnectionManager;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 
@@ -34,10 +36,18 @@ public abstract  class HEAbstractHttpClient {
     private static Charset UTF_8=Charset.forName(defaultUTF);
     private static int socket_timeout=60000;
     private static int connection_timeout=60000;
-
+    private static final int DEFAULT_MAX_NUM_PER_ROUTE = 20;
+    private static final int DEFAULT_MAX_TOTAL_NUM = 50;
 
     public static CloseableHttpClient getHttpClient(){
-           return HttpClients.createDefault();
+        HttpClientBuilder builder = HttpClients.custom();
+        PoolingHttpClientConnectionManager manager = new PoolingHttpClientConnectionManager();
+        manager.setDefaultMaxPerRoute(DEFAULT_MAX_NUM_PER_ROUTE);
+        manager.setMaxTotal(DEFAULT_MAX_TOTAL_NUM);
+        builder.setConnectionManager(manager);
+        builder.setMaxConnPerRoute(DEFAULT_MAX_NUM_PER_ROUTE);
+        builder.setMaxConnTotal(DEFAULT_MAX_TOTAL_NUM);
+        return builder.build();
     }
 
     private static RequestConfig getRequestConfig(){
