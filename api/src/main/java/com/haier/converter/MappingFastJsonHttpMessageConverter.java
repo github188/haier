@@ -6,6 +6,8 @@ import com.alibaba.fastjson.serializer.NameFilter;
 import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.google.common.io.ByteStreams;
 import com.haier.common.response.ResponseBody;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;
@@ -25,6 +27,7 @@ import java.util.List;
  */
 public class MappingFastJsonHttpMessageConverter extends AbstractHttpMessageConverter<Object> {
 
+    Logger logger = LoggerFactory.getLogger(getClass());
     public static final Charset DEFAULT_CHARSET = Charset.forName("UTF-8");
 
     public MappingFastJsonHttpMessageConverter() {
@@ -39,6 +42,7 @@ public class MappingFastJsonHttpMessageConverter extends AbstractHttpMessageConv
     @Override
     protected Object readInternal(Class<?> clazz, HttpInputMessage inputMessage) throws IOException, HttpMessageNotReadableException {
         byte body[]= ByteStreams.toByteArray(inputMessage.getBody());
+        logger.debug(new String(body));
         return JSON.parseObject(body, clazz);
     }
 

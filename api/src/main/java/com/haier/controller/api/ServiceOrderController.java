@@ -34,7 +34,7 @@ public class ServiceOrderController extends BaseController {
 
     @RequestMapping(path = "/newOrder",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
-    public ResponseBody newOrder(@RequestBody ServiceOrder serviceOrder){
+    public ResponseBody newOrder(@RequestBody ServiceOrder serviceOrder,HttpServletRequest request){
         serviceOrder.setApply_id(ApplyIdGenerate.getDefaultApplyId());
         if(serviceOrder.check()){
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);

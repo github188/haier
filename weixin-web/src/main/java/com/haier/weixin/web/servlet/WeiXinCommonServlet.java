@@ -19,6 +19,7 @@ import java.util.Properties;
 public class WeiXinCommonServlet extends HttpServlet{
     private String serviceUrl;
     private Properties properties;
+    private boolean needCode;
     @Override
     public void init() throws ServletException {
         try {
@@ -36,17 +37,12 @@ public class WeiXinCommonServlet extends HttpServlet{
             String type = req.getParameter("type");
             String code = req.getParameter("code");
             boolean needCode = false;
-            if("brand".equals(type)){
-                serviceUrl = properties.getProperty("haier.service.common.brand.url","");
-            }else if("type".equals(type)){
-                needCode = true;
-                serviceUrl = properties.getProperty("haier.service.common.type.url","")+"/"+code;
-            }else if("subType".equals(type)){
-                needCode = true;
-                serviceUrl = properties.getProperty("haier.service.common.subType.url","")+"/"+code;
+            serviceUrl = getServiceUrl(type,code);
+            if(serviceUrl == null || "".equals(serviceUrl)){
+                ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'this type not bound serviceUrl'}");
             }
             if(needCode && Strings.isNullOrEmpty(code)){
-                    ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'parameter is null'}");
+                ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'parameter is null'}");
             }
         try {
             String result = HEHttpClients.httpGetExecute(serviceUrl);
@@ -55,5 +51,18 @@ public class WeiXinCommonServlet extends HttpServlet{
             e.printStackTrace();
             ResponseUtils.returnInfo(resp,500,"{'code':-3,'message':'系统异常'}");
         }
+    }
+
+    private String getServiceUrl(String type,String code){
+        if("brand".equals(type)){
+            return properties.getProperty("haier.service.common.brand.url","");
+        }else if("type".equals(type)){
+            needCode = true;
+            return properties.getProperty("haier.service.common.type.url","")+"/"+code;
+        }else if("subType".equals(type)){
+            needCode = true;
+            return properties.getProperty("haier.service.common.subType.url","")+"/"+code;
+        }
+        return "";
     }
 }

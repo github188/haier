@@ -6,8 +6,24 @@ import java.util.List;
  * Created by bright on 16-6-6.
  */
 public class City {
-    private String code;
-    private String name;
+    private String value;
+    private String text;
+    private List<Area> sub;
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 
     public List<Area> getSub() {
         return sub;
@@ -17,21 +33,4 @@ public class City {
         this.sub = sub;
     }
 
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    private List<Area> sub;
 }

@@ -40,7 +40,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     @Override
     public List<HashMap<String, String>> findCity() {
         try {
-            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct pro_code,city_code,city from t_region", new RowMapper<HashMap<String,String>>() {
+            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct pro_code,city_code,city from t_region  order by pro_code,city_code,area_code asc", new RowMapper<HashMap<String,String>>() {
                 @Override
                 public HashMap<String,String> mapRow(ResultSet resultSet, int i) throws SQLException {
                     HashMap<String,String> map = new HashMap<String,String>();
@@ -62,7 +62,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     @Override
     public List<HashMap<String, String>> findProvince() {
         try {
-            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct pro_code,province from t_region", new RowMapper<HashMap<String,String>>() {
+            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct pro_code,province from t_region order by pro_code,city_code,area_code asc", new RowMapper<HashMap<String,String>>() {
                 @Override
                 public HashMap<String,String> mapRow(ResultSet resultSet, int i) throws SQLException {
                     HashMap<String,String> map = new HashMap<String,String>();
@@ -84,7 +84,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     @Override
     public List<HashMap<String, String>> findRegion() {
         try {
-            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct city_code,admin_code,region_name from t_region", new RowMapper<HashMap<String,String>>() {
+            List<HashMap<String,String>> list =  super.getBySqlRowMapper("select distinct city_code,admin_code,region_name from t_region  order by pro_code,city_code,area_code asc", new RowMapper<HashMap<String,String>>() {
                 @Override
                 public HashMap<String,String> mapRow(ResultSet resultSet, int i) throws SQLException {
                     HashMap<String,String> map = new HashMap<String,String>();

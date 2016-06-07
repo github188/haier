@@ -4,23 +4,24 @@ package com.haier.domain;
  * Created by bright on 16-6-6.
  */
 public class Area {
-    private String code;
+    private String text;
 
-    public String getName() {
-        return name;
+    private String value;
+
+    public String getText() {
+        return text;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    public String getCode() {
-        return code;
+    public String getValue() {
+        return value;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    private String name;
 }

@@ -6,9 +6,9 @@ import java.util.List;
  * Created by bright on 16-6-6.
  */
 public class Province {
-    private String code;
-    private String name;
-
+    private String value;
+    private String text;
+    private List<City> sub;
     public List<City> getSub() {
         return sub;
     }
@@ -17,21 +17,20 @@ public class Province {
         this.sub = sub;
     }
 
-    public String getName() {
-        return name;
+    public String getValue() {
+        return value;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setValue(String value) {
+        this.value = value;
     }
 
-    public String getCode() {
-        return code;
+    public String getText() {
+        return text;
     }
 
-    public void setCode(String code) {
-        this.code = code;
+    public void setText(String text) {
+        this.text = text;
     }
 
-    private List<City> sub;
 }

@@ -41,20 +41,20 @@ public class TestServiceImpl implements TestService {
         List<Province> list = Lists.newArrayList();
         for(HashMap<String,String> map:provinceList){
             Province province = new Province();
-            province.setCode(map.get("pro_code"));
-            province.setName(map.get("province"));
+            province.setValue(map.get("pro_code"));
+            province.setText(map.get("province"));
             List<City> cityList1 = Lists.newArrayList();
             for(HashMap<String,String> map1:cityList){
-                if(map1.get("pro_code").equals(province.getCode())){
+                if(map1.get("pro_code").equals(province.getValue())){
                     City city = new City();
-                    city.setCode(map1.get("city_code"));
-                    city.setName(map1.get("city"));
+                    city.setValue(map1.get("city_code"));
+                    city.setText(map1.get("city"));
                     List<Area> areas = Lists.newArrayList();
                     for(HashMap<String,String> map2:regionList){
                         Area area = new Area();
-                        if(map2.get("city_code").equals(city.getCode())){
-                            area.setCode(map2.get("admin_code"));
-                            area.setName(map2.get("region_name"));
+                        if(map2.get("city_code").equals(city.getValue())){
+                            area.setValue(map2.get("admin_code"));
+                            area.setText(map2.get("region_name"));
                             areas.add(area);
                         }
                     }
