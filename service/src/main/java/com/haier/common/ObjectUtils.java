@@ -2,7 +2,13 @@ package com.haier.common;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+import java.beans.BeanInfo;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -11,14 +17,30 @@ import java.util.Map;
 public class ObjectUtils {
     /**
      *
-     * @param object
      * @return
      * @throws IllegalAccessException
      * @throws NoSuchMethodException
      * @throws InvocationTargetException
      */
-    public static Map<String,String> toMap(Object object) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
-        return BeanUtils.describe(object);
+    public static Map<String,Object> toMap(Object obj) throws IntrospectionException, InvocationTargetException, IllegalAccessException {
+        if(obj == null)
+            return null;
+
+        Map<String, Object> map = new HashMap<String, Object>();
+
+        BeanInfo beanInfo = Introspector.getBeanInfo(obj.getClass());
+        PropertyDescriptor[] propertyDescriptors = beanInfo.getPropertyDescriptors();
+        for (PropertyDescriptor property : propertyDescriptors) {
+            String key = property.getName();
+            if (key.compareToIgnoreCase("class") == 0) {
+                continue;
+            }
+            Method getter = property.getReadMethod();
+            Object value = getter!=null ? getter.invoke(obj) : null;
+            map.put(key, value);
+        }
+
+        return map;
     }
 
     /**

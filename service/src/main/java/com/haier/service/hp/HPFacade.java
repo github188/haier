@@ -57,5 +57,5 @@ public interface HPFacade {
     public HPAddWoDataResponse executeAddWoData(HPAddWoDataRequest addWoDataRequest) throws Exception;
 
 
-    public HPAddWoDataResponse executeAddWoData(Map<String,String> params) throws Exception;
+    public HPAddWoDataResponse executeAddWoData(Map<String,Object> params) throws Exception;
 }

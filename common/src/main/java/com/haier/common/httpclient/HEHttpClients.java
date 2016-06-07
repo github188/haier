@@ -22,7 +22,7 @@ public class HEHttpClients extends HEAbstractHttpClient{
      * @return
      * @throws Exception
      */
-    public static String httpGetExecute(String url,Map<String,String> params) throws Exception {
+    public static String httpGetExecute(String url,Map<String,Object> params) throws Exception {
         CloseableHttpClient client = getHttpClient();
         HttpGet get = getHttpGet(url,params);
         CloseableHttpResponse response=null;
@@ -70,7 +70,7 @@ public class HEHttpClients extends HEAbstractHttpClient{
      */
     public static String httpPostExecute(String url) throws Exception {
         CloseableHttpClient client = getHttpClient();
-        HttpPost post = getHttpPost(url);
+        HttpPost post = getJsonHttpPost(url);
         CloseableHttpResponse response=null;
 
         try{
@@ -92,10 +92,10 @@ public class HEHttpClients extends HEAbstractHttpClient{
      * @return
      * @throws Exception
      */
-    public static String httpJsonPostExecute(String url,Map<String,String> params) throws Exception {
+    public static String httpJsonPostExecute(String url,Map<String,Object> params) throws Exception {
         CloseableHttpClient client = getHttpClient();
-        HttpPost post = getHttpPost(url,params);
-        post.setHeader(HttpHeaders.CONTENT_TYPE, "application/json;charset=utf-8");
+
+        HttpPost post = getJsonHttpPost(url, params);
         CloseableHttpResponse response=null;
 
         try{
@@ -117,9 +117,9 @@ public class HEHttpClients extends HEAbstractHttpClient{
      * @return
      * @throws Exception
      */
-    public static String httpPostExecute(String url,Map<String,String> params,Header header) throws Exception {
+    public static String httpPostExecute(String url,Map<String,Object> params,Header header) throws Exception {
         CloseableHttpClient client = getHttpClient();
-        HttpPost post = getHttpPost(url,params);
+        HttpPost post = getFormHttpPost(url, params);
         post.setHeader(header);
         CloseableHttpResponse response=null;
 
@@ -141,10 +141,10 @@ public class HEHttpClients extends HEAbstractHttpClient{
      * @return
      * @throws Exception
      */
-    public static String httpPostExecute(String url,Map<String,String> params) throws Exception {
+    public static String httpPostExecute(String url,Map<String,Object> params) throws Exception {
         CloseableHttpClient client = getHttpClient();
-        HttpPost post = getHttpPost(url,params);
-//        post.addHeader(new BasicHeader("Content-type","application/json; charset=utf-8"));
+        HttpPost post = getFormHttpPost(url, params);
+
         CloseableHttpResponse response=null;
 
         try{

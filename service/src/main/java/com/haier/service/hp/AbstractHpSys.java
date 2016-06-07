@@ -12,15 +12,15 @@ import java.util.Map;
 public class AbstractHpSys extends ThridSysConfig {
     protected String getUrlPrefix=getHpUrl();
 
-    protected Map<String,String> getAddWoDataParams(){
-        Map<String,String> params=getHpDefaultParams();
+    protected Map<String,Object> getAddWoDataParams(){
+        Map<String,Object> params=getHpDefaultParams();
         params.put("method","rrs.order.addwodata");
         return params;
 
     }
 
-    protected Map<String,String> getHpDefaultParams(){
-        Map<String,String> params = Maps.newHashMap();
+    protected Map<String,Object> getHpDefaultParams(){
+        Map<String,Object> params = Maps.newHashMap();
         params.put("timestamp",new Date().getTime()+"");
         params.put("access_token",getHpToken());
         return params;

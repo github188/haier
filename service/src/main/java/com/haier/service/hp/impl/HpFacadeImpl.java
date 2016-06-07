@@ -27,10 +27,10 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
     }
 
     @Override
-    public HPAddWoDataResponse executeAddWoData(Map<String, String> params) throws Exception {
+    public HPAddWoDataResponse executeAddWoData(Map<String, Object> params) throws Exception {
 
         String url = getHpUrl();
-        Map<String,String> req=getAddWoDataParams();
+        Map<String,Object> req=getAddWoDataParams();
         req.putAll(params);
 
         String json= HEHttpClients.httpGetExecute(url,req);

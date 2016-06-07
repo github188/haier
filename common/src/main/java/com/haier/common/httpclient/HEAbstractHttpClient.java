@@ -2,10 +2,8 @@ package com.haier.common.httpclient;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.collect.Lists;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpStatus;
-import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
+import com.sun.corba.se.impl.ior.OldJIDLObjectKeyTemplate;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.EntityBuilder;
@@ -13,6 +11,7 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.client.utils.URLEncodedUtils;
+import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
@@ -25,6 +24,7 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Created by ehl on 2016/6/5.
@@ -51,17 +51,46 @@ public abstract  class HEAbstractHttpClient {
         return getHttpGet(url, null);
     }
 
-    public static HttpGet getHttpGet(String url ,Map<String,String> paramas){
+    public static HttpGet getHttpGet(String url ,Map<String,Object> paramas){
         HttpGet get =  new HttpGet(buildGetUrl(url,paramas));
         get.setConfig(getRequestConfig());
         return get;
     }
 
-    public static HttpPost getHttpPost(String url){
-        return getHttpPost(url,null);
+    public static HttpPost getFormHttpPost(String url){
+        return getFormHttpPost(url,null);
+    }
+    public static HttpPost getJsonHttpPost(String url){
+        return getJsonHttpPost(url, null);
+    }
+    public static HttpPost getJsonHttpPost(String url,Map<String,Object> params){
+        HttpPost post = new HttpPost(url);
+        HttpEntity entity = null;
+        try {
+            entity = buildStringPostEntity(params);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        if(null != entity){
+            post.setEntity(entity);
+        }
+        post.setConfig(getRequestConfig());
+        return post;
+    }
+    public static HttpPost getHttpPost(String url,Map<String,Object> params,Header headers){
+        HttpPost post = new HttpPost(url);
+        HttpEntity entity = null;
+        entity = buildPostEntity(params);
+//        post.set
+        if(null != entity){
+            post.setEntity(entity);
+        }
+        post.setConfig(getRequestConfig());
+        return post;
     }
 
-    public static HttpPost getHttpPost(String url,Map<String,String> params){
+
+    public static HttpPost getFormHttpPost(String url,Map<String,Object> params){
         HttpPost post = new HttpPost(url);
         HttpEntity entity = null;
         entity = buildPostEntity(params);
@@ -72,29 +101,34 @@ public abstract  class HEAbstractHttpClient {
         post.setConfig(getRequestConfig());
         return post;
     }
-    private static HttpEntity buildStringPostEntity(Map<String,String> params) throws UnsupportedEncodingException {
-        if (params != null) {
-
-            return  new StringEntity(JSONObject.toJSONString(params),UTF_8);
+    private static HttpEntity buildStringPostEntity(Map<String,Object> params) throws UnsupportedEncodingException {
+        if (params != null ) {
+            System.out.println(JSONObject.toJSONString(params));
+            return  new StringEntity(JSONObject.toJSONString(params),
+                    ContentType.create(ContentType.APPLICATION_JSON.getMimeType(),defaultUTF));
         }
         return null;
     }
-    private static HttpEntity buildPostEntity(Map<String,String> params){
+    private static HttpEntity buildPostEntity(Map<String,Object> params){
         if (params != null) {
             List<NameValuePair> formparams = Lists.newArrayList();
             for (String key : params.keySet()) {
-                formparams.add(new BasicNameValuePair(key, params.get(key)));
+                formparams.add(new BasicNameValuePair(key, params.get(key).toString()));
             }
             return  new UrlEncodedFormEntity(formparams, UTF_8);
         }
         return null;
     }
-    private static String buildGetUrl(String url,Map<String,String> params){
+    private static String buildGetUrl(String url,Map<String,Object> params){
         StringBuffer uriStr = new StringBuffer(url);
         if (params != null) {
             List<NameValuePair> ps = Lists.newArrayList();
             for (String key : params.keySet()) {
-                ps.add(new BasicNameValuePair(key, params.get(key)));
+                Object value=params.get(key);
+                if(null == value){
+                    continue;
+                }
+                ps.add(new BasicNameValuePair(key, value.toString()));
             }
             uriStr.append("?");
             uriStr.append(URLEncodedUtils.format(ps, UTF_8));
@@ -104,7 +138,7 @@ public abstract  class HEAbstractHttpClient {
 
     protected static void checkHeader(StatusLine line) throws Exception {
         if(line.getStatusCode()!=HttpStatus.SC_OK){
-            throw new Exception(line.getReasonPhrase());
+            throw new Exception(line.getReasonPhrase()+"\t"+line.getStatusCode());
         }
     }
 
