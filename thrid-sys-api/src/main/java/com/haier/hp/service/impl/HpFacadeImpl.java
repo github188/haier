@@ -1,13 +1,15 @@
-package com.haier.service.hp.impl;
+package com.haier.hp.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
+import com.google.common.collect.Maps;
 import com.haier.common.ObjectUtils;
 import com.haier.common.httpclient.HEHttpClients;
-import com.haier.domain.hp.HPAddWoDataRequest;
-import com.haier.domain.hp.HPAddWoDataResponse;
-import com.haier.service.hp.AbstractHpSys;
-import com.haier.service.hp.HPFacade;
+import com.haier.hp.domain.HPAddWoDataRequest;
+import com.haier.hp.domain.HPAddWoDataResponse;
+import com.haier.hp.domain.HPWoListResponse;
+import com.haier.hp.service.AbstractHpSys;
+import com.haier.hp.service.HPFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -40,4 +42,27 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
         }
         return JSONObject.parseObject(json, HPAddWoDataResponse.class);
     }
+
+    @Override
+    public HPWoListResponse executeWoList(String phone, String flag) throws Exception {
+        if(Strings.isNullOrEmpty(phone) || Strings.isNullOrEmpty(flag)){
+            throw new Exception("null parameter with phone or flag");
+        }
+        Map<String,Object> maps = Maps.newHashMap();
+        maps.put("phone",phone);
+        maps.put("flag", flag);
+        Map<String,Object> req=getWoList();
+        req.putAll(maps);
+        logger.error(getHpUrl());
+        String response= HEHttpClients.httpGetExecute(getHpUrl(),req);
+        logger.error(response);
+        return null;
+    }
+
+    @Override
+    public HPWoListResponse executeWoList(String phone) throws Exception {
+        return executeWoList(phone,"1");
+    }
+
+
 }

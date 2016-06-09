@@ -7,7 +7,6 @@ import com.haier.common.response.ResponseMsg;
 import com.haier.controller.BaseController;
 import com.haier.domain.ServiceOrder;
 import com.haier.service.OrderService;
-import com.haier.test.TestService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +14,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
-import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.util.Map;
 
 /**
  * Created by bright on 16-6-5.

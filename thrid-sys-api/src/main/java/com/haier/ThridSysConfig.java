@@ -1,4 +1,4 @@
-package com.haier.service;
+package com.haier;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;

@@ -147,9 +147,9 @@ public abstract  class HEAbstractHttpClient {
     }
 
     protected static void checkHeader(StatusLine line) throws Exception {
-        if(line.getStatusCode()!=HttpStatus.SC_OK){
-            throw new Exception(line.getReasonPhrase()+"\t"+line.getStatusCode());
-        }
+//        if(line.getStatusCode()!=HttpStatus.SC_OK){
+//            throw new Exception(line.getReasonPhrase()+"\t"+line.getStatusCode());
+//        }
     }
 
     protected static String toString(HttpEntity entity) throws IOException {

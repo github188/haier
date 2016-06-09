@@ -2,11 +2,11 @@ package com.haier.service.impl;
 
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
-import com.haier.domain.hp.HPAddWoDataRequest;
-import com.haier.domain.hp.HPAddWoDataRequestBuilder;
-import com.haier.domain.hp.HPAddWoDataResponse;
+import com.haier.hp.domain.HPAddWoDataRequest;
+import com.haier.hp.domain.HPAddWoDataRequestBuilder;
+import com.haier.hp.domain.HPAddWoDataResponse;
+import com.haier.hp.service.HPFacade;
 import com.haier.service.OrderService;
-import com.haier.service.hp.HPFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +19,7 @@ import java.text.SimpleDateFormat;
  * Created by bright on 16-6-5.
  */
 @Service("orderService")
-public class OrderServiceImpl implements OrderService{
+public class OrderServiceImpl implements OrderService {
     private Logger logger = LoggerFactory.getLogger(getClass());
     @Autowired
     private HPFacade hpFacade;

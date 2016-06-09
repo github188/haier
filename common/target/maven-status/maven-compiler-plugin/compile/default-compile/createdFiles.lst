@@ -1,4 +1,5 @@
 com\haier\common\response\ResponseMsg.class
+com\haier\common\ObjectUtils.class
 com\haier\common\response\ResponseBody.class
 com\haier\common\exception\ApiException.class
 com\haier\common\httpclient\HEHttpClients.class

@@ -1,7 +1,8 @@
-package com.haier.service.hp;
+package com.haier.hp.service;
 
-import com.haier.domain.hp.HPAddWoDataRequest;
-import com.haier.domain.hp.HPAddWoDataResponse;
+import com.haier.hp.domain.HPAddWoDataRequest;
+import com.haier.hp.domain.HPAddWoDataResponse;
+import com.haier.hp.domain.HPWoListResponse;
 
 import java.util.Map;
 
@@ -57,5 +58,9 @@ public interface HPFacade {
     public HPAddWoDataResponse executeAddWoData(HPAddWoDataRequest addWoDataRequest) throws Exception;
 
 
-    public HPAddWoDataResponse executeAddWoData(Map<String,Object> params) throws Exception;
+    public HPAddWoDataResponse executeAddWoData(Map<String, Object> params) throws Exception;
+
+    HPWoListResponse executeWoList(String phone,String flag)throws Exception;
+
+    HPWoListResponse executeWoList(String phone)throws Exception;
 }
