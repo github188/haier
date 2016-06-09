@@ -22,5 +22,13 @@
         <servlet-name>common</servlet-name>
         <url-pattern>/common</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>qrGetProductInfo</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinQRServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>qrGetProductInfo</servlet-name>
+        <url-pattern>/qrGetProductInfo</url-pattern>
+    </servlet-mapping>
 
 </web-app>
