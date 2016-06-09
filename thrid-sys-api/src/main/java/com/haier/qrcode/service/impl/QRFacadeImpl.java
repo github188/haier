@@ -19,7 +19,7 @@ public class QRFacadeImpl extends AbstractEaiSys implements QRFacade{
     Logger logger = LoggerFactory.getLogger(getClass());
     @Override
     public GetOIDProductInfoOutput getOIDProductInfo(GetOIDProductInfoInput input) throws Exception{
-        logger.info("--------------------getOIDProductInfo-------------OidContent:"+input.getOidContent());
+        logger.info("--------------------getOIDProductInfo-------------UserName:"+input.getUserName()+",PassWord:"+input.getPwd()+",OidContent:"+input.getOidContent());
         OIDProductInfoSoap client = null;
         try {
             client = getProductInfoWSClient();

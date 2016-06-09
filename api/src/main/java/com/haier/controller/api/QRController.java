@@ -7,6 +7,7 @@ import com.haier.common.response.ResponseConstantCode;
 import com.haier.common.response.ResponseMsg;
 import com.haier.controller.BaseController;
 import com.haier.domain.ServiceOrder;
+import com.haier.qrcode.domain.GetOIDProductInfoInput;
 import com.haier.qrcode.domain.GetOIDProductInfoOutput;
 import com.haier.service.OrderService;
 import com.haier.service.QRService;
@@ -15,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,15 +31,15 @@ public class QRController extends BaseController{
     @Autowired
     private QRService qrService;
 
-    @RequestMapping(path = "/getOidProductInfo/{oidContent}",method = RequestMethod.GET)
+    @RequestMapping(path = "/getOidProductInfo",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
-    public ResponseBody newOrder(@PathVariable String oidContent){
-        if(Strings.isNullOrEmpty(oidContent)){
+    public ResponseBody newOrder(@RequestBody GetOIDProductInfoInput input){
+        if(Strings.isNullOrEmpty(input.getOidContent())){
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
         GetOIDProductInfoOutput output = null;
         try{
-            output = qrService.getOIDProductInfo(oidContent);
+            output = qrService.getOIDProductInfo(input.getOidContent());
         }catch(Exception ex){
             ex.printStackTrace();
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE, ex.getMessage());
