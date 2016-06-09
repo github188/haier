@@ -14,19 +14,27 @@ public class AbstractHpSys extends ThridSysConfig {
      * 提交订单
      * @return
      */
-    protected Map<String,Object> getAddWoDataParams(){
+    protected Map<String,Object> getAddWoDataParams(Map<String,Object> otherParameter){
         Map<String,Object> params=getHpDefaultParams();
         params.put("method","rrs.order.addwodata");
+        if(null == otherParameter || otherParameter.isEmpty()){
+            return params;
+        }
+        params.putAll(otherParameter);
         return params;
     }
-
+//    protected get
     /**
      * 订单列表
      * @return
      */
-    protected Map<String,Object> getWoList(){
+    protected Map<String,Object> getWoList(Map<String,Object> otherParameter){
         Map<String,Object> params=getHpDefaultParams();
         params.put("method","rrs.hcsp.wo.getwolist");
+        if(null == otherParameter || otherParameter.isEmpty()){
+            return params;
+        }
+        params.putAll(otherParameter);
         return params;
     }
 
@@ -34,7 +42,7 @@ public class AbstractHpSys extends ThridSysConfig {
      * 默认参数
      * @return
      */
-    protected Map<String,Object> getHpDefaultParams(){
+    private  Map<String,Object> getHpDefaultParams(){
         Map<String,Object> params = Maps.newHashMap();
         params.put("timestamp",new Date().getTime()+"");
         params.put("access_token",getHpToken());

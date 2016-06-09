@@ -8,12 +8,14 @@ import com.haier.common.httpclient.HEHttpClients;
 import com.haier.hp.domain.HPAddWoDataRequest;
 import com.haier.hp.domain.HPAddWoDataResponse;
 import com.haier.hp.domain.HPWoListResponse;
+import com.haier.hp.domain.HPWoWholeInfo;
 import com.haier.hp.service.AbstractHpSys;
 import com.haier.hp.service.HPFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -32,8 +34,7 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
     public HPAddWoDataResponse executeAddWoData(Map<String, Object> params) throws Exception {
 
         String url = getHpUrl();
-        Map<String,Object> req=getAddWoDataParams();
-        req.putAll(params);
+        Map<String,Object> req=getAddWoDataParams(params);
 
         String json= HEHttpClients.httpGetExecute(url,req);
         logger.info("request hp result:"+json);
@@ -51,8 +52,7 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
         Map<String,Object> maps = Maps.newHashMap();
         maps.put("phone",phone);
         maps.put("flag", flag);
-        Map<String,Object> req=getWoList();
-        req.putAll(maps);
+        Map<String,Object> req=getWoList(maps);
         logger.error(getHpUrl());
         String response= HEHttpClients.httpGetExecute(getHpUrl(),req);
         logger.error(response);
@@ -62,6 +62,16 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
     @Override
     public HPWoListResponse executeWoList(String phone) throws Exception {
         return executeWoList(phone,"1");
+    }
+
+    @Override
+    public HPWoWholeInfo executeWoWholeInfo(String orderId) throws Exception {
+        return null;
+    }
+
+    @Override
+    public List<HPWoWholeInfo> executeWoWholeInfoBatch(String orderId) throws Exception {
+        return null;
     }
 
 
