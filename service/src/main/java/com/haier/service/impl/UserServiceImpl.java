@@ -32,22 +32,22 @@ public class UserServiceImpl implements UserService{
         User existuser = userDao.findUser(user);
         if(existuser != null){
             //如果登录成功则更新用户AccessToken
-            String userKey = Token.getToken(user.getUserName(),"1",user.getMac());
+            String accessToken = Token.getToken(user.getUserName(),"1",user.getMac());
             existuser.setMac(user.getMac());
-            existuser.setUser_key(userKey);
-            userDao.updateUserUserKeyAndMac(existuser);
+            existuser.setAccessToken(accessToken);
+            userDao.updateUserAccessTokenAndMac(existuser);
             return existuser;
         }
         return null;
     }
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
-    public void clearUserKey(User user) throws Exception{
-        userDao.deleteUserKey(user);
+    public void clearAccessToken(User user) throws Exception{
+        userDao.deleteAccessToken(user);
     }
 
     @Override
-    public Boolean IsValidAccess(String userKey, String u, String t, String m) {
+    public Boolean IsValidAccess(String userKey, int u, String t, String m) {
 
         return userDao.IsValidAccess( userKey,   u,   t,   m);
     }

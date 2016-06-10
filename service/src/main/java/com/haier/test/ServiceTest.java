@@ -1,5 +1,6 @@
 package com.haier.test;
 
+import com.haier.common.token.Token;
 import com.haier.domain.User;
 import com.haier.service.UserService;
 import org.springframework.context.ApplicationContext;
@@ -18,8 +19,9 @@ public class ServiceTest {
         try {
             User user = new User();
             user.setUserName("bright");
-            user.setPassword("123456");
-            service.clearAccessToken(user);
+//            user.setPassword("123456");
+//            user.setMac("qwert");
+           service.clearAccessToken(user);
         } catch (Exception e) {
             e.printStackTrace();
         }

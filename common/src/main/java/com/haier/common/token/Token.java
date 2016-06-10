@@ -43,7 +43,7 @@ public class Token {
 		return ret;
 	}
 
-	private static String getTokenM(String t,String userKey) {
+	public static String getTokenM(String t,String userKey) {
     	String lastChar = t.substring(t.length()-1,t.length());//取最后一个字符
 		int i=Integer.parseInt(lastChar);
 		String md5String = userKey +t.substring(i);    

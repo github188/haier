@@ -24,15 +24,7 @@ public class User {
     private String source;
     private String source_id;
     private String mac;
-    private String user_key;
 
-    public String getUser_key() {
-        return user_key;
-    }
-
-    public void setUser_key(String user_key) {
-        this.user_key = user_key;
-    }
     public String getMac() {
         return mac;
     }
@@ -153,7 +145,7 @@ public class User {
         this.source = source;
     }
     public boolean check(){
-        return Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password) || Strings.isNullOrEmpty(phone) || Strings.isNullOrEmpty(mac);
+        return Strings.isNullOrEmpty(userName) || Strings.isNullOrEmpty(password) || Strings.isNullOrEmpty(phone);
     }
 
     @Override
@@ -173,6 +165,7 @@ public class User {
                 ", phone='" + phone + '\'' +
                 ", source='" + source + '\'' +
                 ", source_id='" + source_id + '\'' +
+                ", mac='" + mac + '\'' +
                 '}';
     }
 }

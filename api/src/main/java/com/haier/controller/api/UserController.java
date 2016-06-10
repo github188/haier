@@ -1,5 +1,6 @@
 package com.haier.controller.api;
 
+import com.alibaba.fastjson.JSONObject;
 import com.google.common.base.Strings;
 import com.haier.common.response.ResponseBody;
 import com.haier.common.response.ResponseConstantCode;
@@ -40,7 +41,10 @@ public class UserController extends BaseController{
             logger.error(ex.getMessage());
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE,ex.getMessage());
         }
-        ResponseMsg<User> message = new ResponseMsg<User>(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
+        ResponseMsg message = new ResponseMsg(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
+        JSONObject info = new JSONObject();
+        info.put("user_id",user.getId());
+        info.put("access_token",user.getAccessToken());
         message.setInfo(user);
         return message;
     }
@@ -60,7 +64,10 @@ public class UserController extends BaseController{
             logger.error(ex.getMessage());
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE,ex.getMessage());
         }
-        ResponseMsg<User> message = new ResponseMsg(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
+        ResponseMsg message = new ResponseMsg(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
+        JSONObject info = new JSONObject();
+        info.put("user_id",user.getId());
+        info.put("access_token",user.getAccessToken());
         message.setInfo(user);
         return message;
     }
@@ -72,7 +79,7 @@ public class UserController extends BaseController{
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
         try{
-            userService.clearUserKey(user);
+            userService.clearAccessToken(user);
         }catch(Exception ex){
             logger.error(ex.getMessage());
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE,ex.getMessage());

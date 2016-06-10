@@ -22,9 +22,9 @@ public interface UserDao {
 
     public User findUserByUserName(User user);
 
-    public void deleteUserKey(User user) throws Exception;
+    public void deleteAccessToken(User user) throws Exception;
 
-    public void updateUserUserKeyAndMac(User user) throws Exception;
+    public void updateUserAccessTokenAndMac(User user) throws Exception;
 
-    public Boolean IsValidAccess(String userKey, String u, String t, String m) ;
+    public Boolean IsValidAccess(String accessToken,int u,String t,String m);
 }

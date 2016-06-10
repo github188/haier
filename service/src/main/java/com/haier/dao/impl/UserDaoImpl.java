@@ -111,13 +111,13 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     @Transactional(readOnly = false)
     @Override
     public User add(final User user) {
-        final String userkey = Token.getToken(user.getUserName(), "1", user.getMac());
-        user.setUser_key(userkey);
+        final String accessToken = Token.getToken(user.getUserName(), "1", user.getMac());
+        user.setAccessToken(accessToken);
         final StringBuilder sql = new StringBuilder("insert into t_user(" +
                 "username,password,");
         sql.append("name,sex,birthday,mobile,address,head_pic,login_status,");
-        sql.append("updatetime,user_source,user_source_id,access_token,user_key,mac)");
-        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        sql.append("updatetime,user_source,user_source_id,access_token,mac)");
+        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         super.getJdbcTemplate().update(new PreparedStatementCreator() {
             @Override
@@ -138,8 +138,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
                 ps.setString(11, user.getSource());
                 ps.setString(12, user.getSource_id());
                 ps.setString(13, user.getAccessToken());
-                ps.setString(14, user.getUser_key());
-                ps.setString(15,user.getMac());
+                ps.setString(14,user.getMac());
                 return ps;
             }
         }, keyHolder);
@@ -197,18 +196,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
     @Transactional(readOnly = false)
     @Override
-    public void deleteUserKey(User user) throws Exception{
-        StringBuilder builder = new StringBuilder("update t_user set user_key = null where username='");
+    public void deleteAccessToken(User user) throws Exception{
+        StringBuilder builder = new StringBuilder("update t_user set access_token = null,mac = null where username='");
         builder.append(user.getUserName());
         builder.append("'");
         super.update(builder.toString());
     }
 
     @Override
-    public void updateUserUserKeyAndMac(User user) throws Exception{
-        StringBuilder builder = new StringBuilder("update t_user set user_key = '");
+    public void updateUserAccessTokenAndMac(User user) throws Exception{
+        StringBuilder builder = new StringBuilder("update t_user set access_token = '");
         builder.append(user.getAccessToken());
-        builder.append("' and mac = '");
+        builder.append("', mac = '");
         builder.append(user.getMac());
         builder.append("' where id = ");
         builder.append(user.getId());
@@ -216,19 +215,18 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public Boolean IsValidAccess(String userKey, String u, String t, String m)
+    public Boolean IsValidAccess(String accessToken,int u,String t,String m)
     {
         Boolean ret =false;
         try{
-            String sql = "SELECT id  FROM user WHERE id=? and user_key=?";
+            String sql = "SELECT 1 FROM t_user WHERE id=? and access_token=?";
             String info = null;
             try{
-                //	info = (String) jdbcTemplate.queryForObject(sql, new Object[] {userKey}, java.lang.String.class);
-                info =jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<String>(String.class),u,userKey );
+                info =jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<String>(String.class),u,accessToken );
             } catch (Exception e) {
                 info = null;
             }
-            ret= (info == null ?false:true);//info =jdbcTemplate.queryForObject(sql, new BeanPropertyRowMapper<ProductInfo>(ProductInfo.class), Id);
+            ret= (info == null ?false:true);
         } catch (Exception e) {
             ret = false;
         }

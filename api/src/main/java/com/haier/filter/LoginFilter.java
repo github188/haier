@@ -59,13 +59,11 @@ public class LoginFilter implements Filter {
 	          //resp.setCharacterEncoding("utf-8");
 	          //resp.setContentType("text/json;charset=".concat("utf-8")); 
             HttpServletRequest request = (HttpServletRequest) req;
-            String userkey =request.getHeader("x-tour-userkey");//登录前，或未取得key时，输入空字符串
-            String u =request.getHeader("u"); 
+            String userkey =request.getHeader("x-haier-accesstoken");//登录前，或未取得key时，输入空字符串
+            int u =Integer.parseInt(request.getHeader("u"));
             String t =request.getHeader("t"); 
             String m =request.getHeader("m");
-            HttpServletResponse response = (HttpServletResponse) resp;            
-           // sLogger.info(u+"\t"+m+"\t"+t+"\t"+userkey);
-            //check token 
+            HttpServletResponse response = (HttpServletResponse) resp;
             String reqUri =request.getRequestURI();
             sLogger.info("reqUri:"+reqUri+ "\t"+u+"\t"+m+"\t"+t+"\t"+userkey);
             if (Token.isValid(userkey,t,m)) {
