@@ -6,6 +6,9 @@ com\haier\common\httpclient\HEHttpClients.class
 com\haier\common\response\ResponseConstantCode.class
 com\haier\common\response\Page$1.class
 com\haier\common\httpclient\HEAbstractHttpClient.class
+<<<<<<< HEAD
 com\haier\common\JaxbUtil.class
+=======
+>>>>>>> 73e080ce568c61d43f7e32d7ba9fc6972238ac2f
 com\haier\common\response\PropertiesLoaderUtils.class
 com\haier\common\response\Page.class

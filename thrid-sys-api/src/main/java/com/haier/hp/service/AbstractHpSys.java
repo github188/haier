@@ -9,7 +9,11 @@ import java.util.Map;
 /**
  * Created by ehl on 2016/6/5.
  */
+<<<<<<< HEAD
 public abstract class AbstractHpSys extends ThridSysConfig {
+=======
+public class AbstractHpSys extends ThridSysConfig {
+>>>>>>> 73e080ce568c61d43f7e32d7ba9fc6972238ac2f
     /**
      * 提交订单
      * @return

@@ -57,11 +57,19 @@
     <orderEntry type="library" name="Maven: axis:axis-jaxrpc:1.2.1" level="project" />
     <orderEntry type="library" name="Maven: commons-discovery:commons-discovery:0.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.axis:axis-saaj:1.4" level="project" />
+<<<<<<< HEAD
+=======
+    <orderEntry type="library" name="Maven: org.eclipse.birt.runtime.3_7_1:javax.wsdl:1.5.1" level="project" />
+>>>>>>> 73e080ce568c61d43f7e32d7ba9fc6972238ac2f
     <orderEntry type="library" name="Maven: com.alibaba:druid:1.0.20" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:jconsole:1.8.0">
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://D:/Program Files/Java/jdk1.7.0_60/lib/jconsole.jar!/" />
+=======
+          <root url="jar://E:/tools/java/lib/jconsole.jar!/" />
+>>>>>>> 73e080ce568c61d43f7e32d7ba9fc6972238ac2f
         </CLASSES>
         <JAVADOC />
         <SOURCES />
@@ -70,7 +78,11 @@
     <orderEntry type="module-library">
       <library name="Maven: com.alibaba:tools:1.8.0">
         <CLASSES>
+<<<<<<< HEAD
           <root url="jar://D:/Program Files/Java/jdk1.7.0_60/lib/tools.jar!/" />
+=======
+          <root url="jar://E:/tools/java/lib/tools.jar!/" />
+>>>>>>> 73e080ce568c61d43f7e32d7ba9fc6972238ac2f
         </CLASSES>
         <JAVADOC />
         <SOURCES />

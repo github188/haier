@@ -48,7 +48,15 @@
             <artifactId>axis-saaj</artifactId>
             <version>1.4</version>
         </dependency>
+<<<<<<< HEAD
 
+=======
+        <dependency>
+            <groupId>org.eclipse.birt.runtime.3_7_1</groupId>
+            <artifactId>javax.wsdl</artifactId>
+            <version>1.5.1</version>
+        </dependency>
+>>>>>>> 73e080ce568c61d43f7e32d7ba9fc6972238ac2f
     </dependencies>
 
 </project>
