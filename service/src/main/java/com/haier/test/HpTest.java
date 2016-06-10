@@ -56,10 +56,8 @@ public class HpTest {
     static SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     public static void hpOrderTest() throws Exception {
         ServiceOrder serviceOrder = new ServiceOrder();
-//                serviceOrder.setApply_id("leixwksdjaflsd");
         serviceOrder.setProduct_id("16");
         serviceOrder.setService_type("T01");
-//        serviceOrder.setRequire_service_date(sdf.parse("2016-06-09 18:18:00"));
         serviceOrder.setRequire_service_date(new Date());
         serviceOrder.setContact_name("李");
         serviceOrder.setMobile_phone("15022086097");
@@ -70,7 +68,7 @@ public class HpTest {
         serviceOrder.setService_time("2016-06-06 17:00:00-2016-06-06 17:00:00");
         Map<String,Object> maps= ObjectUtils.toMap(serviceOrder);
 //        maps.put()
-        String  json =  HEHttpClients.httpJsonPostExecute("http://localhost:9090/api/haier/1.0/order/newOrder", maps);
+        String  json =  HEHttpClients.httpJsonPostExecute("http://115.28.231.67:3027/api/haier/1.0/order/newOrder", maps);
         System.out.println(json);
     }
 }
