@@ -110,6 +110,25 @@ public class HEHttpClients extends HEAbstractHttpClient{
         }
     }
 
+    public static String httpPostStream(String url,String body) throws Exception {
+        CloseableHttpClient client = getHttpClient();
+        HttpPost post = getStreamtpPost(url, body);
+        CloseableHttpResponse response=null;
+
+        try{
+            response=client.execute(post);
+            checkHeader(response.getStatusLine());
+            return toString(response.getEntity());
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }finally {
+            response.close();
+        }
+    }
+
+
+
     /**
      *
      * @param url
