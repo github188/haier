@@ -20,8 +20,14 @@ public class ServiceTest {
 //            User user = new User();
 //            user.setUserName("bright");
 //            user.setPassword("123456");
-//            user.setMac("qwert");
-            System.out.println(service.IsValidAccess("73E89B3FABC135754EF8095199F5C0E7",4,"test","test"));
+//            user.setPhone("123456");
+//            user = service.addNewUser(user);
+//            System.out.println(user);
+            String userkey = "960D0F073667E20BFFD3B61E149FC2CF";
+            String t =Long.toString(System.currentTimeMillis());
+            String m = Token.getTokenM(t,userkey);
+            System.out.println(t);
+            System.out.println(m);
         } catch (Exception e) {
             e.printStackTrace();
         }
