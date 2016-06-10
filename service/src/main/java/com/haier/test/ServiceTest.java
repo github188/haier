@@ -17,11 +17,11 @@ public class ServiceTest {
 //        ThridSysConfig service = ap.getBean(ThridSysConfig.class);
         UserService service = ap.getBean(UserService.class);
         try {
-            User user = new User();
-            user.setUserName("bright");
+//            User user = new User();
+//            user.setUserName("bright");
 //            user.setPassword("123456");
 //            user.setMac("qwert");
-           service.clearAccessToken(user);
+            System.out.println(service.IsValidAccess("73E89B3FABC135754EF8095199F5C0E7",4,"test","test"));
         } catch (Exception e) {
             e.printStackTrace();
         }

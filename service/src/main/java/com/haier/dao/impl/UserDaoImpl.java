@@ -197,9 +197,8 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     @Transactional(readOnly = false)
     @Override
     public void deleteAccessToken(User user) throws Exception{
-        StringBuilder builder = new StringBuilder("update t_user set access_token = null,mac = null where username='");
-        builder.append(user.getUserName());
-        builder.append("'");
+        StringBuilder builder = new StringBuilder("update t_user set access_token = null,mac = null where id=");
+        builder.append(user.getId());
         super.update(builder.toString());
     }
 
