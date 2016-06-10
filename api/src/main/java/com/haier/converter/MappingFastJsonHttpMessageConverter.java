@@ -5,7 +5,7 @@ import com.alibaba.fastjson.serializer.JSONSerializer;
 import com.alibaba.fastjson.serializer.NameFilter;
 import com.alibaba.fastjson.serializer.SerializeWriter;
 import com.google.common.io.ByteStreams;
-import com.haier.common.ResponseBody;
+import com.haier.common.response.ResponseBody;
 import org.springframework.http.HttpInputMessage;
 import org.springframework.http.HttpOutputMessage;
 import org.springframework.http.MediaType;

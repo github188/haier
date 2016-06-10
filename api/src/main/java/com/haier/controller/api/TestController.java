@@ -1,15 +1,11 @@
 package com.haier.controller.api;
 
-import com.haier.common.ResponseBody;
-import com.haier.common.ResponseMsg;
+import com.haier.common.response.ResponseBody;
 import com.haier.controller.BaseController;
 import com.haier.test.TestService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.Mapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import javax.annotation.Resource;
 
 /**
  * Created by ehl on 2016/6/4.
@@ -21,7 +17,7 @@ public class TestController  extends BaseController{
     private TestService testService;
     @RequestMapping("/example")
     @org.springframework.web.bind.annotation.ResponseBody
-    public  ResponseBody getTest(){
+    public ResponseBody getTest(){
 
         testService.save();
 

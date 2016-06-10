@@ -1,9 +1,0 @@
-com\haier\dao\IBaseDao.class
-com\haier\dao\impl\BaseDaoImpl.class
-com\haier\test\ServiceTest.class
-com\haier\dao\impl\UserDaoImpl$1.class
-com\haier\dao\impl\UserDaoImpl.class
-com\haier\test\TestService.class
-com\haier\dao\UserDao.class
-com\haier\test\Test.class
-com\haier\test\TestServiceImpl.class

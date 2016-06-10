@@ -1,8 +1,0 @@
-com\haier\controller\BaseController.class
-com\haier\controller\api\TestController.class
-com\haier\logback\LogbackWebConfigurer.class
-com\haier\controller\ExceptionController.class
-com\haier\controller\ApiException.class
-com\haier\logback\LogbackConfigurer.class
-com\haier\logback\LogbackConfigListener.class
-com\haier\converter\MappingFastJsonHttpMessageConverter.class
