@@ -70,6 +70,7 @@ public class HEIDSAPIClient {
 		this.secretKey = secretKey;
 		this.digestAlgorithm = digestAlgorithm;
 		this.responseType = responseType;
+		logger.error("wx init parameter.   "+serviceUrl+"\t"+secretKey+"\t"+digestAlgorithm+"\t"+responseType);
 	}
 
 	/**
