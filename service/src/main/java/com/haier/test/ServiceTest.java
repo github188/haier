@@ -2,11 +2,13 @@ package com.haier.test;
 
 import com.haier.common.token.Token;
 import com.haier.domain.User;
+import com.haier.hp.domain.HPWoListData;
 import com.haier.service.OrderService;
 import com.haier.service.UserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -19,7 +21,9 @@ public class ServiceTest {
         OrderService service = ap.getBean(OrderService.class);
         try {
             User user = new User();
-            service.getOrderList()
+            user.setPhone("15022086097");
+            List<HPWoListData> list = service.getOrderList(user);
+            System.out.println(list);
         } catch (Exception e) {
             e.printStackTrace();
         }

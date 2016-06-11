@@ -62,10 +62,10 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     @Override
     public void updateOrderServiceStatus(User user, final List<HPWoListData> hpwoList) {
 
-        StringBuilder sql = new StringBuilder("update set status = ? and status_desc = ? where mobile_phone='");
+        StringBuilder sql = new StringBuilder("update t_service_order set status = ?,status_desc = ? where mobile_phone='");
         sql.append(user.getPhone());
-        sql.append("' and order_code=?");
-        super.getJdbcTemplate().batchUpdate("", new BatchPreparedStatementSetter(){
+        sql.append("' and order_code = ?");
+        super.getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter(){
 
             @Override
             public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
