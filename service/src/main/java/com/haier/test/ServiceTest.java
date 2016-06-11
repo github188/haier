@@ -1,6 +1,9 @@
 package com.haier.test;
 
+import com.haier.common.response.Page;
 import com.haier.common.token.Token;
+import com.haier.domain.ServiceOrder;
+import com.haier.domain.ServiceOrderTrace;
 import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
 import com.haier.service.OrderService;
@@ -20,10 +23,15 @@ public class ServiceTest {
 //        ThridSysConfig service = ap.getBean(ThridSysConfig.class);
         OrderService service = ap.getBean(OrderService.class);
         try {
-            User user = new User();
-            user.setPhone("15022086097");
-            //List<HPWoListData> list = service.getOrderList(user);
-           // System.out.println(list);
+//            User user = new User();
+//            user.setId(1);
+//            Page<ServiceOrder> page = new Page<ServiceOrder>();
+//            page.setPageNumber(1);
+//            page.setPageSize(3);
+//            page = service.getOrderListPage(user,page);
+//            System.out.println(page);
+            List<ServiceOrderTrace> list = service.getServiceOrderTrack("BXK3160606115337");
+            System.out.println(list);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -9,16 +9,17 @@ public class HPWoWholeInfoResponse {
     private String msg;
 
 
-    private HPWoWholeInfo woWholeInfo;
-
-
-    public HPWoWholeInfo getWoWholeInfo() {
-        return woWholeInfo;
+    public HPWoWholeInfo getData() {
+        return data;
     }
 
-    public void setWoWholeInfo(HPWoWholeInfo woWholeInfo) {
-        this.woWholeInfo = woWholeInfo;
+    public void setData(HPWoWholeInfo data) {
+        this.data = data;
     }
+
+    private HPWoWholeInfo data;
+
+
 
     public String getCode() {
         return code;

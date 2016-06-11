@@ -89,20 +89,16 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     @Override
     public Page getOrderListPage(User user, Page page) throws Exception {
 
-        StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_order_service where user_id = ");
+        StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_service_order where user_id = ");
         countsql.append(user.getId());
-        countsql.append("limit  ");
-        countsql.append((page.getPageNumber()-1)*page.getPageSize());
-        countsql.append(",");
-        countsql.append(page.getPageSize());
 
         Map<String, Object> result = super.getJdbcTemplate().queryForMap(countsql.toString());
 
-        Long count = Long.parseLong((String)result.get("recordnum"));
+        Long count = (Long)result.get("recordnum");
 
-        StringBuilder sql = new StringBuilder("select * from t_order_service where user_id = ");
+        StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
         sql.append(user.getId());
-        sql.append("limit  ");
+        sql.append(" order by updatetime asc limit  ");
         sql.append((page.getPageNumber()-1)*page.getPageSize());
         sql.append(",");
         sql.append(page.getPageSize());
@@ -128,7 +124,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setService_time(resultSet.getString("service_time"));
                 serviceOrder.setService_type(resultSet.getString("he_type"));
                 serviceOrder.setUser_id(resultSet.getString("user_id"));
-                serviceOrder.setUpdatetime(resultSet.getDate("updatetime"));
+                serviceOrder.setUpdatetime(resultSet.getTimestamp("updatetime"));
                 serviceOrder.setStatus(resultSet.getString("status"));
                 serviceOrder.setStatusDesc(resultSet.getString("status_desc"));
                 return serviceOrder;
@@ -141,8 +137,8 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
 
     @Override
     public List<ServiceOrderTrace> updateOrderServiceTrack(final String orderCode, HPWoWholeInfoResponse json) throws Exception{
-        HPWoWholeInfo info = json.getWoWholeInfo();
-        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ?");
+        HPWoWholeInfo info = json.getData();
+        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ? order by type asc");
         if(!Strings.isNullOrEmpty(info.getCall_time())){
             updateOrInsertOrderTrace(orderCode,info,"0");
         }
@@ -183,9 +179,17 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         param1[0] = orderCode;
         param1[1] = type;
         Map<String,Object> map = super.getJdbcTemplate().queryForMap(countsql.toString(),param1);
-        if(Integer.parseInt((String)map.get("recordnum")) != 0){
+        if((Long)map.get("recordnum") != 0L){
             Object[] param2 = new Object[3];
-            param2[0] = format.parse(info.getCall_time());
+            if("0".equals(type)){
+                param2[0] = format.parse(info.getCall_time());
+            }else if("1".equals(type)){
+                param2[0] = format.parse(info.getAssign_date());
+            }else if("2".equals(type)){
+                param2[0] = format.parse(info.getEnter_time());
+            }else{
+                param2[0] = format.parse(info.getServer_close_time());
+            }
             param2[1] = orderCode;
             param2[2] = type;
             super.getJdbcTemplate().update(updatesql.toString(),param2);
@@ -193,7 +197,15 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
             Object[] param3 = new Object[3];
             param3[0] = orderCode;
             param3[1] = type;
-            param3[2] = format.parse(info.getCall_time());
+            if("0".equals(type)){
+                param3[2] = format.parse(info.getCall_time());
+            }else if("1".equals(type)){
+                param3[2] = format.parse(info.getAssign_date());
+            }else if("2".equals(type)){
+                param3[2] = format.parse(info.getEnter_time());
+            }else{
+                param3[2] = format.parse(info.getServer_close_time());
+            }
             super.getJdbcTemplate().update(insertsql.toString(),param3);
         }
     }
