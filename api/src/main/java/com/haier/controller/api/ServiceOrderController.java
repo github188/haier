@@ -1,5 +1,6 @@
 package com.haier.controller.api;
 
+import com.google.common.base.Strings;
 import com.haier.common.ApplyIdGenerate;
 import com.haier.common.response.ResponseBody;
 import com.haier.common.response.ResponseConstantCode;
@@ -65,6 +66,9 @@ public class ServiceOrderController extends BaseController {
         User user = new User();
         user.setPhone(phone);
         List<HPWoListData> orderList = null;
+        if(Strings.isNullOrEmpty(phone)){
+            return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
+        }
         try {
             orderList= orderService.getOrderList(user);
         } catch (Exception e) {
