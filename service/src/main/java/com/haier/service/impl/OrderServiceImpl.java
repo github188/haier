@@ -2,9 +2,8 @@ package com.haier.service.impl;
 
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
-import com.haier.hp.domain.HPAddWoDataRequest;
-import com.haier.hp.domain.HPAddWoDataRequestBuilder;
-import com.haier.hp.domain.HPAddWoDataResponse;
+import com.haier.domain.User;
+import com.haier.hp.domain.*;
 import com.haier.hp.service.HPFacade;
 import com.haier.service.OrderService;
 import org.slf4j.Logger;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by bright on 16-6-5.
@@ -38,6 +38,17 @@ public class OrderServiceImpl implements OrderService {
         logger.debug(serviceOrder.toString());
         orderDao.save(serviceOrder);
     }
+
+    @Override
+    public List<HPWoListData> getOrderList(User user) throws Exception {
+        HPWoListResponse json = hpFacade.executeWoList(user.getPhone());
+        if(!json.getCode().equals("200")){
+            throw new Exception(json.getMsg()+" hp 获取工单失败");
+        }
+        orderDao.updateOrderServiceStatus(user,json.getData());
+        return json.getData();
+    }
+
     static  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private HPAddWoDataRequest build(ServiceOrder serviceOrder){
         return HPAddWoDataRequestBuilder.create()

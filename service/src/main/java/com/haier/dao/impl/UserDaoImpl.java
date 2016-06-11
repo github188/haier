@@ -4,7 +4,6 @@ import com.haier.common.token.Token;
 import com.haier.dao.UserDao;
 import com.haier.domain.User;
 import com.haier.test.Test;
-import javafx.beans.binding.StringBinding;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.RowMapper;
