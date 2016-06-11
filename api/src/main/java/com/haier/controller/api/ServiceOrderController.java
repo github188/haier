@@ -8,6 +8,7 @@ import com.haier.common.response.ResponseConstantCode;
 import com.haier.common.response.ResponseMsg;
 import com.haier.controller.BaseController;
 import com.haier.domain.ServiceOrder;
+import com.haier.domain.ServiceOrderTrace;
 import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
 import com.haier.hp.domain.HPWoListResponse;
@@ -77,5 +78,23 @@ public class ServiceOrderController extends BaseController {
         page.setCode(ResponseConstantCode.SUCCESS_CODE);
         page.setMessage(ResponseConstantCode.SUCCESS_DESC);
         return page;
+    }
+
+    @RequestMapping(path = "/getOrderTrack/{orderCode}",method = RequestMethod.GET)
+    @org.springframework.web.bind.annotation.ResponseBody
+    public ResponseBody getOrderTrack(@PathVariable String orderCode){
+        if(Strings.isNullOrEmpty(orderCode)){
+            return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
+        }
+        List<ServiceOrderTrace> list = null;
+        try {
+           list= orderService.getServiceOrderTrack(orderCode);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE, e.getMessage());
+        }
+        ResponseMsg msg = new ResponseMsg(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
+        msg.setInfo(list);
+        return msg;
     }
 }
