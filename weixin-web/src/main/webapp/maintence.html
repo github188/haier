@@ -35,25 +35,17 @@
 <body>
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
-	    <h1 class="mui-title">送货安装</h1>
-	    	    <a id="maintence" class="mui-icon mui-icon-more icon-mark mui-pull-right"></a>
-	   
+	    <h1 class="mui-title">一键维修</h1>
+	      <a id="maintence" class="mui-icon mui-icon-more icon-mark mui-pull-right"></a>
+	   	    
 	</header>
 	<nav class="mui-bar mui-bar-tab">
 		<div style="width:80%;margin:0 auto">    
-	    	<button id="add" onclick="addData()" type="button" class="mui-btn mui-btn-primary" style="width:100%;background-color: #32beff;border:-20">立即提交</button>
+	    	<button id="add" onclick="addMaintenceData()" type="button" class="mui-btn mui-btn-primary" style="width:100%;background-color: #32beff;border:-20">立即提交</button>
 	   </div>
 	</nav>
 	<div class="mui-content">
-			<div id="slider" class="mui-slider">
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item  mui-active" href="#item1mobile">
-						新机报装
-					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						移机报装
-					</a>
-				</div>
+			<div id="slider" class="mui-slider">				
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
@@ -84,6 +76,13 @@
 									</div>
 								</div>
 								
+								<div style="width:100%;height:40px;padding-left:30px;border-bottom: 1px solid #dcdcdc;">
+									<div style="width:25%;height:40px;float:left;"></div>
+									<div style="width:75%;height:40px;float:left;">
+										<input type="text" id="infowrong" class="color2" placeholder="请填写故障描述" style="padding:0;margin:0;height:40px;border:0;background: transparent;font-size:14px;"/>
+										<input id="wrong-hidden" name="wrong" type="hidden"/>
+									</div>
+								</div>
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">联系人</span></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px">										

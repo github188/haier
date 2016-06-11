@@ -3752,7 +3752,8 @@ select:focus
     padding: 15px;
 
     border-radius: 13px 13px 0 0;
-    background: rgba(255, 255, 255, .95);
+  /*  background: rgba(255, 255, 255, .95); */
+    background: rgba(81, 186, 234, .95);
 }
 .mui-popup-inner:after
 {
@@ -3781,7 +3782,7 @@ select:focus
 {
     font-size: 18px;
     font-weight: 500;
-
+		color:#FFFFFF;
     text-align: center;
 }
 
@@ -3789,7 +3790,7 @@ select:focus
 {
     font-family: inherit;
     font-size: 14px;
-
+		color:#FFFFFF;
     margin: 5px 0 0;
 }
 
