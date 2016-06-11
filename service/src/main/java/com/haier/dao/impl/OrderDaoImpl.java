@@ -2,6 +2,9 @@ package com.haier.dao.impl;
 
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
+import com.haier.domain.User;
+import com.haier.hp.domain.HPWoListData;
+import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -13,6 +16,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.List;
 
 /**
  * Created by bright on 16-6-5.
@@ -53,5 +57,28 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 return ps;
             }
         }, keyHolder);
+    }
+
+    @Override
+    public void updateOrderServiceStatus(User user, final List<HPWoListData> hpwoList) {
+
+        StringBuilder sql = new StringBuilder("update t_service_order set status = ?,status_desc = ? where mobile_phone='");
+        sql.append(user.getPhone());
+        sql.append("' and order_code = ?");
+        super.getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter(){
+
+            @Override
+            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
+                HPWoListData data = hpwoList.get(i);
+                preparedStatement.setString(1,data.getWo_status());
+                preparedStatement.setString(2,data.getWo_status_zy());
+                preparedStatement.setString(3,data.getWo_id());
+            }
+
+            @Override
+            public int getBatchSize() {
+                return hpwoList.size();
+            }
+        });
     }
 }

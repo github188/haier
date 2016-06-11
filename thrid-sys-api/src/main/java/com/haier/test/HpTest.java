@@ -2,6 +2,7 @@ package com.haier.test;
 import com.haier.hp.domain.HPAddWoDataRequest;
 import com.haier.hp.domain.HPAddWoDataRequestBuilder;
 import com.haier.hp.domain.HPAddWoDataResponse;
+import com.haier.hp.domain.HPWoListResponse;
 import com.haier.hp.service.HPFacade;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -32,7 +33,8 @@ public class HpTest {
         ApplicationContext ap = new ClassPathXmlApplicationContext("applicationThridSys.xml");
         HPFacade facade = ap.getBean(HPFacade.class);
         try {
-            facade.executeWoList("15022086097");
+            HPWoListResponse result = facade.executeWoList("15022086097");
+            System.out.print(result.toString());
 //            HPAddWoDataResponse response = facade.executeAddWoData(getAddRequest());
 //            System.out.print(response.toString());
         } catch (Exception e) {

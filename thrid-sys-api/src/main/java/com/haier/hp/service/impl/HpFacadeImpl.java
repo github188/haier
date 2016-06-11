@@ -56,7 +56,7 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
         logger.error(getHpUrl());
         String response= HEHttpClients.httpGetExecute(getHpUrl(),req);
         logger.error(response);
-        return null;
+        return JSONObject.parseObject(response, HPWoListResponse.class);
     }
 
     @Override
