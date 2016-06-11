@@ -27,84 +27,70 @@
     <style> 
 		.mui-control-content {
 			background-color: white;
-			min-height: 500px;
+			min-height:500px;
 		}
 	
 	</style>
 </head>
 <body>
-	<header class="mui-bar mui-bar-nav">
-	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
-	    <h1 class="mui-title">送货安装</h1>
-	    	    <a id="maintence" class="mui-icon mui-icon-more icon-mark mui-pull-right"></a>
-	   
-	</header>
-	<nav class="mui-bar mui-bar-tab">
-		<div style="width:80%;margin:0 auto">    
-	    	<button id="add" onclick="addData()" type="button" class="mui-btn mui-btn-primary" style="width:100%;background-color: #32beff;border:-20">立即提交</button>
-	   </div>
-	</nav>
+	
 	<div class="mui-content">
 			<div id="slider" class="mui-slider">
-				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item  mui-active" href="#item1mobile">
-						新机报装
-					</a>
-					<a class="mui-control-item" href="#item2mobile">
-						移机报装
-					</a>
-				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+				
+				
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="mui-slider-item mui-control-content mui-active">
 						<div id="scroll1" class="mui-scroll-wrapper">
-							<div class="mui-scroll" style="height:760px;position:absolute;overflow-y :auto;">
+							<div class="mui-scroll" style="height:640px;">
 								<div style="height:80px;border-bottom: 1px solid #dcdcdc;line-height: 80px;padding-left:30px">
 									<span class="color1">我的产品</span>
 									<a style="display: block;background:url(images/arrow-right.png) no-repeat;background-size:6px 12px;width:12px;height:24px;float:right;margin-top:28px;margin-right:30px"></a>
 								</div>
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">品牌</span></div>
-									<div style="width:75%;height:40px;float: left;padding-right:30px">
-										<div id="pinpai" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">品牌</span></div>
+									<div style="width:75%;height:40px;float: left;padding-right:30px ">
+										<div id="pinpai" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="pinpai-hidden" type="hidden"/>
 									</div>
+									
+									
+									
 								</div>
 								<div style="width:100%;height:80px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">类型</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">类型</span></div>
 									<div style="width:75%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px">
-										<div id="type1" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
+										<div id="type1" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="type1-hidden" type="hidden"/>
 									</div>
 									
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px">
-										<div id="type2" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
+										<div id="type2" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="type2-hidden" name="product_id" type="hidden"/>
 									</div>
 								</div>
 								
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">联系人</span></div>
-									<div style="width:75%;height:40px;float: left;padding-right:30px">										
-										<input type="text" id="contact" name="contact_name" placeholder="请输入" class="color2" style="padding:0;margin:0;height:40px;border:0;background: transparent;font-size:14px;"/>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">联系人</span></div>
+									<div style="width:75%;height:40px;float: left;padding-right:30px">
+										<input type="text" id="contact" name="contact_name" style="padding:0;margin:0;height:40px;border:0;background: transparent;"/>
 									</div>
 								</div>
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">联系电话</span></div>
-									<div style="width:75%;height:40px;float: left;padding-right:30px">										
-										<input type="text" id="phone" name="mobile_phone" placeholder="请输入" class="color2" style="padding:0;margin:0;height:40px;border:0;background: transparent;font-size:14px;"/>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">联系电话</span></div>
+									<div style="width:75%;height:40px;float: left;padding-right:30px">
+										<input type="text" id="phone" name="mobile_phone" style="padding:0;margin:0;height:40px;border:0;background: transparent;"/>
 										<input id="phone-hidden" type="hidden"/>
 									</div>
 								</div>
 								
 								<div style="width:100%;height:60px;padding-left:30px;">
-									<div style="width:25%;height:60px;float:left;padding-top:20px"><span class="triangle">*</span><span class="color1">服务地址</span></div>
-									<div style="width:45%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:32px;">
-										<div id="Address" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:60px;width:100%;height:60px;font-size:14px;">请输入</div>
+									<div style="width:25%;height:60px;float:left;padding-top:20px"><span class="triangle">*</span><span class="color2">服务地址</span></div>
+									<div style="width:45%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;">
+										<div id="Address" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:60px;width:100%;height:60px">请输入</div>
 										<input id="Address-hidden" type="hidden"/>
 									</div>
-									<div style="width:30%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:20px;text-align: right;">
+									<div style="width:30%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px;text-align: right;">
 										<a id="icon-add" class="mui-icon iconfont icon-roundaddfill" style="font-size: 30px;color: #32beff;padding-top: 15px;margin:0"></a>
 									</div>
 									
@@ -112,13 +98,13 @@
 								
 								<div style="width:100%;height:40px;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color1">省</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color2">省</span></div>
 									<div style="width:30%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;">
 										<div id="sheng" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="sheng-hidden" type="hidden"/>
 									</div>
 									<div style="width:5%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;border-bottom: 1px solid #dcdcdc;"><span class="color1">市</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;border-bottom: 1px solid #dcdcdc;"><span class="color2">市</span></div>
 									<div style="width:30%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
 										<div id="shi" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="shi-hidden" type="hidden"/>
@@ -128,7 +114,7 @@
 								
 								<div style="width:100%;height:40px;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color1">区</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color2">区</span></div>
 									<div style="width:70%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
 										<div id="area" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="area-hidden" name="district" type="hidden"/>
@@ -137,12 +123,12 @@
 								<div style="width:100%;height:40px;padding-left:30px;border-bottom: 1px solid #dcdcdc;">
 									<div style="width:25%;height:40px;float:left;"></div>
 									<div style="width:75%;height:40px;float:left;">
-										<input type="text" id="infoaddress" class="color2" placeholder="请填写详细地址" style="padding:0;margin:0;height:40px;border:0;background: transparent;font-size:14px;"/>
+										<input type="text" id="infoaddress" class="color3" placeholder="请填写详细地址" style="padding:0;margin:0;height:40px;border:0;background: transparent;"/>
 										<input id="infoaddress-hidden" name="address" type="hidden"/>
 									</div>
 								</div>
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px;"><span class="triangle">*</span><span class="color1">预约日期</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px;"><span class="triangle">*</span><span class="color2">预约日期</span></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px;">
 										<div id="newdate" class="color3 dates" data-options='{"type":"date"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="newdate-hidden" name="require_service_date" type="hidden"/>
@@ -151,18 +137,22 @@
 								</div>
 								
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px;"><span class="triangle">*</span><span class="color1">服务时间</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px;"><span class="triangle">*</span><span class="color2">服务时间</span></div>
 									<div style="width:35%;height:40px;float: left;padding-right:30px;">
 										<div id="newdate-font" class="color3 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="newdate-font-hidden" type="hidden"/>
 									</div>
 									
-									<div class="color1" style="width:5%;height:40px;float: left;text-align: right;padding-top:10px;">到</div>
+									<div class="color2" style="width:5%;height:40px;float: left;text-align: right;padding-top:10px;">到</div>
 									<div style="width:35%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
 										<div id="newdate-after" class="color3 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="newdate-after-hidden" type="hidden"/>
 									</div>
 									<input id="newdate-front-after-hidden" name="service_time" type="hidden"/>
+									
+								</div>
+								<div style="width:100%;height:40px;padding-left:30px;">
+									
 									
 								</div>
 								
@@ -182,70 +172,70 @@
 					</div>
 					<div id="item2mobile" class="mui-slider-item mui-control-content">
 						<div id="scroll2" class="mui-scroll-wrapper">
-							<div class="mui-scroll" style="height:760px;position:absolute;overflow-y :auto;">
+							<div class="mui-scroll">
 								<div style="height:80px;border-bottom: 1px solid #dcdcdc;line-height: 80px;padding-left:30px">
 									<span class="color1">我的产品</span>
-									<a style="display: block;background:url(images/arrow-right.png) no-repeat;background-size:6px 12px;width:12px;height:24px;float:right;margin-top:28px;margin-right:30px"></a>
+									<a style="display: block;background:url(images/arrow-right.png);width:12px;height:24px;float:right;margin-top:28px;margin-right:30px"></a>
 								</div>
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">品牌</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">品牌</span></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px">
-										<div id="yjbz-pinpai" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
+										<div id="yjbz-pinpai" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="yjbz-pinpai-hidden" type="hidden"/>
 									</div>
 								</div>
 								<div style="width:100%;height:80px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">类型</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">类型</span></div>
 									<div style="width:75%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px">
-										<div id="yjbz-type1" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
+										<div id="yjbz-type1" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="yjbz-type1-hidden" type="hidden"/>
 									</div>
 									
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px">
-										<div id="yjbz-type2" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px">请输入</div>
+										<div id="yjbz-type2" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="yjbz-type2-hidden" type="hidden"/>
 									</div>
 								</div>
 								
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">联系人</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">联系人</span></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px">
-										<div id="yjbz-contact" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;font-size:14px;">请输入</div>
+										<div id="yjbz-contact" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="yjbz-contact-hidden" type="hidden"/>
 									</div>
 								</div>
 								<div style="width:100%;height:40px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
-									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color1">联系电话</span></div>
+									<div style="width:25%;height:40px;float:left;padding-top:10px"><span class="triangle">*</span><span class="color2">联系电话</span></div>
 									<div style="width:75%;height:40px;float: left;padding-right:30px">
-										<div id="yjbz-phone" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;font-size:14px;">请输入</div>
+										<div id="yjbz-phone" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px">请输入</div>
 										<input id="yjbz-phone-hidden" type="hidden"/>
 									</div>
 								</div>
 								
 								<div style="width:100%;height:60px;padding-left:30px;">
-									<div style="width:25%;height:60px;float:left;padding-top:20px"><span class="triangle">*</span><span class="color1">旧地址</span></div>
+									<div style="width:25%;height:60px;float:left;padding-top:20px"><span class="triangle">*</span><span class="color2">旧地址</span></div>
 									<div style="width:45%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-Address" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:60px;width:100%;height:60px;font-size:14px;">请输入</div>
+										<div id="yjbz-Address" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:60px;width:100%;height:60px">请输入</div>
 										<input id="yjbz-Address-hidden" type="hidden"/>
 									</div>
-									<div style="width:30%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px;text-align: right;">
-										<a id="yjbz-icon-add" class="mui-icon iconfont icon-roundaddfill" style="font-size: 30px;color: #32beff;padding-top: 15px;margin:0"></a>
+									<div style="width:30%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px">
+										<a id="yjbz-icon-add" style="background:url(images/add.png) right center no-repeat;border:0;display:block;width:100%;height:60px""></a>
 									</div>
 									
 								</div>
 								
 								<div style="width:100%;height:40px;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color1">省</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color2">省</span></div>
 									<div style="width:30%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-sheng" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-sheng" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-sheng-hidden" type="hidden"/>
 									</div>
 									<div style="width:5%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;border-bottom: 1px solid #dcdcdc;"><span class="color1">市</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;border-bottom: 1px solid #dcdcdc;"><span class="color2">市</span></div>
 									<div style="width:30%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-shi" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-shi" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-shi-hidden" type="hidden"/>
 									</div>
 									
@@ -253,41 +243,42 @@
 								
 								<div style="width:100%;height:40px;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color1">区</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color2">区</span></div>
 									<div style="width:70%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-area" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-area" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-area-hidden" type="hidden"/>
 									</div>
 								</div>
 								<div style="width:100%;height:40px;padding-left:30px;border-bottom: 1px solid #dcdcdc;">
 									<div style="width:25%;height:40px;float:left;"></div>
 									<div style="width:75%;height:40px;float:left;">
-										<input type="text" id="yjbz-infoaddress" class="color2" placeholder="请填写详细地址" style="padding:0;margin:0;height:40px;border:0;background: transparent;font-size:14px;"/>
+										<input type="text" id="yjbz-infoaddress" class="color1" placeholder="请填写详细地址" style="padding:0;margin:0;height:40px;border:0;background: transparent;"/>
 									</div>
 								</div>
 								
 								<div style="width:100%;height:60px;padding-left:30px;">
-									<div style="width:25%;height:60px;float:left;padding-top:20px"><span class="triangle">*</span><span class="color1">新地址</span></div>
+									<div style="width:25%;height:60px;float:left;padding-top:20px"><span class="triangle">*</span><span class="color2">新地址</span></div>
 									<div style="width:45%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-newAddress" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:60px;width:100%;height:60px;font-size:14px;">请输入</div>
+										<div id="yjbz-newAddress" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:60px;width:100%;height:60px">请输入</div>
 										<input id="yjbz-newAddress-hidden" type="hidden"/>
 									</div>
-									<div style="width:30%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px;text-align: right;">
-										<a id="icon-newadd" class="mui-icon iconfont icon-roundaddfill" style="font-size: 30px;color: #32beff;padding-top: 15px;margin:0"></a>
+									<div style="width:30%;height:60px;float: left;border-bottom: 1px solid #dcdcdc;padding-right:30px">
+										<a id="icon-newadd" style="background:url(images/add.png) right center no-repeat;border:0;display:block;width:100%;height:60px""></a>
 									</div>
+									
 								</div>
 								
 								<div style="width:100%;height:40px;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color1">省</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color2">省</span></div>
 									<div style="width:30%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-newsheng" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-newsheng" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-newsheng-hidden" type="hidden"/>
 									</div>
 									<div style="width:5%;height:40px;float: left;border-bottom: 1px solid #dcdcdc;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;border-bottom: 1px solid #dcdcdc;"><span class="color1">市</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;border-bottom: 1px solid #dcdcdc;"><span class="color2">市</span></div>
 									<div style="width:30%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-newshi" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-newshi" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-newshi-hidden" type="hidden"/>
 									</div>
 									
@@ -295,16 +286,16 @@
 								
 								<div style="width:100%;height:40px;padding-left:30px;">
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"></div>
-									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color1">区</span></div>
+									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;border-bottom: 1px solid #dcdcdc;"><span class="color2">区</span></div>
 									<div style="width:70%;height:40px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
-										<div id="yjbz-newarea" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-newarea" class="color3" style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-newarea-hidden" type="hidden"/>
 									</div>
 								</div>
 								<div style="width:100%;height:40px;padding-left:30px;border-bottom: 1px solid #dcdcdc;">
 									<div style="width:25%;height:40px;float:left;"></div>
 									<div style="width:75%;height:40px;float:left;">
-										<input id="yjbz-newinfoaddress" type="text" class="color2" placeholder="请填写详细地址" style="padding:0;margin:0;height:40px;border:0;background: transparent;font-size:14px;"/>
+										<input id="yjbz-newinfoaddress" type="text" class="color1" placeholder="请填写详细地址" style="padding:0;margin:0;height:40px;border:0;background: transparent;"/>
 									</div>
 								</div>
 								
@@ -312,15 +303,19 @@
 									<div style="width:25%;height:40px;float:left;padding-top:10px;"><span class="triangle">*</span><span class="color1">预约日期</span></div>
 									<div style="width:5%;height:40px;float:left;padding-top:10px;text-align: right;"><span class="color1">日</span></div>
 									<div style="width:30%;height:40px;float: left;">
-										<div id="yjbz-newdate" class="color3 dates" data-options='{"type":"date"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-newdate" class="color3 dates" data-options='{"type":"date"}' style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-newdate-hidden" type="hidden"/>
 									</div>
 									<div style="width:5%;height:40px;float: left;"></div>
 									<div style="width:5%;height:40px;float:left;padding-top:10px;"><span class="color1">时</span></div>
 									<div style="width:30%;height:40px;float: left;padding-right:30px;">
-										<div id="yjbz-newtime" class="color3 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
+										<div id="yjbz-newtime" class="color3 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;border:0;line-height:40px;width:100%;height:40px;padding-left: 5px;">请输入</div>
 										<input id="yjbz-newtime-hidden" type="hidden"/>
 									</div>
+								</div>
+								<div style="width:100%;height:60px;padding-left:30px;">
+									
+									
 								</div>
 							</div>
 						</div>
@@ -334,6 +329,7 @@
 			(function($, doc) {
 				mui.init({
 					swipeBack: false
+					
 				});
 				$('.mui-scroll-wrapper').scroll({
 					indicators: true //是否显示滚动条
@@ -350,6 +346,7 @@
 					}
 				});*/
 				$.ready(function() {
+					//plus.webview.currentWebview().scrollbarIndicatorY = "none";
 					//普通示例
 					userPicker = new $.PopPicker();
 					var pinpai = doc.getElementById('pinpai');
@@ -386,19 +383,8 @@
 					}, false);
 					
 				});
-	
-				//跳转新页面
-				document.getElementById('maintence').addEventListener('tap',function(){
-					mui.openWindow({
-					    url: 'pages/maintence.html',
-					    id: 'maintence',
+				
 
-					    extras: {
-					       //自定义扩展参数，可以用来处理页面间传值
-					    }
-					    
-					})
-				})
 				
 				var btns = $('.dates');
 				btns.each(function(i, btn) {
