@@ -1,8 +1,10 @@
 package com.haier.dao;
 
+import com.haier.common.response.Page;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
+import com.haier.service.OrderService;
 
 import java.util.List;
 
@@ -12,4 +14,6 @@ import java.util.List;
 public interface OrderDao {
     public void save(final ServiceOrder order);
     public void updateOrderServiceStatus(User user, List<HPWoListData> hpwoList);
+
+    public Page getOrderListPage(User user, Page page) throws Exception;
 }

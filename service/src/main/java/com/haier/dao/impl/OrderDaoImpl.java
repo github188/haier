@@ -1,22 +1,23 @@
 package com.haier.dao.impl;
 
+import com.haier.common.response.Page;
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
+import com.haier.service.OrderService;
 import org.springframework.jdbc.core.BatchPreparedStatementSetter;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by bright on 16-6-5.
@@ -80,5 +81,58 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 return hpwoList.size();
             }
         });
+    }
+
+    @Override
+    public Page getOrderListPage(User user, Page page) throws Exception {
+
+        StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_order_service where user_id = ");
+        countsql.append(user.getId());
+        countsql.append("limit  ");
+        countsql.append((page.getPageNumber()-1)*page.getPageSize());
+        countsql.append(",");
+        countsql.append(page.getPageSize());
+
+        Map<String, Object> result = super.getJdbcTemplate().queryForMap(countsql.toString());
+
+        Long count = Long.parseLong((String)result.get("recordnum"));
+
+        StringBuilder sql = new StringBuilder("select * from t_order_service where user_id = ");
+        sql.append(user.getId());
+        sql.append("limit  ");
+        sql.append((page.getPageNumber()-1)*page.getPageSize());
+        sql.append(",");
+        sql.append(page.getPageSize());
+
+
+        List<ServiceOrder> list = super.getBySqlRowMapper(sql.toString(), new RowMapper<ServiceOrder>() {
+            @Override
+            public ServiceOrder mapRow(ResultSet resultSet, int i) throws SQLException {
+                ServiceOrder serviceOrder = new ServiceOrder();
+                serviceOrder.setId(resultSet.getInt("id"));
+                serviceOrder.setApply_id(resultSet.getString("apply_id"));
+                serviceOrder.setAddress(resultSet.getString("service_address"));
+                serviceOrder.setArrive_time(resultSet.getString("arrive_time"));
+                serviceOrder.setContact_name(resultSet.getString("contact_name"));
+                serviceOrder.setDistrict(resultSet.getString("district"));
+                serviceOrder.setMobile_phone(resultSet.getString("mobile_phone"));
+                serviceOrder.setOrder_code(resultSet.getString("order_code"));
+                serviceOrder.setOrder_time(resultSet.getDate("order_time"));
+                serviceOrder.setProduct_id(resultSet.getString("product_id"));
+                serviceOrder.setRequire_service_date(resultSet.getDate("require_time"));
+                serviceOrder.setRequire_service_desc(resultSet.getString("require_desc"));
+                serviceOrder.setService_man_id(resultSet.getString("work_man_id"));
+                serviceOrder.setService_time(resultSet.getString("service_time"));
+                serviceOrder.setService_type(resultSet.getString("he_type"));
+                serviceOrder.setUser_id(resultSet.getString("user_id"));
+                serviceOrder.setUpdatetime(resultSet.getDate("updatetime"));
+                serviceOrder.setStatus(resultSet.getString("status"));
+                serviceOrder.setStatusDesc(resultSet.getString("status_desc"));
+                return serviceOrder;
+            }
+        });
+        page.setMessages(list);
+        page.setCount(count);
+        return page;
     }
 }

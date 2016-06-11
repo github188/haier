@@ -1,6 +1,8 @@
 package com.haier.service.impl;
 
+import com.haier.common.response.Page;
 import com.haier.dao.OrderDao;
+import com.haier.dao.UserDao;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.User;
 import com.haier.hp.domain.*;
@@ -13,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 /**
  * Created by bright on 16-6-5.
@@ -25,6 +26,8 @@ public class OrderServiceImpl implements OrderService {
     private HPFacade hpFacade;
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private UserDao userDao;
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
     public void saveOrder(ServiceOrder serviceOrder) throws Exception {
@@ -40,13 +43,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public List<HPWoListData> getOrderList(User user) throws Exception {
+    public Page getOrderListPage(User user,Page page) throws Exception {
+        user = userDao.findUserById(user);
         HPWoListResponse json = hpFacade.executeWoList(user.getPhone());
         if(!json.getCode().equals("200")){
             throw new Exception(json.getMsg()+" hp 获取工单失败");
         }
         orderDao.updateOrderServiceStatus(user,json.getData());
-        return json.getData();
+
+        page = orderDao.getOrderListPage(user,page);
+
+        return page;
     }
 
     static  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

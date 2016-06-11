@@ -2,6 +2,7 @@ package com.haier.controller.api;
 
 import com.google.common.base.Strings;
 import com.haier.common.ApplyIdGenerate;
+import com.haier.common.response.Page;
 import com.haier.common.response.ResponseBody;
 import com.haier.common.response.ResponseConstantCode;
 import com.haier.common.response.ResponseMsg;
@@ -60,23 +61,21 @@ public class ServiceOrderController extends BaseController {
         }
         return getSuccess();
     }
-    @RequestMapping(path = "/getOrderList/{phone}",method = RequestMethod.POST)
+    @RequestMapping(path = "/getOrderList",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
-    public ResponseBody getOrderList(@PathVariable String phone){
-        User user = new User();
-        user.setPhone(phone);
+    public ResponseBody getOrderList(@RequestBody User user,@RequestBody Page page){
         List<HPWoListData> orderList = null;
-        if(Strings.isNullOrEmpty(phone)){
+        if(user.getId() == 0){
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
         try {
-            orderList= orderService.getOrderList(user);
+            page = orderService.getOrderListPage(user,page);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE, e.getMessage());
         }
-        ResponseMsg msg = new ResponseMsg(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
-        msg.setInfo(orderList);
-        return msg;
+        page.setCode(ResponseConstantCode.SUCCESS_CODE);
+        page.setMessage(ResponseConstantCode.SUCCESS_DESC);
+        return page;
     }
 }

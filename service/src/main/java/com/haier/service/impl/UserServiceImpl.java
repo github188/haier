@@ -3,7 +3,10 @@ package com.haier.service.impl;
 import com.haier.common.token.Token;
 import com.haier.dao.UserDao;
 import com.haier.domain.User;
+import com.haier.domain.UserAddress;
+import com.haier.domain.UserProduct;
 import com.haier.service.UserService;
+import com.sun.tools.javac.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -50,5 +53,25 @@ public class UserServiceImpl implements UserService{
     public Boolean IsValidAccess(String userKey, int u, String t, String m) {
 
         return userDao.IsValidAccess( userKey,   u,   t,   m);
+    }
+
+    @Override
+    public void addUserProduct(UserProduct userProduct) {
+
+    }
+
+    @Override
+    public List<UserProduct> listUserProduct(User user) {
+        return null;
+    }
+
+    @Override
+    public void addUserAddress(UserAddress userAddress) {
+
+    }
+
+    @Override
+    public List<UserAddress> listUserAddress(User user) {
+        return null;
     }
 }
