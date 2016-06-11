@@ -3,7 +3,8 @@ package com.haier.service;
 import com.haier.domain.User;
 import com.haier.domain.UserAddress;
 import com.haier.domain.UserProduct;
-import com.sun.tools.javac.util.List;
+
+import java.util.List;
 
 /**
  * Created by bright on 16-6-10.

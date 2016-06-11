@@ -4,6 +4,7 @@ import com.haier.common.response.Page;
 import com.haier.dao.OrderDao;
 import com.haier.dao.UserDao;
 import com.haier.domain.ServiceOrder;
+import com.haier.domain.ServiceOrderTrace;
 import com.haier.domain.User;
 import com.haier.hp.domain.*;
 import com.haier.hp.service.HPFacade;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 /**
  * Created by bright on 16-6-5.
@@ -41,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
         logger.debug(serviceOrder.toString());
         orderDao.save(serviceOrder);
     }
-
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
     public Page getOrderListPage(User user,Page page) throws Exception {
         user = userDao.findUserById(user);
@@ -54,6 +56,15 @@ public class OrderServiceImpl implements OrderService {
         page = orderDao.getOrderListPage(user,page);
 
         return page;
+    }
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
+    @Override
+    public List<ServiceOrderTrace> getServiceOrderTrack(String orderCode) throws Exception{
+        //从HP接口获得最新的订单信息
+        HPWoWholeInfoResponse json = hpFacade.executeWoWholeInfo(orderCode);
+        //更新本地的订单轨迹,饼返回
+        List<ServiceOrderTrace> list = orderDao.updateOrderServiceTrack(orderCode,json);
+        return list;
     }
 
     static  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

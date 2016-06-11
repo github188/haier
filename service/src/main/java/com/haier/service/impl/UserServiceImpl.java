@@ -6,10 +6,11 @@ import com.haier.domain.User;
 import com.haier.domain.UserAddress;
 import com.haier.domain.UserProduct;
 import com.haier.service.UserService;
-import com.sun.tools.javac.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 /**
  * Created by bright on 16-6-10.

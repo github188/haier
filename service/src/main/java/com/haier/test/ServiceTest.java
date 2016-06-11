@@ -22,8 +22,8 @@ public class ServiceTest {
         try {
             User user = new User();
             user.setPhone("15022086097");
-            List<HPWoListData> list = service.getOrderList(user);
-            System.out.println(list);
+            //List<HPWoListData> list = service.getOrderList(user);
+           // System.out.println(list);
         } catch (Exception e) {
             e.printStackTrace();
         }

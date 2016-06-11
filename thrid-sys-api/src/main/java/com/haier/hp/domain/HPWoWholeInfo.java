@@ -56,6 +56,18 @@ public class HPWoWholeInfo {
     private String part_no;
     private String part_require_time;
 
+
+
+    private String assign_date;
+
+    public String getAssign_date() {
+        return assign_date;
+    }
+
+    public void setAssign_date(String assign_date) {
+        this.assign_date = assign_date;
+    }
+
     public String getEnter_time() {
         return enter_time;
     }

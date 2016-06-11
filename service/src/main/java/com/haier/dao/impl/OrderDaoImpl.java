@@ -1,21 +1,24 @@
 package com.haier.dao.impl;
 
+import com.google.common.base.Strings;
 import com.haier.common.response.Page;
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
+import com.haier.domain.ServiceOrderTrace;
 import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
+import com.haier.hp.domain.HPWoWholeInfo;
+import com.haier.hp.domain.HPWoWholeInfoResponse;
 import com.haier.service.OrderService;
-import org.springframework.jdbc.core.BatchPreparedStatementSetter;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCreator;
-import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.*;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -134,5 +137,64 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         page.setMessages(list);
         page.setCount(count);
         return page;
+    }
+
+    @Override
+    public List<ServiceOrderTrace> updateOrderServiceTrack(final String orderCode, HPWoWholeInfoResponse json) throws Exception{
+        HPWoWholeInfo info = json.getWoWholeInfo();
+        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ?");
+        if(!Strings.isNullOrEmpty(info.getCall_time())){
+            updateOrInsertOrderTrace(orderCode,info,"0");
+        }
+        if(!Strings.isNullOrEmpty(info.getAssign_date())){
+            updateOrInsertOrderTrace(orderCode,info,"1");
+        }
+        if(!Strings.isNullOrEmpty(info.getEnter_time())){
+            updateOrInsertOrderTrace(orderCode,info,"2");
+        }
+        if(!Strings.isNullOrEmpty(info.getServer_close_time())){
+            updateOrInsertOrderTrace(orderCode,info,"3");
+        }
+        return super.getJdbcTemplate().query(querysql.toString(), new PreparedStatementSetter() {
+            @Override
+            public void setValues(PreparedStatement preparedStatement) throws SQLException {
+                preparedStatement.setString(1,orderCode);
+            }
+        }, new RowMapper<ServiceOrderTrace>() {
+            @Override
+            public ServiceOrderTrace mapRow(ResultSet resultSet, int i) throws SQLException {
+                ServiceOrderTrace trace = new ServiceOrderTrace();
+                trace.setId(resultSet.getInt("id"));
+                trace.setOrderCode(resultSet.getString("order_code"));
+                trace.setStatus(resultSet.getString("status"));
+                trace.setUpdatetime(resultSet.getDate("updatetime"));
+                return trace;
+            }
+        });
+    }
+
+    private void updateOrInsertOrderTrace(String orderCode, HPWoWholeInfo info,String type) throws Exception{
+        StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_service_track where order_code = ? and status = ? ");
+        StringBuilder updatesql = new StringBuilder("update t_service_track set updatetime = ? where order_code = ? and status = ?");
+        StringBuilder insertsql = new StringBuilder("insert into t_service_track(order_code,status,updatetime) values(?,?,?)");
+
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Object[] param1 = new Object[2];
+        param1[0] = orderCode;
+        param1[1] = type;
+        Map<String,Object> map = super.getJdbcTemplate().queryForMap(countsql.toString(),param1);
+        if(Integer.parseInt((String)map.get("recordnum")) != 0){
+            Object[] param2 = new Object[3];
+            param2[0] = format.parse(info.getCall_time());
+            param2[1] = orderCode;
+            param2[2] = type;
+            super.getJdbcTemplate().update(updatesql.toString(),param2);
+        }else{
+            Object[] param3 = new Object[3];
+            param3[0] = orderCode;
+            param3[1] = type;
+            param3[2] = format.parse(info.getCall_time());
+            super.getJdbcTemplate().update(insertsql.toString(),param3);
+        }
     }
 }
