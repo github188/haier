@@ -60,7 +60,7 @@ public class LoginFilter implements Filter {
 	          //resp.setContentType("text/json;charset=".concat("utf-8")); 
             HttpServletRequest request = (HttpServletRequest) req;
             String userkey =request.getHeader("x-haier-accesstoken");//登录前，或未取得key时，输入空字符串
-            int u =Integer.parseInt(request.getHeader("u")==null?"000":request.getHeader("u"));
+            int u =Integer.parseInt(Strings.isNullOrEmpty(request.getHeader("u"))?"000":request.getHeader("u"));
             String t =request.getHeader("t"); 
             String m =request.getHeader("m");
             HttpServletResponse response = (HttpServletResponse) resp;

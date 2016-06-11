@@ -5,10 +5,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Maps;
 import com.haier.common.ObjectUtils;
 import com.haier.common.httpclient.HEHttpClients;
-import com.haier.hp.domain.HPAddWoDataRequest;
-import com.haier.hp.domain.HPAddWoDataResponse;
-import com.haier.hp.domain.HPWoListResponse;
-import com.haier.hp.domain.HPWoWholeInfo;
+import com.haier.hp.domain.*;
 import com.haier.hp.service.AbstractHpSys;
 import com.haier.hp.service.HPFacade;
 import org.slf4j.Logger;
@@ -65,8 +62,17 @@ public class HpFacadeImpl extends AbstractHpSys implements HPFacade {
     }
 
     @Override
-    public HPWoWholeInfo executeWoWholeInfo(String orderId) throws Exception {
-        return null;
+    public HPWoWholeInfoResponse executeWoWholeInfo(String orderId) throws Exception {
+        if(Strings.isNullOrEmpty(orderId) || Strings.isNullOrEmpty(orderId)){
+            throw new Exception("null parameter with orderId");
+        }
+        Map<String,Object> maps = Maps.newHashMap();
+        maps.put("order_id",orderId);
+        Map<String,Object> req=getWoWholeInfo(maps);
+        logger.error(getHpUrl());
+        String response= HEHttpClients.httpGetExecute(getHpUrl(),req);
+        logger.error(response);
+        return JSONObject.parseObject(response, HPWoWholeInfoResponse.class);
     }
 
     @Override
