@@ -1,0 +1,277 @@
+html,body{overflow-x:hidden;} 
+.clearfix{overflow:auto;_height:1%}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+.mui-content ul, .mui-content ul li{list-style:none;width: 100%;}
+ul.service-list{
+	width: 100%;
+	font-size: 15px;
+	color: #888888;
+	margin:0px;
+	padding:0px;
+	background: #EEEEEE;
+}
+ul.service-list a{
+	color: #888888;
+}
+ul.service-list li{
+	margin-bottom: 20px;background: #FFFFFF;
+	height:250px;
+}
+ul.service-list li.view{
+	margin-bottom: 20px;background: #FFFFFF;
+	height:50px;
+}
+ul.service-list li .service-title {
+	width: 100%;
+	height:86px;
+	line-height:86px;
+	border-bottom:solid 1px #EDEDED;
+	overflow: hidden;
+}
+.service-type{float:left;color:#32BEFF;width:15%;padding-left:10px;height:86px;line-height:86px;}
+.service-phone{float:left;width:30%;height:86px;line-height:86px;}
+.service-time{float:right;width:55%;height:86px;line-height:86px;}
+ul.service-list-view li .service-list-view-title {
+	width: 100%;
+	height:46px;
+	line-height:46px;
+	border-bottom:solid 1px #EDEDED;
+	overflow: hidden;
+}
+.service-list-view-title .service-type{float:left;color:#32BEFF;width:15%;padding-left:10px;height:46px;line-height:46px;}
+.service-list-view-title .service-product{float:left;width:60%;height:46px;line-height:46px;}
+.service-list-view-title .service-status{float:right;color:#32BEFF;width:25%;height:46px;line-height:46px;text-align: right;padding-right:10px;}
+
+.service-content{
+	width: 100%;
+	padding:10px;
+	height:150px;
+	overflow: hidden;
+}
+.detaillink{
+	background:url(../images/service/zhuizong.png) right center no-repeat;
+	background-size:27px ;
+	border:0;display:block;
+	height:40px;
+	line-height:40px;
+	text-align:right;
+	padding-right:33px;
+}
+.service-item{
+	height:120px;
+	overflow: hidden;
+
+}
+.service-item .service-content-pic{
+	float: left;
+	width:25%;
+	
+}
+.service-item .service-content-content{
+	float: left;
+	width:75%;
+
+}
+.service-item .service-content-text div{
+	height:30px;line-height:30px;
+}
+.service-item .service-content-text .man{
+	height:30px;
+	line-height: 30px;
+	overflow: hidden;
+}
+.service-item .service-content-text .man span{
+	float: left;
+	width:89%;
+}
+.service-item .service-content-text .man a{
+	float: right;
+	width:11%;
+	height:30px;
+	line-height:30px;
+	background:url(../images/service/phone.png) right center no-repeat;
+	background-size:27px ;border:0;
+	padding-right:10px;
+}
+
+.service-dianzan{
+	width: 100%;
+	height:120px;
+	overflow: hidden;
+	font-size:15px;
+	color: #888888;
+	background-color: #FFFFFF;
+	margin-bottom: 20px;
+}
+.service-dianzan a{
+	width:100%;
+	height:66px;
+	line-height:66px;
+	border:0;
+	display: block;
+	margin:10px 0 0 0;
+	background-size:47px ;
+}
+.service-dianzan-name{
+	float:left;
+	width: 25%;
+	height:120px;
+	line-height: 120px;
+	text-align: center;
+}
+.service-dianzan-pic{
+	float:left;
+	width: 25%;
+	height:120px;
+	line-height: 120px;
+	text-align: center;
+	border:0;
+}
+.service-dianzan-title{
+	width: 100%;
+	height:30px;
+	line-height: 30px;
+	overflow: hidden;
+}
+.service-dianzan-pic-zan-active{
+	background:url(../images/service/pingjia_zan_active.png) center no-repeat;
+}
+.service-dianzan-pic-zan{
+	background:url(../images/service/pingjia_zan.png) center no-repeat;
+}
+.service-dianzan-pic-manyi-active{
+	background:url(../images/service/pingjia_manyi_active.png) center no-repeat;
+}
+.service-dianzan-pic-manyi{
+	background:url(../images/service/pingjia_manyi.png) center no-repeat;
+}
+.service-dianzan-pic-cha-active{
+	background:url(../images/service/pingjia_cha_active.png) center no-repeat;
+}
+.service-dianzan-pic-cha{
+	background:url(../images/service/pingjia_cha.png) center no-repeat;
+}
+.service-dianzan-cha-detail{
+	width:100%;
+	height:220px;
+	overflow: hidden;
+	padding-left:25%;
+}
+.service-pingjia-detail {
+	width: 100%;
+	height:170px;
+	overflow: hidden;
+	font-size:15px;
+	color: #888888;
+	background-color: #FFFFFF;
+	margin-bottom: 20px;
+}
+.service-pingjia-item {
+	width: 100%;
+	height:130px;
+	overflow: hidden;
+	font-size:15px;
+	color: #888888;
+	background-color: #FFFFFF;
+}
+
+.service-pingjia-name{
+	float:left;
+	width: 25%;
+	height:70px;
+	line-height: 70px;
+	text-align: center;
+}
+.service-pingjia-txt{
+	float:left;
+	width: 75%;
+	height:70px;
+	line-height: 70px;
+	text-align: center;
+	border:0;
+}
+.service-pingjia-txt textarea{
+	padding:2px;
+	width:95%;
+	margin-top:23px;
+	height:100px;
+	border:0px;
+	background: transparent;
+	font-size:14px;
+}
+
+.service-pingjia-detail-yuyin a{
+	background:url(../images/service/yuyin.png) right center no-repeat;
+	background-size:27px ;
+	border:0;display:block;
+	height:40px;
+	line-height:40px;
+	text-align:right;
+	margin-right:10px;
+	width:11%;
+	float:right;
+}
+
+ul.service-tree{
+	width: 100%;
+	font-size: 15px;
+	color: #888888;
+	margin:0px 0px 20px 0px;
+	padding:10px 0px;
+	background: #FFFFFF;
+}
+ul.service-tree li{
+	background-size:27px ;
+	padding:0 0 10px 20px;
+	width:100%;
+	background:url(../images/service/keshi_bg.png) left center no-repeat;
+	overflow: hidden;
+	height:auto;
+}
+.tree-active{
+	background:url(../images/service/keshi_active.png) left top no-repeat;
+	background-size:117px ;
+	height:30px;
+	overflow: hidden;
+}
+.tree{
+	background:url(../images/service/keshi.png) left top no-repeat;
+	background-size:117px ;
+	height:30px;
+	overflow: hidden;
+}
+.service-tree hr{
+	height:1px;border:none;border-top:1px solid #DCDCDC;
+	width: 90%;
+	aligh;right;
+	float:right;
+	margin:10px 0 0 0;
+	clear:both;
+}
+
+
+.service-itme-name{
+	float:left;
+	width: 35%;
+	top:0px;
+	left:-11px;
+	position: relative;
+	
+}
+.service-itme-name span{
+	margin: 5px 0 0 15px;
+	display:block;
+	width:120px;
+	text-align: center;
+} 
+.service-itme-content{
+	float:left;
+	width: 65%;
+	margin-top:5px;
+}
+.service-itme-content p{
+	width: 100%;
+	line-height:20px;
+	padding:0px;
+	margin:0px 0px 3px 0;
+}

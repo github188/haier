@@ -1,3 +1,18 @@
+var _city_data = {};
+$(function () {
+ 	initCity();
+});
+function initCity(){
+	$.ajax({ 
+		type:"POST", 
+		url:"data/city.json", 
+		dataType:"json", 
+		success:function(data){
+	   		_city_data = data;
+		}
+	}); 
+}
+
 function ajax_pinpai_Data(obj){
 	$.ajax({ 
 		type:"get", 
@@ -53,11 +68,12 @@ function ajax_type2_Data(obj){
 }
 
 function ajax_area_Data(obj){
-	$.ajax({ 
+	/*$.ajax({ 
 		type:"POST", 
 		url:"data/city.json", 
 		dataType:"json", 
 		success:function(data){
+	   		alert(data);
 	   		userPicker.setData(data);
 	   		userPicker.show(function(items) {
 				obj.innerText = items[0].text;
@@ -67,10 +83,18 @@ function ajax_area_Data(obj){
 			});
 			
 		}
-	}); 
+	});*/
+	userPicker.setData(_city_data);
+	userPicker.show(function(items) {
+		obj.innerText = items[0].text;
+		var id = obj.getAttribute("id");
+		$("#"+id+"-hidden").val(items[0].value);
+		$(obj).css("color","#000"); 
+	});
+	
 }
 function ajax_shi_Data(obj,sheng_val){
-	$.ajax({ 
+	/*$.ajax({ 
 		type:"POST", 
 		url:"data/city.json", 
 		dataType:"json", 
@@ -89,11 +113,24 @@ function ajax_shi_Data(obj,sheng_val){
 				$(obj).css("color","#000"); 
 			});
 		}
-	}); 
+	});*/
+	$.each(_city_data, function(i,n) {
+		if(n.value == sheng_val){
+			userPicker.setData(n.sub);
+			return false;
+		}
+	});
+	
+	userPicker.show(function(items) {
+		obj.innerText = items[0].text;
+		var id = obj.getAttribute("id");
+		$("#"+id+"-hidden").val(items[0].value);
+		$(obj).css("color","#000"); 
+	});
 }
 
 function ajax_areaa_Data(obj,sheng_val,shi_val){
-	$.ajax({ 
+	/*$.ajax({ 
 		type:"POST", 
 		url:"data/city.json", 
 		dataType:"json", 
@@ -119,7 +156,27 @@ function ajax_areaa_Data(obj,sheng_val,shi_val){
 				$(obj).css("color","#000"); 
 			});
 		}
-	}); 
+	});*/
+	var shi_array = new Array();
+	$.each(_city_data, function(i,n) {
+		if(n.value == sheng_val){
+			shi_array = n.sub;
+			return false;
+		}
+	});
+	$.each(shi_array, function(i,n) {
+		if(n.value == shi_val){
+			userPicker.setData(n.sub);
+			return false;
+		}
+	});
+	
+	userPicker.show(function(items) {
+		obj.innerText = items[0].text;
+		var id = obj.getAttribute("id");
+		$("#"+id+"-hidden").val(items[0].value);
+		$(obj).css("color","#000"); 
+	});
 }
 
 function addData(){
@@ -176,6 +233,14 @@ function addData(){
 	      return false;
 	    });
 	    return false;
+  	} else {
+  		if(!isphone1(phone) && !isphone2(phone)) {
+  			mui.alert('请输入有效的联系电话', '输入提示', function() 
+		    {
+		      return false;
+		    });
+		    return false;
+  		}
   	}
   	/*
   	if(Address == '') {
@@ -281,6 +346,14 @@ function addData(){
 	      return false;
 	    });
 	    return false;
+  	} else {
+  		if(!isphone1(phone) && !isphone2(phone)) {
+  			mui.alert('请输入有效的联系电话', '输入提示', function() 
+		    {
+		      return false;
+		    });
+		    return false;
+  		}
   	}
   	if(Address == '') {
   		mui.alert('请输入旧地址', '输入提示', function() 
@@ -401,7 +474,7 @@ function addData(){
 
 
 function addMaintenceData(){
-		$("#newdate-front-after-hidden").val($("#newdate-font-hidden").val() + "-" +$("#newdate-after-hidden").val());
+	$("#newdate-front-after-hidden").val($("#newdate-font-hidden").val() + "-" +$("#newdate-after-hidden").val());
 	var infoaddress = $("#infoaddress").val();
 	$("#infoaddress-hidden").val($("#sheng-hidden").val()+$("#shi-hidden").val()+$("#area-hidden").val()+infoaddress);
 	//var jsonData = $("#item1mobile :input").serializeArray();
@@ -409,6 +482,7 @@ function addMaintenceData(){
    	var pinpai = $.trim($("#pinpai-hidden").val());
   	var type1 = $.trim($("#type1-hidden").val());
   	var type2 = $.trim($("#type2-hidden").val());
+  	var infowrong = $.trim($("#infowrong").val());
   	var contact = $.trim($("#contact").val());
   	var phone = $.trim($("#phone").val());
   	var Address = $.trim($("#Address-hidden").val());
@@ -436,6 +510,13 @@ function addMaintenceData(){
   	}
   	if(type2 == '') {
   		mui.alert('请输入类型', '输入提示', function() 
+	    {
+	      return false;
+	    });
+	    return false;
+  	}
+  	if(infowrong == '') {
+  		mui.alert('请输入故障描述', '输入提示', function() 
 	    {
 	      return false;
 	    });
@@ -516,7 +597,8 @@ function addMaintenceData(){
 		"district":$("#area-hidden").val(),
 		"require_service_desc":wronginfo,
 		"service_time":$("#newdate-front-after-hidden").val(),
-		"address":$("#infoaddress-hidden").val()
+		"address":$("#infoaddress-hidden").val(),
+		"infowrong":infowrong,
 	};
 	
  
@@ -552,3 +634,36 @@ function addMaintenceData(){
 	   	}
 	});
 }
+
+
+/*判断输入是否为合法的手机号码*/
+ function isphone2(inpurStr)
+ {
+      var partten = /^1[3,5,8]\d{9}$/;
+      var fl=false;
+      if(partten.test(inpurStr))
+      {
+           //alert('是手机号码');
+           return true;
+      }
+      else
+      {
+           return false;
+           //alert('不是手机号码');
+      }
+ }
+ /*判断输入是否为合法的电话号码，匹配固定电话或小灵通*/
+ function isphone1(inpurStr)
+ {
+      var partten = /^0(([1,2]\d)|([3-9]\d{2}))\d{7,8}$/;
+      if(partten.test(inpurStr))
+      {
+           //alert('是电话号码');
+           return true;
+      }
+      else
+      {
+           //alert('不是电话号码');
+           return false;
+      }
+ }

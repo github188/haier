@@ -59,17 +59,6 @@
 		<script>
 			(function($, doc) {
 				$.init();
-				$.plusReady(function() {
-					var sendButton = doc.getElementById('getCheckcode');
-					var emailBox = doc.getElementById('phone');
-					sendButton.addEventListener('tap', function() {
-						app.forgetPassword(emailBox.value, function(err, info) {
-							plus.nativeUI.toast(err || info);
-						});
-					}, false);
-
-				});
-				
 			}(mui, document));
 		</script>
 	</body>

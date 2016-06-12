@@ -1,0 +1,129 @@
+html,body{overflow-x:hidden;} 
+.clearfix{overflow:auto;_height:1%}
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+
+.deliver-address{
+	width: 100%;
+	font-size: 15px;
+	color: #888888;
+	margin:0px;
+	padding:0px;
+	background: #EEEEEE;
+}
+.deliver-address a{
+	color: #888888;
+}
+.deliver-address-item{
+	margin-bottom: 10px;
+	background: #FFFFFF;
+	height:150px;
+	overflow: hidden;
+	padding:5px 10px;
+}
+.deliver-address .col-man{
+	width: 100%;
+	height:45px;
+	line-height:45px;
+	color: #000000;
+	overflow: hidden;
+}
+.deliver-address .col-name{
+	float:left;
+	width: 30%;
+	height:45px;
+	line-height: 45px;
+}
+.deliver-address .col-phone{
+	float:left;
+	width: 70%;
+	height:45px;
+	line-height: 45px;
+}
+.deliver-address p{
+	width: 100%;
+	line-height:20px;
+	padding:0px 0 10px 0;
+	margin:0px 0px 3px 0;
+}
+
+.deliver-address-opt{
+	width: 100%;
+	height:40px;
+	line-height:40px;
+	padding-top:5px;
+	overflow: hidden;
+	border-top:solid 1px #E8E8E8;
+	bottom:solid 1px #E8E8E8;
+}
+.deliver-address-opt .fleft{
+	float:left;
+	padding:0px;
+	margin:0px;
+}
+.deliver-address-opt .fleft input[type='radio']{
+	left:0px
+}
+.deliver-address-opt .fleft label
+{
+    padding-right: 0px;
+    padding-left: 40px;
+}
+.deliver-address-opt .fleft lable{
+	
+}
+.deliver-address-opt .fright{
+	float:right;
+}
+.deliver-address-opt .fright a.del{
+	float: left;
+	width:70px;
+	height:40px;
+	line-height:40px;
+	background:url(../images/deliver_address/del.png) left center no-repeat;
+	background-size:17px ;border:0;
+	padding-left:23px;
+	display: block;
+}
+.deliver-address-opt .fright a.edit{
+	float: left;
+	width:70px;
+	height:40px;
+	line-height:40px;
+	background:url(../images/deliver_address/edit.png) left center no-repeat;
+	background-size:17px ;border:0;
+	padding-left:23px;
+}
+
+.deliver-address-detail{
+	width:100%;
+	font-size: 15px;
+	background: #FFFFFF;
+}
+.deliver-address-detail-td{
+	width:100%;
+	padding:0px 10px;
+	height:40px;
+	overflow: hidden;
+}
+.deliver-address-detail-tl{
+	width:25%;height:40px;float:left;padding:10px 0 0 10px;text-align:left;border-bottom: 1px solid #dcdcdc;
+}
+.deliver-address-detail-ts{
+	width:75%;height:40px;float:left;border-bottom: 1px solid #dcdcdc;
+}
+.deliver-address-detail-ts input[type='text']{
+	padding:0;margin:0;height:40px;border:0;background: transparent;font-size:15px;
+}
+.deliver-address-detail-textarea{
+	width:100%;
+	padding:0px 10px;
+	height:130px;
+	overflow: hidden;
+}
+.deliver-address-detail-textarea textarea{
+	width:100%;
+	margin:10px 0;
+	height:120px;
+	border:0;
+	font-size:15px;
+}

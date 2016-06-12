@@ -3367,7 +3367,8 @@ select:focus
 }
 .mui-segmented-control.mui-segmented-control-inverted ~ .mui-slider-progress-bar
 {
-    background-color: #007aff;
+    /*background-color: #007aff;*/
+   background-color: #32BEFF;
 }
 
 .mui-segmented-control-positive

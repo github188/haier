@@ -38,6 +38,7 @@ public class WeiXinQRServlet extends HttpServlet{
 
         if(Strings.isNullOrEmpty(oidContent)){
             ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'parameter is null'}");
+            return;
         }
         serviceUrl = properties.getProperty("haier.service.qr.getproductinfo.url","http://localhost:9090/api/haier/1.0/qr/getOidProductInfo");
         HashMap param = Maps.newHashMap();
