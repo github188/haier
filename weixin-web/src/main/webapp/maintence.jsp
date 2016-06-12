@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,10 @@
     <script src="js/mui.min.js"></script>
     <script src="js/mui.picker.js"></script>
 	<script src="js/mui.poppicker.js"></script>
-	<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/mui.picker.min.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>
     <!--<script src="js/scale.js"></script>-->
-    <script src="js/views/ajaxData.js""></script>
+    <script src="js/views/ajaxData.js"></script>
     
     <link href="css/mui.min.css" rel="stylesheet"/>
     <!--App自定义的css-->
@@ -24,6 +23,9 @@
     <link rel="stylesheet" type="text/css" href="css/mui.picker.min.css" />
     <link href="css/iconfont.css" rel="stylesheet"/>
     <link rel="stylesheet" type="text/css" href="css/main.css"/>
+	<%
+		String openId = request.getParameter("openId");
+	%>
     <style> 
 		.mui-control-content {
 			background-color: white;
@@ -33,6 +35,7 @@
 	</style>
 </head>
 <body>
+<input type="hidden" name="openId" value="<%=openId%>">
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
 	    <h1 class="mui-title">一键维修</h1>

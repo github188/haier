@@ -397,7 +397,7 @@
         //跳转新页面
         /*document.getElementById('maintence').addEventListener('tap',function(){
          mui.openWindow({
-         url: 'pages/maintence.html',
+         url: 'pages/maintence.jsp',
          id: 'maintence',
 
          extras: {

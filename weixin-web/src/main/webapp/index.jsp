@@ -1,6 +1,10 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
+	<%
+		String openId = request.getParameter("openId");
+	%>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -31,6 +35,7 @@
 	</style>
 </head>
 <body>
+<input type="hidden" name="openId" value="<%=openId%>">
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
 	    <h1 class="mui-title" ><a href="javascript:;" onclick="addData()">送货安装</a></h1>
@@ -388,7 +393,7 @@
 				//跳转新页面
 				/*document.getElementById('maintence').addEventListener('tap',function(){
 					mui.openWindow({
-					    url: 'pages/maintence.html',
+					    url: 'pages/maintence.jsp',
 					    id: 'maintence',
 
 					    extras: {

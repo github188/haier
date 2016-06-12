@@ -39,4 +39,9 @@ public interface UserDao {
     public void addUserAddress(UserAddress userAddress);
 
     public List<UserAddress> listUserAddress(User user);
+
+    public String wxRegister(String openId,String phone,String code,String userName,String password) throws Exception;
+
+    public String isExistWithOpenId(String openId)throws Exception;
+
 }

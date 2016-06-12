@@ -51,14 +51,14 @@ public class RedirectPageServlet extends HttpServlet {
             ResponseUtils.returnInfo(resp,500,"{'code':-3,'message':'wx系统异常'}");
             return;
         }
-        String responseJsp="index.html";
+        String responseJsp="index.jsp";
         switch (type){
             //维修
             case "maintain":
-                responseJsp="";
+                responseJsp="maintain.jsp";
                 break;
-            case "install":
-                responseJsp="";
+            case "index":
+                responseJsp="index.jsp";
                 break;
             default:
                 break;

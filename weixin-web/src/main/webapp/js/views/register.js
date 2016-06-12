@@ -104,7 +104,7 @@ function initBtn(){
 			        } 
 			        else 
 			        {
-			        	window.location.href='maintence.html';
+			        	window.location.href='../../maintence.jsp';
 			         //   info.innerText = '确认';
 			        }
 			    });

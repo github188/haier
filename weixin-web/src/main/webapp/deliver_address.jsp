@@ -1,6 +1,8 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html class="ui-page-login">
 	<head>
+
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
@@ -55,7 +57,7 @@
 								<input name="address_radio" id="address_radio1" type="radio" checked><label>默认地址</label>
 							</div>
 							<div class="fright">
-								<a name="icon-edit" class="edit" href="deliver_address_edit.html">编辑</a>
+								<a name="icon-edit" class="edit" href="deliver_address_edit.jsp">编辑</a>
 								<a name="address-del" class="del" href="javascript:;" attr_id="1">删除</a>
 							</div>
 						</div>
@@ -73,7 +75,7 @@
 								
 							</div>
 							<div class="fright">
-								<a name="icon-edit" class="edit" href="deliver_address_edit.html">编辑</a>
+								<a name="icon-edit" class="edit" href="deliver_address_edit.jsp">编辑</a>
 								<a name="address-del" class="del" href="javascript:;" attr_id="2">删除</a>
 							</div>
 						</div>
@@ -91,7 +93,7 @@
 								
 							</div>
 							<div class="fright">
-								<a name="icon-edit" class="edit" href="deliver_address_edit.html">编辑</a>
+								<a name="icon-edit" class="edit" href="deliver_address_edit.jsp">编辑</a>
 								<a name="address-del" class="del" href="javascript:;" attr_id="3">删除</a>
 							</div>
 						</div>
@@ -109,7 +111,7 @@
 								
 							</div>
 							<div class="fright">
-								<a name="icon-edit" class="edit" href="deliver_address_edit.html">编辑</a>
+								<a name="icon-edit" class="edit" href="deliver_address_edit.jsp">编辑</a>
 								<a name="address-del" class="del" href="javascript:;" attr_id="4">删除</a>
 							</div>
 						</div>
