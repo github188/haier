@@ -39,6 +39,19 @@ public abstract class AbstractHpSys extends ThridSysConfig {
         params.putAll(otherParameter);
         return params;
     }
+    /**
+     * 订单详情
+     * @return
+     */
+    protected Map<String,Object> getWoWholeInfo(Map<String,Object> otherParameter){
+        Map<String,Object> params=getHpDefaultParams();
+        params.put("method","rrs.order.query.getwowholeinfo");
+        if(null == otherParameter || otherParameter.isEmpty()){
+            return params;
+        }
+        params.putAll(otherParameter);
+        return params;
+    }
 
     /**
      * 默认参数

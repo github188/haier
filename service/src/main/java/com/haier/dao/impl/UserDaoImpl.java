@@ -3,6 +3,8 @@ package com.haier.dao.impl;
 import com.haier.common.token.Token;
 import com.haier.dao.UserDao;
 import com.haier.domain.User;
+import com.haier.domain.UserAddress;
+import com.haier.domain.UserProduct;
 import com.haier.test.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -171,6 +173,23 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
+    public User findUserById(User user) {
+        StringBuilder sql = new StringBuilder("select * from t_user where id = ");
+        sql.append(user.getId());
+        return super.getJdbcTemplate().queryForObject(sql.toString(), new RowMapper<User>() {
+            @Override
+            public User mapRow(ResultSet resultSet, int i) throws SQLException {
+                User user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setUserName(resultSet.getString("username"));
+                user.setPhone(resultSet.getString("mobile"));
+                user.setName(resultSet.getString("name"));
+                return user;
+            }
+        });
+    }
+
+    @Override
     public User findUserByUserName(User user) {
         try {
             StringBuilder builder = new StringBuilder("select * from t_user where username ='");
@@ -229,5 +248,61 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
             ret = false;
         }
         return ret;
+    }
+
+    @Override
+    public void addUserProduct(final UserProduct userProduct) {
+        final StringBuilder sql = new StringBuilder("insert into t_user_product(user_id,brand,");
+        sql.append("category,sub_category,type,product_code,purchase_date,guarantee_year,service_address");
+        sql.append("updatetime)");
+        sql.append(" values(?,?,?,?,?,?,?,?,?,?)");
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        super.getJdbcTemplate().update(new PreparedStatementCreator() {
+            @Override
+            public PreparedStatement createPreparedStatement(Connection con)
+                    throws SQLException {
+
+                PreparedStatement ps = con.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
+                ps.setInt(1, userProduct.getUserId());
+                ps.setString(2, userProduct.getBrand());
+                ps.setString(3, userProduct.getCategory());
+                ps.setString(4, userProduct.getSubCategory());
+                ps.setString(5, userProduct.getType());
+                ps.setString(6, userProduct.getProductCode());
+                ps.setTimestamp(7, new Timestamp(userProduct.getPurchaseDate().getTime()));
+                ps.setInt(8, userProduct.getGuaranteeYear());
+                ps.setString(9, userProduct.getServiceAddress());
+                ps.setTimestamp(10, new Timestamp(userProduct.getUpdatetime().getTime()));
+                return ps;
+            }
+        }, keyHolder);
+    }
+
+    @Override
+    public List<UserProduct> listUserProduct(User user) throws Exception{
+        StringBuilder builder = new StringBuilder("select * from t_user_product where user_id =");
+        builder.append(user.getId());
+        List<UserProduct> list =  super.getBySqlRowMapper(builder.toString(), new RowMapper<UserProduct>() {
+            @Override
+            public UserProduct mapRow(ResultSet resultSet, int i) throws SQLException {
+                UserProduct userProduct = new UserProduct();
+                userProduct.setId(resultSet.getInt("id"));
+                userProduct.setUserId(resultSet.getInt("user_id"));
+                userProduct.setBrand(resultSet.getString("brand"));
+                userProduct.setCategory(resultSet.getString("category"));
+                return userProduct;
+            }
+        });
+        return list;
+    }
+
+    @Override
+    public void addUserAddress(UserAddress userAddress) {
+
+    }
+
+    @Override
+    public List<UserAddress> listUserAddress(User user) {
+        return null;
     }
 }

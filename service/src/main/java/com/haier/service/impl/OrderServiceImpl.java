@@ -1,7 +1,10 @@
 package com.haier.service.impl;
 
+import com.haier.common.response.Page;
 import com.haier.dao.OrderDao;
+import com.haier.dao.UserDao;
 import com.haier.domain.ServiceOrder;
+import com.haier.domain.ServiceOrderTrace;
 import com.haier.domain.User;
 import com.haier.hp.domain.*;
 import com.haier.hp.service.HPFacade;
@@ -25,6 +28,8 @@ public class OrderServiceImpl implements OrderService {
     private HPFacade hpFacade;
     @Autowired
     private OrderDao orderDao;
+    @Autowired
+    private UserDao userDao;
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
     public void saveOrder(ServiceOrder serviceOrder) throws Exception {
@@ -38,15 +43,28 @@ public class OrderServiceImpl implements OrderService {
         logger.debug(serviceOrder.toString());
         orderDao.save(serviceOrder);
     }
-
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
-    public List<HPWoListData> getOrderList(User user) throws Exception {
+    public Page getOrderListPage(User user,Page page) throws Exception {
+        user = userDao.findUserById(user);
         HPWoListResponse json = hpFacade.executeWoList(user.getPhone());
         if(!json.getCode().equals("200")){
             throw new Exception(json.getMsg()+" hp 获取工单失败");
         }
         orderDao.updateOrderServiceStatus(user,json.getData());
-        return json.getData();
+
+        page = orderDao.getOrderListPage(user,page);
+
+        return page;
+    }
+    @Transactional(readOnly = false,rollbackFor = Exception.class)
+    @Override
+    public List<ServiceOrderTrace> getServiceOrderTrack(String orderCode) throws Exception{
+        //从HP接口获得最新的订单信息
+        HPWoWholeInfoResponse json = hpFacade.executeWoWholeInfo(orderCode);
+        //更新本地的订单轨迹,饼返回
+        List<ServiceOrderTrace> list = orderDao.updateOrderServiceTrack(orderCode,json);
+        return list;
     }
 
     static  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

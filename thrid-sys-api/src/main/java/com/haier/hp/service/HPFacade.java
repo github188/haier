@@ -1,9 +1,6 @@
 package com.haier.hp.service;
 
-import com.haier.hp.domain.HPAddWoDataRequest;
-import com.haier.hp.domain.HPAddWoDataResponse;
-import com.haier.hp.domain.HPWoListResponse;
-import com.haier.hp.domain.HPWoWholeInfo;
+import com.haier.hp.domain.*;
 
 import java.util.List;
 import java.util.Map;
@@ -66,7 +63,7 @@ public interface HPFacade {
 
     HPWoListResponse executeWoList(String phone)throws Exception;
 
-    HPWoWholeInfo executeWoWholeInfo(String orderId) throws  Exception;
+    HPWoWholeInfoResponse executeWoWholeInfo(String orderId) throws  Exception;
 
  /**
   * ,隔开
