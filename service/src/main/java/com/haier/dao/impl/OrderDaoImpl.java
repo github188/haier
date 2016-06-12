@@ -162,7 +162,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ServiceOrderTrace trace = new ServiceOrderTrace();
                 trace.setId(resultSet.getInt("id"));
                 trace.setOrderCode(resultSet.getString("order_code"));
-                trace.setStatus(resultSet.getString("status"));
+                String status = resultSet.getString("status");
+                trace.setStatus(status);
+                if("0".equals(status)){
+                    trace.setDescription("已提交成功");
+                }else if("1".equals(status)){
+                    trace.setDescription("已受理");
+                }else if("2".equals(status)){
+                    trace.setDescription("正在服务");
+                }else{
+                    trace.setDescription("服务完成");
+                }
+
                 trace.setUpdatetime(resultSet.getDate("updatetime"));
                 return trace;
             }

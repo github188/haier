@@ -12,6 +12,7 @@ import java.util.List;
 public interface UserService {
     public User addNewUser(User user) throws Exception;
     public User isExistsUser(User user) throws Exception;
+    public Boolean isExistsUserName(String userName) throws Exception;
     public void clearAccessToken(User user) throws Exception;
     public Boolean IsValidAccess(String userKey, int u, String t, String m);
     public void addUserProduct(UserProduct userProduct);
