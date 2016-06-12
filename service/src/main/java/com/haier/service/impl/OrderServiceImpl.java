@@ -40,6 +40,7 @@ public class OrderServiceImpl implements OrderService {
             throw new  Exception(json.getMsg()+" hp 对接失败");
         }
         serviceOrder.setOrder_code(json.getData());
+        serviceOrder.setIfEvaluate("0");
         logger.debug(serviceOrder.toString());
         orderDao.save(serviceOrder);
     }

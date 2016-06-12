@@ -34,7 +34,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         final StringBuilder sql = new StringBuilder("insert into t_service_order(" +
                 "apply_id,order_code,");
         sql.append("product_id,user_id,he_type,require_time,order_time,arrive_time,work_man_id,");
-        sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time)");
+        sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time,if_evaluate)");
         sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         super.getJdbcTemplate().update(new PreparedStatementCreator() {
@@ -46,7 +46,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setString(1, order.getApply_id());
                 ps.setString(2, order.getOrder_code());
                 ps.setString(3, order.getProduct_id());
-                ps.setString(4, order.getUser_id());
+                ps.setInt(4, order.getUser_id());
                 ps.setString(5, order.getService_type());
                 ps.setTimestamp(6, new Timestamp(order.getRequire_service_date().getTime()));
                 ps.setTimestamp(7, new Timestamp(order.getOrder_time().getTime()));
@@ -58,6 +58,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setString(13, order.getAddress());
                 ps.setString(14, order.getRequire_service_desc());
                 ps.setString(15, order.getService_time());
+                ps.setString(16, order.getIfEvaluate());
                 return ps;
             }
         }, keyHolder);
@@ -134,7 +135,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setService_man_id(resultSet.getString("work_man_id"));
                 serviceOrder.setService_time(resultSet.getString("service_time"));
                 serviceOrder.setService_type(resultSet.getString("he_type"));
-                serviceOrder.setUser_id(resultSet.getString("user_id"));
+                serviceOrder.setUser_id(resultSet.getInt("user_id"));
                 serviceOrder.setUpdatetime(resultSet.getTimestamp("updatetime"));
                 serviceOrder.setStatus(resultSet.getString("status"));
                 serviceOrder.setStatusDesc(resultSet.getString("status_desc"));

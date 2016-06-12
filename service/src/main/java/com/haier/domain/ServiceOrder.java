@@ -27,6 +27,16 @@ public class ServiceOrder{
     private String service_time;
     private String status;
 
+    public String getIfEvaluate() {
+        return ifEvaluate;
+    }
+
+    public void setIfEvaluate(String ifEvaluate) {
+        this.ifEvaluate = ifEvaluate;
+    }
+
+    private String ifEvaluate;
+
     private String statusDesc;
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())

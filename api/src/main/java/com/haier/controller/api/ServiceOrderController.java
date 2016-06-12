@@ -62,7 +62,7 @@ public class ServiceOrderController extends BaseController {
     }
     @RequestMapping(path = "/getOrderList",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
-    public ResponseBody getOrderList(@RequestBody ServiceOrder order,@RequestBody Page page){
+    public ResponseBody getOrderList(@RequestBody ServiceOrder order,Page page){
         List<HPWoListData> orderList = null;
         if(order.getUser_id() == 0 || Strings.isNullOrEmpty(order.getStatus())
                 || page.getPageNumber() == 0 || page.getPageSize() == 0){

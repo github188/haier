@@ -66,26 +66,26 @@ public class LoginFilter implements Filter {
             HttpServletResponse response = (HttpServletResponse) resp;
             String reqUri =request.getRequestURI();
             sLogger.info("reqUri:"+reqUri+ "\t"+u+"\t"+m+"\t"+t+"\t"+userkey);
-            if (Token.isValid(userkey,t,m)) {
-                if (reqUri.equals("/api/haier/1.0/user/register")
-                        || reqUri.equals("/api/haier/1.0/user/login")){
-                    //not check token
-                }else{
-                    if (userService.IsValidAccess(userkey,u,t,m)==false){
-                        JSONObject returnJson = new JSONObject();
-                        returnJson.put("code", 2121);
-                        returnJson.put("msg", "user key is not valid");
-                        returnInfo(request, response, 200, returnJson.toString());
-                        return;
-                    }
-                }
-            }else{
-                JSONObject returnJson = new JSONObject();
-                returnJson.put("code", 2001);
-                returnJson.put("msg", "t and m is not valid");
-                returnInfo(request, response, 200, returnJson.toString());
-                return;
-            }
+//            if (Token.isValid(userkey,t,m)) {
+//                if (reqUri.equals("/api/haier/1.0/user/register")
+//                        || reqUri.equals("/api/haier/1.0/user/login")){
+//                    //not check token
+//                }else{
+//                    if (userService.IsValidAccess(userkey,u,t,m)==false){
+//                        JSONObject returnJson = new JSONObject();
+//                        returnJson.put("code", 2121);
+//                        returnJson.put("msg", "user key is not valid");
+//                        returnInfo(request, response, 200, returnJson.toString());
+//                        return;
+//                    }
+//                }
+//            }else{
+//                JSONObject returnJson = new JSONObject();
+//                returnJson.put("code", 2001);
+//                returnJson.put("msg", "t and m is not valid");
+//                returnInfo(request, response, 200, returnJson.toString());
+//                return;
+//            }
             
             chain.doFilter(req, resp);
         } 
