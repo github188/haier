@@ -129,7 +129,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setDistrict(resultSet.getString("district"));
                 serviceOrder.setMobile_phone(resultSet.getString("mobile_phone"));
                 serviceOrder.setOrder_code(resultSet.getString("order_code"));
-                serviceOrder.setOrder_time(resultSet.getDate("order_time"));
+                serviceOrder.setOrder_time(resultSet.getTimestamp("order_time"));
                 serviceOrder.setProduct_id(resultSet.getString("product_id"));
                 serviceOrder.setRequire_service_date(resultSet.getDate("require_time"));
                 serviceOrder.setRequire_service_desc(resultSet.getString("require_desc"));
@@ -188,7 +188,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                     trace.setDescription("服务完成");
                 }
 
-                trace.setUpdatetime(resultSet.getDate("updatetime"));
+                trace.setUpdatetime(resultSet.getTimestamp("updatetime"));
                 return trace;
             }
         });

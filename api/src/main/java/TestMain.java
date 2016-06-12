@@ -1,18 +1,14 @@
 import com.alibaba.fastjson.JSON;
-import com.haier.common.ObjectUtils;
 import com.haier.common.httpclient.HEHttpClients;
-import com.sun.deploy.net.HttpUtils;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.net.ssl.HttpsURLConnection;
 
 public class TestMain {
 
@@ -21,6 +17,8 @@ public class TestMain {
 //			// 绑定驾驶证
 			put("getOrderList",
 					"{\"user_id\":\"1\",\"status\":\"1\",\"pageNumber\":\"1\",\"pageSize\":\"3\"}");
+			put("getOidProductInfo",
+					"{\"oidContent\":\"http://oid.haier.com/oid?ewm=D006iM$MFTKA$AM$M$cM$KM$KKM$=$AM$Kv=Y$AM$$K$KA$KKM$FATMAK$FK=$KMKKYKKL4\"}");
 		}
 	};
 
@@ -30,13 +28,13 @@ public class TestMain {
 		// "https://sso.ehualu.com:8443/ehualu-appServer/handle.json");
 
 		StringBuffer url = new StringBuffer(
-				"http://localhost:9000/api/haier/1.0/order/getOrderTrack/BXK4160606656000");
+				"http://localhost:9000/api/haier/1.0/qr/getOidProductInfo");
 //		 StringBuffer url = new StringBuffer(
 //		 "http://114.247.102.206:8070/ehualu-appServer/handle.json");
 
 		//String sessionId = "JSESSIONID=2A4D10F0F01DCBF57775284928483A42;";
 
-		String param = (String) paramMap.get("getOrderList");
+		String param = (String) paramMap.get("getOidProductInfo");
 
 		String resp = connectHttpUri(url.toString(),JSON.parseObject(param,HashMap.class));
 
@@ -138,7 +136,7 @@ public class TestMain {
 	}
 
 	public static String connectHttpUri(String uri, Map<String,Object> param) throws Exception{
-		return HEHttpClients.httpGetExecute(uri);
+		return HEHttpClients.httpJsonPostExecute(uri,param);
 	}
 
 }
