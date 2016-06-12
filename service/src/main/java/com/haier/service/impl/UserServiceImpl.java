@@ -49,6 +49,17 @@ public class UserServiceImpl implements UserService{
         }
         return null;
     }
+    @Override
+    public Boolean isExistsUserName(String userName) throws Exception{
+        Boolean flag = false;
+        User user = new User();
+        user.setUserName(userName);
+        user = userDao.findUserByUserName(user);
+        if(user != null){
+            flag = true;
+        }
+        return flag;
+    }
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
     public void clearAccessToken(User user) throws Exception{

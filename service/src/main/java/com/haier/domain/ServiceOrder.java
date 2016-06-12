@@ -13,7 +13,7 @@ public class ServiceOrder{
     private String apply_id;
     private String order_code;
     private String product_id;
-    private String user_id;
+    private int user_id;
     private String service_type;
     private Date require_service_date;
     private Date order_time=new Date();
@@ -27,6 +27,16 @@ public class ServiceOrder{
     private String service_time;
     private String status;
 
+    public String getIfEvaluate() {
+        return ifEvaluate;
+    }
+
+    public void setIfEvaluate(String ifEvaluate) {
+        this.ifEvaluate = ifEvaluate;
+    }
+
+    private String ifEvaluate;
+
     private String statusDesc;
     public boolean check(){
         return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
@@ -36,7 +46,7 @@ public class ServiceOrder{
                 ||Strings.isNullOrEmpty(getService_time());
     }
     public ServiceOrder(){
-        this.user_id = "0";
+        this.user_id = 0;
     }
     public String getContact_name() {
         return contact_name;
@@ -93,11 +103,11 @@ public class ServiceOrder{
         this.product_id = product_id;
     }
 
-    public String getUser_id() {
+    public int getUser_id() {
         return user_id;
     }
 
-    public void setUser_id(String user_id) {
+    public void setUser_id(int user_id) {
         this.user_id = user_id;
     }
 

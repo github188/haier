@@ -1,6 +1,7 @@
 package com.haier.dao;
 
 import com.haier.common.response.Page;
+import com.haier.common.response.ServiceOrderPage;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.ServiceOrderTrace;
 import com.haier.domain.User;
@@ -17,7 +18,7 @@ public interface OrderDao {
     public void save(final ServiceOrder order);
     public void updateOrderServiceStatus(User user, List<HPWoListData> hpwoList);
 
-    public Page getOrderListPage(User user, Page page) throws Exception;
+    public ServiceOrderPage getOrderListPage(ServiceOrderPage page) throws Exception;
 
     public List<ServiceOrderTrace> updateOrderServiceTrack(String orderCode, HPWoWholeInfoResponse json) throws Exception;
 }

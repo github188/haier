@@ -57,6 +57,10 @@ public class UserController extends BaseController{
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
         try{
+            boolean isUserRegist = userService.isExistsUserName(user.getUserName());
+            if(!isUserRegist){
+                return new ResponseMsg(ResponseConstantCode.DATA_CANT_FOUND_CODE,"用户名不存在");
+            }
             user = userService.isExistsUser(user);
             if(user==null){
                 return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE,"用户名或密码不正确");

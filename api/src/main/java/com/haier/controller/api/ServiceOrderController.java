@@ -2,16 +2,11 @@ package com.haier.controller.api;
 
 import com.google.common.base.Strings;
 import com.haier.common.ApplyIdGenerate;
-import com.haier.common.response.Page;
-import com.haier.common.response.ResponseBody;
-import com.haier.common.response.ResponseConstantCode;
-import com.haier.common.response.ResponseMsg;
+import com.haier.common.response.*;
 import com.haier.controller.BaseController;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.ServiceOrderTrace;
-import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
-import com.haier.hp.domain.HPWoListResponse;
 import com.haier.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,13 +59,13 @@ public class ServiceOrderController extends BaseController {
     }
     @RequestMapping(path = "/getOrderList",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
-    public ResponseBody getOrderList(@RequestBody User user,@RequestBody Page page){
-        List<HPWoListData> orderList = null;
-        if(user.getId() == 0){
+    public ResponseBody getOrderList(@RequestBody ServiceOrderPage page){
+        if(page.getUser_id() == 0 || Strings.isNullOrEmpty(page.getStatus())
+                || page.getPageNumber() == 0 || page.getPageSize() == 0){
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
         try {
-            page = orderService.getOrderListPage(user,page);
+            page = orderService.getOrderListPage(page);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE, e.getMessage());

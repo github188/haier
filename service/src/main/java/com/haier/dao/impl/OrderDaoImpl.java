@@ -2,6 +2,7 @@ package com.haier.dao.impl;
 
 import com.google.common.base.Strings;
 import com.haier.common.response.Page;
+import com.haier.common.response.ServiceOrderPage;
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.ServiceOrderTrace;
@@ -34,7 +35,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         final StringBuilder sql = new StringBuilder("insert into t_service_order(" +
                 "apply_id,order_code,");
         sql.append("product_id,user_id,he_type,require_time,order_time,arrive_time,work_man_id,");
-        sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time)");
+        sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time,if_evaluate)");
         sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         super.getJdbcTemplate().update(new PreparedStatementCreator() {
@@ -46,7 +47,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setString(1, order.getApply_id());
                 ps.setString(2, order.getOrder_code());
                 ps.setString(3, order.getProduct_id());
-                ps.setString(4, order.getUser_id());
+                ps.setInt(4, order.getUser_id());
                 ps.setString(5, order.getService_type());
                 ps.setTimestamp(6, new Timestamp(order.getRequire_service_date().getTime()));
                 ps.setTimestamp(7, new Timestamp(order.getOrder_time().getTime()));
@@ -58,6 +59,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setString(13, order.getAddress());
                 ps.setString(14, order.getRequire_service_desc());
                 ps.setString(15, order.getService_time());
+                ps.setString(16, order.getIfEvaluate());
                 return ps;
             }
         }, keyHolder);
@@ -87,17 +89,28 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     }
 
     @Override
-    public Page getOrderListPage(User user, Page page) throws Exception {
+    public ServiceOrderPage getOrderListPage(ServiceOrderPage page) throws Exception {
 
         StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_service_order where user_id = ");
-        countsql.append(user.getId());
+        countsql.append(page.getUser_id());
+        if("1".equals(page.getStatus())){
+            countsql.append(" and status = '3'");
+        }else{
+            countsql.append(" and status in ('0','1','2')");
+        }
+
 
         Map<String, Object> result = super.getJdbcTemplate().queryForMap(countsql.toString());
 
         Long count = (Long)result.get("recordnum");
 
         StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
-        sql.append(user.getId());
+        sql.append(page.getUser_id());
+        if("1".equals(page.getStatus())){
+            countsql.append(" and status = '3'");
+        }else{
+            countsql.append(" and status in ('0','1','2')");
+        }
         sql.append(" order by updatetime asc limit  ");
         sql.append((page.getPageNumber()-1)*page.getPageSize());
         sql.append(",");
@@ -123,10 +136,11 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setService_man_id(resultSet.getString("work_man_id"));
                 serviceOrder.setService_time(resultSet.getString("service_time"));
                 serviceOrder.setService_type(resultSet.getString("he_type"));
-                serviceOrder.setUser_id(resultSet.getString("user_id"));
+                serviceOrder.setUser_id(resultSet.getInt("user_id"));
                 serviceOrder.setUpdatetime(resultSet.getTimestamp("updatetime"));
                 serviceOrder.setStatus(resultSet.getString("status"));
                 serviceOrder.setStatusDesc(resultSet.getString("status_desc"));
+                serviceOrder.setIfEvaluate(resultSet.getString("if_evaluate"));
                 return serviceOrder;
             }
         });
@@ -138,7 +152,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     @Override
     public List<ServiceOrderTrace> updateOrderServiceTrack(final String orderCode, HPWoWholeInfoResponse json) throws Exception{
         HPWoWholeInfo info = json.getData();
-        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ? order by type asc");
+        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ? order by status asc");
         if(!Strings.isNullOrEmpty(info.getCall_time())){
             updateOrInsertOrderTrace(orderCode,info,"0");
         }
@@ -162,7 +176,18 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ServiceOrderTrace trace = new ServiceOrderTrace();
                 trace.setId(resultSet.getInt("id"));
                 trace.setOrderCode(resultSet.getString("order_code"));
-                trace.setStatus(resultSet.getString("status"));
+                String status = resultSet.getString("status");
+                trace.setStatus(status);
+                if("0".equals(status)){
+                    trace.setDescription("已提交成功");
+                }else if("1".equals(status)){
+                    trace.setDescription("已受理");
+                }else if("2".equals(status)){
+                    trace.setDescription("正在服务");
+                }else{
+                    trace.setDescription("服务完成");
+                }
+
                 trace.setUpdatetime(resultSet.getDate("updatetime"));
                 return trace;
             }

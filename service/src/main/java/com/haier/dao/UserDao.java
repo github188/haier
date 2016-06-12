@@ -22,7 +22,7 @@ public interface UserDao {
 
     public User findUser(User user);
 
-    public User findUserById(User user);
+    public User findUserById(int id);
 
     public User findUserByUserName(User user);
 
