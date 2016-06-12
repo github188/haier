@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,12 +10,11 @@
     <script src="js/mui.min.js"></script>
     <script src="js/mui.picker.js"></script>
 	<script src="js/mui.poppicker.js"></script>
-	<script src="js/city.data.js" type="text/javascript" charset="utf-8"></script>
-	<script src="js/city.data-3.js" type="text/javascript" charset="utf-8"></script>
+
     <script src="js/mui.picker.min.js"></script>
     <script src="js/jquery-1.11.1.min.js"></script>
     <!--<script src="js/scale.js"></script>-->
-    <script src="js/views/ajaxData.js""></script>
+    <script src="js/views/ajaxData.js"></script>
     
     <link href="css/mui.min.css" rel="stylesheet"/>
     <!--App自定义的css-->

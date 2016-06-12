@@ -463,7 +463,7 @@ function addData(){
 		        } 
 		        else 
 		        {
-		        	window.location.href='index.html';
+		        	window.location.href='../../index.jsp';
 		         //   info.innerText = '确认';
 		        }
 		    });
@@ -627,7 +627,7 @@ function addMaintenceData(){
 		        } 
 		        else 
 		        {
-		        	window.location.href='maintence.html';
+		        	window.location.href='../../maintence.jsp';
 		         //   info.innerText = '确认';
 		        }
 		    });

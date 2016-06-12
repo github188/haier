@@ -16,7 +16,7 @@ public class BaseController {
     
     public static final String RESULT_CODE = "resultCode";
     public static final String RESULT_DESC = "resultDesc";
-    protected ResponseBody getSuccess(){
+    protected ResponseMsg getSuccess(){
         return new ResponseMsg(ResponseConstantCode.SUCCESS_CODE,ResponseConstantCode.SUCCESS_DESC);
     }
 }

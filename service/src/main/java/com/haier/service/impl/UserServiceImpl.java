@@ -1,11 +1,15 @@
 package com.haier.service.impl;
 
+import com.google.common.base.Splitter;
+import com.google.common.collect.Lists;
 import com.haier.common.token.Token;
 import com.haier.dao.UserDao;
 import com.haier.domain.User;
 import com.haier.domain.UserAddress;
 import com.haier.domain.UserProduct;
 import com.haier.service.UserService;
+import com.haier.weixin.domain.WeiXinResponse;
+import com.haier.weixin.service.WeiXinFacade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,7 +21,8 @@ import java.util.List;
  */
 @Service("userService")
 public class UserServiceImpl implements UserService{
-
+    @Autowired
+    private WeiXinFacade weiXinFacade;
     @Autowired
     private UserDao userDao;
 
@@ -85,5 +90,54 @@ public class UserServiceImpl implements UserService{
     @Override
     public List<UserAddress> listUserAddress(User user) {
         return null;
+    }
+
+    @Override
+    public String isExistWithOpenId(String openId) throws Exception {
+        return userDao.isExistWithOpenId(openId);
+
+    }
+
+    @Override
+    public void sendQrcode(String openId, String user) throws Exception {
+        try{
+            WeiXinResponse response = weiXinFacade.userRegister(user,openId);
+            if(response.getIsAskNextRequest().equals("false")){
+                //已经注册
+            }
+        }catch (Exception e){
+            throw  new Exception("发送验证码失败");
+        }
+//        weiXinFacade.userRegister()
+    }
+
+    /**
+     * 您已成功注册海尔会员，登录账号15022086097默认密码vkbwdj；登录vip.haier.com互动赢好礼，免费获得家电保养,更多精彩尽在海尔
+     * @param openId
+     * @param phone
+     * @param code
+     * @return
+     * @throws Exception
+     */
+    @Override
+    public String wxRegister(String openId, String phone,String code) throws Exception {
+        try {
+            WeiXinResponse response = weiXinFacade.userActivate(code, openId);
+            if(response.getIsAskNextRequest().equals("false")){
+                //注册
+                String str=response.getBody().getContent().replace("您已成功注册海尔会员，登录账号","").replace("默认密码",";").replace("；登录vip.haier.com互动赢好礼，免费获得家电保养,更多精彩尽在海尔",";");
+                List<String> up= Lists.newArrayList(Splitter.on(";").trimResults().split(str));
+                if(up.size()==3){
+                    return userDao.wxRegister(openId,phone,code,up.get(0),up.get(1));
+                }else{
+                    return userDao.wxRegister(openId,phone,code,phone,"");
+                }
+
+            }
+            return "";
+        }catch (Exception e){
+            e.printStackTrace();
+            throw new Exception("微信激活注册失败");
+        }
     }
 }

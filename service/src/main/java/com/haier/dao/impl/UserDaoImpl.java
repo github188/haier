@@ -305,4 +305,57 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     public List<UserAddress> listUserAddress(User user) {
         return null;
     }
+    @Transactional(readOnly = false)
+    @Override
+    public String wxRegister(final String openId, final String phone, final String code, final String userName, final String password) throws Exception {
+        final StringBuilder sql = new StringBuilder("insert into t_user(" +
+                "username,password,");
+        sql.append("name,sex,birthday,mobile,address,head_pic,login_status,");
+        sql.append("updatetime,user_source,user_source_id,access_token,mac)");
+        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        try {
+            super.getJdbcTemplate().update(new PreparedStatementCreator() {
+                @Override
+                public PreparedStatement createPreparedStatement(Connection con)
+                        throws SQLException {
+
+                    PreparedStatement ps = con.prepareStatement(sql.toString(), PreparedStatement.RETURN_GENERATED_KEYS);
+                    ps.setString(1, userName);
+                    ps.setString(2, password);
+                    ps.setString(3, phone);
+                    ps.setString(4, "");
+                    ps.setString(5, "");
+                    ps.setString(6, phone);
+                    ps.setString(7, "");
+                    ps.setBinaryStream(8, null);
+                    ps.setString(9, "1");
+                    ps.setTimestamp(10, new Timestamp(new java.util.Date().getTime()));
+                    ps.setString(11, "wx");
+                    ps.setString(12, openId);
+                    ps.setString(13, openId);
+                    ps.setString(14, "");
+                    return ps;
+                }
+            }, keyHolder);
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }
+        return "你的用户名:"+userName+";密码:"+password;
+    }
+
+    @Override
+    public String isExistWithOpenId(String openId) throws Exception {
+        List<String>  result = getBySqlRowMapper("select username from t_user where user_source_id='" + openId + "'", new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
+                return rs.getString(1);
+            }
+        });
+        if(null == result ||result.size()==0){
+            return "";
+        }
+        return result.get(0);
+    }
 }

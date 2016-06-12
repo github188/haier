@@ -19,4 +19,23 @@ public interface UserService {
     public List<UserProduct> listUserProduct(User user);
     public void addUserAddress(UserAddress userAddress);
     public List<UserAddress> listUserAddress(User user);
+
+    public String isExistWithOpenId(String openId) throws Exception;
+
+    /**
+     * 微信 发送验证码
+     * @param openId
+     * @param user
+     * @throws Exception
+     */
+    public void sendQrcode(String openId,String user) throws Exception;
+
+    /**
+     *微信激活
+     * @param openId
+     * @param phone
+     * @return
+     * @throws Exception
+     */
+    public String wxRegister(String openId,String phone,String code) throws Exception;
 }
