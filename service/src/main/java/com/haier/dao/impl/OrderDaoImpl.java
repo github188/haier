@@ -107,9 +107,9 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
         sql.append(page.getUser_id());
         if("1".equals(page.getStatus())){
-            countsql.append(" and status = '3'");
+            sql.append(" and status = '3'");
         }else{
-            countsql.append(" and status in ('0','1','2')");
+            sql.append(" and status in ('0','1','2')");
         }
         sql.append(" order by updatetime asc limit  ");
         sql.append((page.getPageNumber()-1)*page.getPageSize());
