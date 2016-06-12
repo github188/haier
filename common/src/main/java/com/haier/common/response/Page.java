@@ -11,7 +11,7 @@ import java.util.List;
  * Date: 13-12-27
  * Time: 上午9:25
  */
-public class Page<T> extends ResponseBody{
+public abstract class Page<T> extends ResponseBody{
     private Long count;
 
     public Page() {
@@ -52,9 +52,7 @@ public class Page<T> extends ResponseBody{
         return Lists.newArrayList(listAlias);
     }
 
-    protected String listAlias(){
-        return "messages";
-    };
+    protected abstract String listAlias();
 
     public Long getCount() {
         return count;

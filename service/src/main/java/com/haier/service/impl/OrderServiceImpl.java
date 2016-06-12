@@ -1,6 +1,7 @@
 package com.haier.service.impl;
 
 import com.haier.common.response.Page;
+import com.haier.common.response.ServiceOrderPage;
 import com.haier.dao.OrderDao;
 import com.haier.dao.UserDao;
 import com.haier.domain.ServiceOrder;
@@ -46,15 +47,15 @@ public class OrderServiceImpl implements OrderService {
     }
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
-    public Page getOrderListPage(ServiceOrder order,Page page) throws Exception {
-        User user = userDao.findUserById(order.getUser_id());
+    public ServiceOrderPage getOrderListPage(ServiceOrderPage page) throws Exception {
+        User user = userDao.findUserById(page.getUser_id());
         HPWoListResponse json = hpFacade.executeWoList(user.getPhone());
         if(!json.getCode().equals("200")){
             throw new Exception(json.getMsg()+" hp 获取工单失败");
         }
         orderDao.updateOrderServiceStatus(user,json.getData());
 
-        page = orderDao.getOrderListPage(order,page);
+        page = orderDao.getOrderListPage(page);
 
         return page;
     }
@@ -64,6 +65,9 @@ public class OrderServiceImpl implements OrderService {
         //从HP接口获得最新的订单信息
         HPWoWholeInfoResponse json = hpFacade.executeWoWholeInfo(orderCode);
         //更新本地的订单轨迹,饼返回
+        if(!"200".equals(json.getCode())){
+            throw new Exception("从HP接口获取订单详情失败");
+        }
         List<ServiceOrderTrace> list = orderDao.updateOrderServiceTrack(orderCode,json);
         return list;
     }

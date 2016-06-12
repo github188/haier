@@ -2,6 +2,7 @@ package com.haier.dao.impl;
 
 import com.google.common.base.Strings;
 import com.haier.common.response.Page;
+import com.haier.common.response.ServiceOrderPage;
 import com.haier.dao.OrderDao;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.ServiceOrderTrace;
@@ -88,11 +89,11 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     }
 
     @Override
-    public Page getOrderListPage(ServiceOrder order, Page page) throws Exception {
+    public ServiceOrderPage getOrderListPage(ServiceOrderPage page) throws Exception {
 
         StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_service_order where user_id = ");
-        countsql.append(order.getUser_id());
-        if("1".equals(order.getStatus())){
+        countsql.append(page.getUser_id());
+        if("1".equals(page.getStatus())){
             countsql.append(" and status = '3'");
         }else{
             countsql.append(" and status in ('0','1','2')");
@@ -104,8 +105,8 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         Long count = (Long)result.get("recordnum");
 
         StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
-        sql.append(order.getUser_id());
-        if("1".equals(order.getStatus())){
+        sql.append(page.getUser_id());
+        if("1".equals(page.getStatus())){
             countsql.append(" and status = '3'");
         }else{
             countsql.append(" and status in ('0','1','2')");
@@ -139,6 +140,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setUpdatetime(resultSet.getTimestamp("updatetime"));
                 serviceOrder.setStatus(resultSet.getString("status"));
                 serviceOrder.setStatusDesc(resultSet.getString("status_desc"));
+                serviceOrder.setIfEvaluate(resultSet.getString("if_evaluate"));
                 return serviceOrder;
             }
         });
@@ -150,7 +152,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     @Override
     public List<ServiceOrderTrace> updateOrderServiceTrack(final String orderCode, HPWoWholeInfoResponse json) throws Exception{
         HPWoWholeInfo info = json.getData();
-        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ? order by type asc");
+        StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ? order by status asc");
         if(!Strings.isNullOrEmpty(info.getCall_time())){
             updateOrInsertOrderTrace(orderCode,info,"0");
         }

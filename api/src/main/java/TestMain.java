@@ -30,7 +30,7 @@ public class TestMain {
 		// "https://sso.ehualu.com:8443/ehualu-appServer/handle.json");
 
 		StringBuffer url = new StringBuffer(
-				"http://localhost:9000/api/haier/1.0/order/getOrderList");
+				"http://localhost:9000/api/haier/1.0/order/getOrderTrack/BXK4160606656000");
 //		 StringBuffer url = new StringBuffer(
 //		 "http://114.247.102.206:8070/ehualu-appServer/handle.json");
 
@@ -138,7 +138,7 @@ public class TestMain {
 	}
 
 	public static String connectHttpUri(String uri, Map<String,Object> param) throws Exception{
-		return HEHttpClients.httpJsonPostExecute(uri,param);
+		return HEHttpClients.httpGetExecute(uri);
 	}
 
 }
