@@ -87,17 +87,28 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     }
 
     @Override
-    public Page getOrderListPage(User user, Page page) throws Exception {
+    public Page getOrderListPage(ServiceOrder order, Page page) throws Exception {
 
         StringBuilder countsql = new StringBuilder("select count(1) recordnum from t_service_order where user_id = ");
-        countsql.append(user.getId());
+        countsql.append(order.getUser_id());
+        if("1".equals(order.getStatus())){
+            countsql.append(" and status = '3'");
+        }else{
+            countsql.append(" and status in ('0','1','2')");
+        }
+
 
         Map<String, Object> result = super.getJdbcTemplate().queryForMap(countsql.toString());
 
         Long count = (Long)result.get("recordnum");
 
         StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
-        sql.append(user.getId());
+        sql.append(order.getUser_id());
+        if("1".equals(order.getStatus())){
+            countsql.append(" and status = '3'");
+        }else{
+            countsql.append(" and status in ('0','1','2')");
+        }
         sql.append(" order by updatetime asc limit  ");
         sql.append((page.getPageNumber()-1)*page.getPageSize());
         sql.append(",");

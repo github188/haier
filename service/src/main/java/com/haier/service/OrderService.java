@@ -15,7 +15,7 @@ public interface OrderService {
 
     public void saveOrder(ServiceOrder serviceOrder) throws Exception;
 
-    public Page getOrderListPage(User user,Page page) throws Exception;
+    public Page getOrderListPage(ServiceOrder order,Page page) throws Exception;
 
     public List<ServiceOrderTrace> getServiceOrderTrack(String orderCode)  throws Exception;
 }

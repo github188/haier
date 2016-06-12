@@ -17,7 +17,7 @@ public interface OrderDao {
     public void save(final ServiceOrder order);
     public void updateOrderServiceStatus(User user, List<HPWoListData> hpwoList);
 
-    public Page getOrderListPage(User user, Page page) throws Exception;
+    public Page getOrderListPage(ServiceOrder order, Page page) throws Exception;
 
     public List<ServiceOrderTrace> updateOrderServiceTrack(String orderCode, HPWoWholeInfoResponse json) throws Exception;
 }

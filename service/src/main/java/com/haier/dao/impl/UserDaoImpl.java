@@ -173,9 +173,9 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public User findUserById(User user) {
+    public User findUserById(String id) {
         StringBuilder sql = new StringBuilder("select * from t_user where id = ");
-        sql.append(user.getId());
+        sql.append(id);
         return super.getJdbcTemplate().queryForObject(sql.toString(), new RowMapper<User>() {
             @Override
             public User mapRow(ResultSet resultSet, int i) throws SQLException {

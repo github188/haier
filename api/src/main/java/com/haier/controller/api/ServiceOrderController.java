@@ -9,9 +9,7 @@ import com.haier.common.response.ResponseMsg;
 import com.haier.controller.BaseController;
 import com.haier.domain.ServiceOrder;
 import com.haier.domain.ServiceOrderTrace;
-import com.haier.domain.User;
 import com.haier.hp.domain.HPWoListData;
-import com.haier.hp.domain.HPWoListResponse;
 import com.haier.service.OrderService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,13 +62,14 @@ public class ServiceOrderController extends BaseController {
     }
     @RequestMapping(path = "/getOrderList",method = RequestMethod.POST)
     @org.springframework.web.bind.annotation.ResponseBody
-    public ResponseBody getOrderList(@RequestBody User user,@RequestBody Page page){
+    public ResponseBody getOrderList(@RequestBody ServiceOrder order,@RequestBody Page page){
         List<HPWoListData> orderList = null;
-        if(user.getId() == 0){
+        if(order.getUser_id() == 0 || Strings.isNullOrEmpty(order.getStatus())
+                || page.getPageNumber() == 0 || page.getPageSize() == 0){
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
         try {
-            page = orderService.getOrderListPage(user,page);
+            page = orderService.getOrderListPage(order,page);
         } catch (Exception e) {
             e.printStackTrace();
             return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE, e.getMessage());
