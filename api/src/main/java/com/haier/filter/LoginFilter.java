@@ -59,34 +59,36 @@ public class LoginFilter implements Filter {
 	          //resp.setCharacterEncoding("utf-8");
 	          //resp.setContentType("text/json;charset=".concat("utf-8")); 
             HttpServletRequest request = (HttpServletRequest) req;
-            String userkey =request.getHeader("x-haier-accesstoken");//登录前，或未取得key时，输入空字符串
-            int u =Integer.parseInt(Strings.isNullOrEmpty(request.getHeader("u"))?"000":request.getHeader("u"));
-            String t =request.getHeader("t"); 
-            String m =request.getHeader("m");
-            HttpServletResponse response = (HttpServletResponse) resp;
-            String reqUri =request.getRequestURI();
-            sLogger.info("reqUri:"+reqUri+ "\t"+u+"\t"+m+"\t"+t+"\t"+userkey);
-            if (Token.isValid(userkey,t,m)) {
-                if (reqUri.equals("/api/haier/1.0/user/register")
-                        || reqUri.equals("/api/haier/1.0/user/login")){
-                    //not check token
-                }else{
-                    if (userService.IsValidAccess(userkey,u,t,m)==false){
-                        JSONObject returnJson = new JSONObject();
-                        returnJson.put("code", 2121);
-                        returnJson.put("msg", "user key is not valid");
-                        returnInfo(request, response, 200, returnJson.toString());
-                        return;
+            String type = request.getHeader("type");
+            if(!"wx".equals(type)){
+                String userkey =request.getHeader("x-haier-accesstoken");//登录前，或未取得key时，输入空字符串
+                int u =Integer.parseInt(Strings.isNullOrEmpty(request.getHeader("u"))?"000":request.getHeader("u"));
+                String t =request.getHeader("t");
+                String m =request.getHeader("m");
+                HttpServletResponse response = (HttpServletResponse) resp;
+                String reqUri =request.getRequestURI();
+                sLogger.info("reqUri:"+reqUri+ "\t"+u+"\t"+m+"\t"+t+"\t"+userkey);
+                if (Token.isValid(userkey,t,m)) {
+                    if (reqUri.equals("/api/haier/1.0/user/register")
+                            || reqUri.equals("/api/haier/1.0/user/login")){
+                        //not check token
+                    }else{
+                        if (userService.IsValidAccess(userkey,u,t,m)==false){
+                            JSONObject returnJson = new JSONObject();
+                            returnJson.put("code", 2121);
+                            returnJson.put("msg", "user key is not valid");
+                            returnInfo(request, response, 200, returnJson.toString());
+                            return;
+                        }
                     }
+                }else{
+                    JSONObject returnJson = new JSONObject();
+                    returnJson.put("code", 2001);
+                    returnJson.put("msg", "t and m is not valid");
+                    returnInfo(request, response, 200, returnJson.toString());
+                    return;
                 }
-            }else{
-                JSONObject returnJson = new JSONObject();
-                returnJson.put("code", 2001);
-                returnJson.put("msg", "t and m is not valid");
-                returnInfo(request, response, 200, returnJson.toString());
-                return;
             }
-            
             chain.doFilter(req, resp);
         } 
     }
