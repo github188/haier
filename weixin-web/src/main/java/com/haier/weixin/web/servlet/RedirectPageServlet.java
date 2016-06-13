@@ -60,11 +60,13 @@ public class RedirectPageServlet extends HttpServlet {
             case "index":
                 responseJsp="index.jsp";
                 break;
+            case "servicelist":
+                responseJsp="servicelist.jsp";
+                break;
             default:
                 break;
         }
-//        req.setAttribute("heOpenId",type);
-        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
+        req.getRequestDispatcher(responseJsp).forward(req,resp);
     }
 
     @Override
