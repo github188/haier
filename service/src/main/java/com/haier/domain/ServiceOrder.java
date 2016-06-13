@@ -27,6 +27,34 @@ public class ServiceOrder{
     private String service_time;
     private String status;
     private Date updatetime=new Date();
+    private String product_name;
+    private String type_code;
+    private String type_name;
+
+    public String getType_name() {
+        return type_name;
+    }
+
+    public void setType_name(String type_name) {
+        this.type_name = type_name;
+    }
+
+    public String getProduct_name() {
+        return product_name;
+    }
+
+    public void setProduct_name(String product_name) {
+        this.product_name = product_name;
+    }
+
+    public String getType_code() {
+        return type_code;
+    }
+
+    public void setType_code(String type_code) {
+        this.type_code = type_code;
+    }
+
 
     public String getIfEvaluate() {
         return ifEvaluate;

@@ -98,8 +98,12 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
 
         Long count = (Long)result.get("recordnum");
 
-        StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
+        StringBuilder sql = new StringBuilder("select distinct t1.*,t2.code product_id,t2.name product_name," +
+                "t3.code type_code,t3.name type_name from t_service_order t1" +
+                ",t_product_subcategory t2,t_product_category t3 where user_id = ");
         sql.append(page.getUser_id());
+        sql.append(" and t1.product_id=t2.code");
+        sql.append(" and t2.category_code=t3.code");
         if("1".equals(page.getStatus())){
             sql.append(" and status = '3'");
         }else{
@@ -135,6 +139,9 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setStatus(resultSet.getString("status"));
                 serviceOrder.setStatusDesc(resultSet.getString("status_desc"));
                 serviceOrder.setIfEvaluate(resultSet.getString("if_evaluate"));
+                serviceOrder.setProduct_name(resultSet.getString("product_name"));
+                serviceOrder.setType_code(resultSet.getString("type_code"));
+                serviceOrder.setType_name(resultSet.getString("type_name"));
                 return serviceOrder;
             }
         });
