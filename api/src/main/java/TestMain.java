@@ -28,13 +28,13 @@ public class TestMain {
 		// "https://sso.ehualu.com:8443/ehualu-appServer/handle.json");
 
 		StringBuffer url = new StringBuffer(
-				"http://localhost:9000/api/haier/1.0/qr/getOidProductInfo");
+				"http://localhost:9000/api/haier/1.0/order/getOrderList");
 //		 StringBuffer url = new StringBuffer(
 //		 "http://114.247.102.206:8070/ehualu-appServer/handle.json");
 
 		//String sessionId = "JSESSIONID=2A4D10F0F01DCBF57775284928483A42;";
 
-		String param = (String) paramMap.get("getOidProductInfo");
+		String param = (String) paramMap.get("getOrderList");
 
 		String resp = connectHttpUri(url.toString(),JSON.parseObject(param,HashMap.class));
 
