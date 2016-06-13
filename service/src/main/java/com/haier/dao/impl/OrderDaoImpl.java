@@ -36,7 +36,7 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 "apply_id,order_code,");
         sql.append("product_id,user_id,he_type,require_time,order_time,arrive_time,work_man_id,");
         sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time,if_evaluate)");
-        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         super.getJdbcTemplate().update(new PreparedStatementCreator() {
             @Override
