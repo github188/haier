@@ -35,7 +35,8 @@
 	</style>
 </head>
 <body>
-<input type="hidden" name="openId" value="<%=openId%>">
+<input type="hidden" name="openId" id="openId" value="<%=openId%>">
+<input type="hidden" name="user_id" id="user_id" value="">
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
 	    <h1 class="mui-title" ><a href="javascript:;" onclick="addData()">送货安装</a></h1>

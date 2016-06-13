@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html class="ui-page-login">
+<%
+	String openId = request.getParameter("openId");
+%>
 
 	<head>
 		<meta charset="utf-8">
@@ -16,6 +19,8 @@
 	</head>
 
 	<body>
+	<input type="hidden" name="openId" id="openId" value="<%=openId%>">
+	<input type="hidden" name="user_id" id="user_id" value="">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title">账号注册</h1>
