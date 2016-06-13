@@ -25,6 +25,6 @@ public class ServiceOrderPage extends Page{
     private String status;
     @Override
     protected String listAlias() {
-        return "message";
+        return "messages";
     }
 }
