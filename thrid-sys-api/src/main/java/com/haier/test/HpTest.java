@@ -30,7 +30,9 @@ public class HpTest {
         ApplicationContext ap = new ClassPathXmlApplicationContext("applicationThridSys.xml");
         HPFacade facade = ap.getBean(HPFacade.class);
         try {
-            HPWoWholeInfoResponse result = facade.executeWoWholeInfo("BXK1160610146230");
+            //12345678907
+//            HPWoListResponse result = facade.executeWoList("17612287688");
+            HPWoWholeInfoResponse result = facade.executeWoWholeInfo("BXK1160613148932");
             System.out.print(result.toString());
 //            HPAddWoDataResponse response = facade.executeAddWoData(getAddRequest());
 //            System.out.print(response.toString());

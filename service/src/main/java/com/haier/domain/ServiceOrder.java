@@ -26,6 +26,7 @@ public class ServiceOrder{
     private String require_service_desc;
     private String service_time;
     private String status;
+    private Date updatetime=new Date();
 
     public String getIfEvaluate() {
         return ifEvaluate;
@@ -183,7 +184,6 @@ public class ServiceOrder{
         this.service_time = service_time;
     }
 
-    private Date updatetime=new Date();
 
 
     public String getStatusDesc() {
