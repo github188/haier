@@ -28,7 +28,7 @@ public class TestMain {
 		// "https://sso.ehualu.com:8443/ehualu-appServer/handle.json");
 
 		StringBuffer url = new StringBuffer(
-				"http://localhost:9000/api/haier/1.0/order/getOrderList");
+				"http://localhost:9000/api/haier/1.0/order/newOrder");
 //		 StringBuffer url = new StringBuffer(
 //		 "http://114.247.102.206:8070/ehualu-appServer/handle.json");
 

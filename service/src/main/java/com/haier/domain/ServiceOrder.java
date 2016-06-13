@@ -39,7 +39,7 @@ public class ServiceOrder{
 
     private String statusDesc;
     public boolean check(){
-        return Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
+        return getUser_id()==0||Strings.isNullOrEmpty(getProduct_id()) || Strings.isNullOrEmpty(getService_type())
                 ||null == getRequire_service_date() || Strings.isNullOrEmpty(getContact_name())
                 || Strings.isNullOrEmpty(getMobile_phone())||Strings.isNullOrEmpty(getDistrict())
                 || Strings.isNullOrEmpty(getAddress()) || Strings.isNullOrEmpty(getRequire_service_desc())
