@@ -3,6 +3,12 @@
 <html class="ui-page-login">
 
 	<head>
+		<%
+			String openId = request.getParameter("openId");
+			if(null == openId){
+				openId="";
+			}
+		%>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<title></title>
@@ -31,6 +37,8 @@
 	</head>
 
 	<body>
+	<input type="hidden" name="openId" id="openId" value="<%=openId%>">
+	<input type="hidden" name="user_id" id="user_id" value="">
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
 	    	<h1 class="mui-title">我的服务单</h1>

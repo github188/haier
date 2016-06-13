@@ -3,6 +3,9 @@
 <html class="ui-page-login">
 <%
 	String openId = request.getParameter("openId");
+	if(null == openId){
+		openId="";
+	}
 %>
 
 	<head>
