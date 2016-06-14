@@ -579,7 +579,6 @@ function addMaintenceData(){
   	var area = $.trim($("#area-hidden").val());
   	var newdate = $.trim($("#newdate-hidden").val());
   	var newtime = $.trim($("#newdate-front-after-hidden").val());
-  	var wronginfo = $.trim($("#wrong-hidden").val());
   	
   	if(pinpai == '') {
   		mui.alert('请输入产品品牌', '输入提示', function() 
@@ -690,13 +689,13 @@ function addMaintenceData(){
 		"contact_name":$("#contact").val(),
 		"mobile_phone":$("#phone").val(),
 		"district":$("#area-hidden").val(),
-		"require_service_desc":wronginfo,
+		"require_service_desc":infowrong,
 		"service_time":$("#newdate-front-after-hidden").val(),
 		"address":$("#infoaddress").val(),
-		"infowrong":infowrong,
+		//"infowrong":infowrong,
 	};
 	
- 
+ 	alert(jsonData.require_service_desc);
 
 	//jQuery.each( jsonData, function(i, field){
 	//	  alert(field.value);

@@ -144,26 +144,18 @@
 								<div style="width:100%;height:50px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
 									<div style="width:25%;height:50px;float:left;padding-top:15px;"><span class="triangle">*</span><span class="color1">预约日期</span></div>
 									<div style="width:75%;height:50px;float: left;padding-right:30px;">
-										<div id="newdate" class="color3 dates" data-options='{"type":"date"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
+										<div id="newdate" class="color2 dates" data-options='{"type":"date"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
 										<input id="newdate-hidden" name="require_service_date" type="hidden"/>
 									</div>
-									
+
 								</div>
-								
+
 								<div style="width:100%;height:50px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
 									<div style="width:25%;height:50px;float:left;padding-top:15px;"><span class="triangle">*</span><span class="color1">预约时间</span></div>
-									<div style="width:35%;height:50px;float: left;padding-right:30px;">
-										<div id="newdate-font" class="color3 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
-										<input id="newdate-font-hidden" type="hidden"/>
+									<div style="width:75%;height:50px;float: left;padding-right:30px;">
+										<div id="newdate-front-after" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
+										<input id="newdate-front-after-hidden" type="hidden"/>
 									</div>
-									
-									<div class="color1" style="width:5%;height:50px;float: left;text-align: right;padding-top:15px;">到</div>
-									<div style="width:35%;height:50px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
-										<div id="newdate-after" class="color3 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
-										<input id="newdate-after-hidden" type="hidden"/>
-									</div>
-									<input id="newdate-front-after-hidden" name="service_time" type="hidden"/>
-									
 								</div>
 								
 								<!--<div style="width:100%;height:40px;padding-left:30px;">
@@ -384,26 +376,33 @@
 						var shi_hidden = doc.getElementById("shi-hidden");
 						ajax_areaa_Data(this,sheng_hidden.value,shi_hidden.value);
 					}, false);
+
+					var newdate = doc.getElementById('newdate-front-after');
+					newdate.addEventListener('tap', function(event) {
+						ajax_time_Data(this);
+					}, false);
 					
 				});
 	
 				//跳转新页面
-				document.getElementById('maintence').addEventListener('tap',function(){
-					mui.openWindow({
-					    url: 'pages/maintence.html',
-					    id: 'maintence',
-
-					    extras: {
-					       //自定义扩展参数，可以用来处理页面间传值
-					    }
-					    
-					})
-				})
-				
+//				document.getElementById('maintence').addEventListener('tap',function(){
+//					mui.openWindow({
+//					    url: 'pages/maintence.html',
+//					    id: 'maintence',
+//
+//					    extras: {
+//					       //自定义扩展参数，可以用来处理页面间传值
+//					    }
+//
+//					})
+//				})
+//				document.getElementById('add').addEventListener('tap',function(){
+//					addData();
+//				})
 				var btns = $('.dates');
 				btns.each(function(i, btn) {
 					btn.addEventListener('tap', function() {
-						var obj = this;  
+						var obj = this;
 						var optionsJson = this.getAttribute('data-options') || '{}';
 						var options = JSON.parse(optionsJson);
 						var id = this.getAttribute('id');

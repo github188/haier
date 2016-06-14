@@ -5,7 +5,24 @@ $(function () {
 
 function initBtn()
 {
-	initList(1, 1);
+	var openId = $("#openId").val();
+	$.ajax({
+		type:"GET",
+		// url:"http://hrfwtest.haier.net/api/haier/1.0/wxuser/isExist/"+openId,
+		url:"wxuser?type=isExist&openId="+openId,
+		// contentType: "application/json; charset=utf-8",
+		// dataType:"json",
+		success:function(data){
+			var user_id = typeof(data.info.user_id) != 'undefined' ? data.info.user_id : '';
+			if( ! user_id.length ) {
+				window.location.href='register.jsp?openId='+openId;
+			} else {
+				$("#user_id").val(user_id);
+				initList(1, 1);
+			}
+		}
+	});
+
 }
 function initList(offset, status)
 {
@@ -52,7 +69,7 @@ function initList(offset, status)
 					html += '				<div class="company">'+n.address+'</div>';
 					html += '				<div class="man clearfix">';
 					html += '					<span>服务兵：'+n.contact_name+' '+n.mobile_phone+'</span>';
-					html += '					<a name="icon-phone" class="mui-icon" href=""></a>';
+					//html += '					<a name="icon-phone" class="mui-icon" href=""></a>';
 					html += '				</div>';
 					html += '			</div>';
 					html += '		</div>';
