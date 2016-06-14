@@ -62,7 +62,7 @@ import java.util.Properties;
  private String district;--->code
  private String service_address --->;address
  */
-public class WeiXinServiceOrderServlet extends HttpServlet {
+public class WeiXinServiceOrderServlet extends AbstractServlet {
     private List<String> reqName= Lists.newArrayList("product_id","service_type","require_service_date",
             "contact_name",
             "mobile_phone","district","address","require_service_desc","service_time");
@@ -84,27 +84,34 @@ public class WeiXinServiceOrderServlet extends HttpServlet {
 
         ServiceOrder order = new ServiceOrder();
         order.setContact_name(req.getParameter("contact_name"));
+        String user_id=req.getParameter("user_id");
+        if(user_id==null){
+            user_id="1";
+        }
+        order.setUser_id(Integer.parseInt(user_id));
         order.setDistrict(req.getParameter("district"));
         order.setMobile_phone(req.getParameter("mobile_phone"));
         order.setProduct_id(req.getParameter("product_id"));
         order.setRequire_service_desc(req.getParameter("require_service_desc"));
+        order.setAddress(req.getParameter("address"));
         String req_time = req.getParameter("require_service_date");
-        if(Strings.isNullOrEmpty(req_time)){
-            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date不能为空''}");
-            return;
-        }
-        try {
-            order.setRequire_service_date(sdf.parse(req_time));
-        } catch (ParseException e) {
-            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date转换问题 '}");
-            return;
-        }
+
+//        if(Strings.isNullOrEmpty(req_time)){
+//            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date不能为空''}");
+//            return;
+//        }
+//        try {
+//            order.setRequire_service_date(sdf.parse(req_time));
+//        } catch (ParseException e) {
+//            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date转换问题 '}");
+//            return;
+//        }
         order.setService_time(req.getParameter("service_time"));
         order.setService_type(req.getParameter("service_type"));
 //        order.set
-
+        logger.info("order : "+order.toString());
         try {
-            String result = HEHttpClients.httpPostExecute(serviceUrl, ObjectUtils.toMap(order));
+            String result = HEHttpClients.httpPostExecute(serviceUrl, ObjectUtils.toMap(order),getWXHeader());
             ResponseUtils.returnInfo(resp,200,result);
             return;
         } catch (Exception e) {

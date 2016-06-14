@@ -347,7 +347,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
 
     @Override
     public String isExistWithOpenId(String openId) throws Exception {
-        List<String>  result = getBySqlRowMapper("select username from t_user where user_source_id='" + openId + "'", new RowMapper<String>() {
+        List<String>  result = getBySqlRowMapper("select id from t_user where user_source_id='" + openId + "'", new RowMapper<String>() {
             @Override
             public String mapRow(ResultSet rs, int rowNum) throws SQLException {
                 return rs.getString(1);

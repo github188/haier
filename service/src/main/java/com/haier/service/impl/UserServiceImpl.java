@@ -100,14 +100,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public void sendQrcode(String openId, String user) throws Exception {
-        try{
-            WeiXinResponse response = weiXinFacade.userRegister(user,openId);
-            if(response.getIsAskNextRequest().equals("false")){
-                //已经注册
-            }
-        }catch (Exception e){
-            throw  new Exception("发送验证码失败");
-        }
+
 //        weiXinFacade.userRegister()
     }
 

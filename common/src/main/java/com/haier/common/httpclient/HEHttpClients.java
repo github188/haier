@@ -61,6 +61,29 @@ public class HEHttpClients extends HEAbstractHttpClient{
             response.close();
         }
     }
+    /**
+     *
+     * @param url
+     * @return
+     * @throws Exception
+     */
+    public static String httpGetExecute(String url,Header header) throws Exception {
+        CloseableHttpClient client = getHttpClient();
+        HttpGet get = getHttpGet(url);
+        get.setHeader(header);
+        CloseableHttpResponse response=null;
+
+        try{
+            response=client.execute(get);
+            checkHeader(response.getStatusLine());
+            return toString(response.getEntity());
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }finally {
+            response.close();
+        }
+    }
 
     /**
      *

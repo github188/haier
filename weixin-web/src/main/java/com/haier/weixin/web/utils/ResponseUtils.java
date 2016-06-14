@@ -15,10 +15,11 @@ import java.io.PrintWriter;
  */
 public class ResponseUtils {
     private static Logger logger = LoggerFactory.getLogger(ResponseUtils.class);
-    private static final String CHARSET = "GBK";
+    private static final String CHARSET = "UTF-8";
     public static void returnInfo( HttpServletResponse response, int httpStatusCode, String returnInfo) throws IOException {
         response.setStatus(httpStatusCode);
         response.setCharacterEncoding(CHARSET);
+        response.setContentType("application/json; charset=utf-8");
         if (returnInfo != null && returnInfo.trim().length() > 0) {
             PrintWriter out = response.getWriter();
             logger.info("返回终端数据：" + returnInfo);

@@ -16,7 +16,7 @@ import java.util.Properties;
 /**
  * Created by Administrator on 2016/6/5.
  */
-public class WeiXinCommonServlet extends HttpServlet{
+public class WeiXinCommonServlet extends AbstractServlet{
     private String serviceUrl;
     private Properties properties;
     @Override
@@ -52,7 +52,8 @@ public class WeiXinCommonServlet extends HttpServlet{
                     ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'parameter is null'}");
             }
         try {
-            String result = HEHttpClients.httpGetExecute(serviceUrl);
+
+            String result = HEHttpClients.httpGetExecute(serviceUrl,getWXHeader());
             ResponseUtils.returnInfo(resp,200,result);
         } catch (Exception e) {
             e.printStackTrace();

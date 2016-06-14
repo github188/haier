@@ -6,6 +6,8 @@ import com.haier.common.httpclient.HEHttpClients;
 import com.haier.common.response.PropertiesLoaderUtils;
 import com.haier.weixin.web.domain.WXAccessDomain;
 import com.haier.weixin.web.utils.ResponseUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -19,14 +21,15 @@ import java.util.Properties;
  * Created by ehl on 2016/6/11.
  */
 public class RedirectPageServlet extends HttpServlet {
-
+    private Logger logger = LoggerFactory.getLogger(getClass());
     private Properties properties;
     private String access_token_url="";
     @Override
     public void init() throws ServletException{
         try {
             properties= PropertiesLoaderUtils.loadAllProperties("config.properties");
-            String access_token_url=properties.getProperty("wx.fetch.access.tocken","https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6b17940db3bd4c51&secret=aac91e95b920141d4fe8e3d6483931ae&code={0}&grant_type=authorization_code");
+            access_token_url=properties.getProperty("wx.fetch.access.tocken","https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6b17940db3bd4c51&secret=aac91e95b920141d4fe8e3d6483931ae&code={0}&grant_type=authorization_code");
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -44,11 +47,13 @@ public class RedirectPageServlet extends HttpServlet {
         access_token_url=MessageFormat.format(access_token_url,code);
         WXAccessDomain wxAccessDomain;
         try {
+            logger.info(access_token_url);
            String wxResponse=HEHttpClients.httpGetExecute(access_token_url);
             wxAccessDomain=JSONObject.parseObject(wxResponse,WXAccessDomain.class);
+            logger.info(wxAccessDomain.toString());
         } catch (Exception e) {
             e.printStackTrace();
-            ResponseUtils.returnInfo(resp,500,"{'code':-3,'message':'wx系统异常'}");
+            ResponseUtils.returnInfo(resp,500,"{'code':-3,'message':'wx系统异常'"+e.getMessage()+"'}");
             return;
         }
         String responseJsp="index.jsp";
@@ -66,7 +71,7 @@ public class RedirectPageServlet extends HttpServlet {
             default:
                 break;
         }
-        req.getRequestDispatcher(responseJsp).forward(req,resp);
+        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
     }
 
     @Override

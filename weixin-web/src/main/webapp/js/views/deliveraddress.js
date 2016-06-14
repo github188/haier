@@ -85,7 +85,7 @@ function initBtn(){
 	
 		$.ajax({ 
 			type:"POST", 
-			url:"http://115.28.231.67:3027/api/haier/1.0/order/newOrder", 
+			url:"http://hrfwtest.haier.net/api/haier/1.0/order/newOrder", 
 			contentType: "application/json; charset=utf-8",
 			dataType:"json", 
 			data: JSON.stringify(jsonData),
