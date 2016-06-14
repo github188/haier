@@ -24,6 +24,7 @@ public class RedirectPageServlet extends HttpServlet {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Properties properties;
     private String access_token_url="";
+    //https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b17940db3bd4c51&redirect_uri=http://hrfwtest.haier.net/weixin-web/redirect?heType=index&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect
     @Override
     public void init() throws ServletException{
         try {
@@ -49,6 +50,7 @@ public class RedirectPageServlet extends HttpServlet {
         try {
             logger.info(access_token_url);
            String wxResponse=HEHttpClients.httpGetExecute(access_token_url);
+            logger.error(wxResponse);
             wxAccessDomain=JSONObject.parseObject(wxResponse,WXAccessDomain.class);
             logger.info(wxAccessDomain.toString());
         } catch (Exception e) {
@@ -60,22 +62,25 @@ public class RedirectPageServlet extends HttpServlet {
         switch (type){
             //维修
             case "maintain":
-                responseJsp="maintain.jsp";
+                responseJsp="maintence.jsp";
                 break;
             case "index":
                 responseJsp="index.jsp";
                 break;
             case "servicelist":
                 responseJsp="servicelist.jsp";
+
                 break;
             default:
                 break;
         }
-        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
+//        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
+        resp.sendRedirect(responseJsp+"?openId="+wxAccessDomain.getOpenid());//.forward(req,resp);
+//        resp.sendRedirect(responseJsp+"?openId="+1);//.forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
+        super.doGet(req, resp);
     }
 }

@@ -18,15 +18,7 @@ import java.util.Properties;
  */
 public class WeiXinCommonServlet extends AbstractServlet{
     private String serviceUrl;
-    private Properties properties;
-    @Override
-    public void init() throws ServletException {
-        try {
-             properties= PropertiesLoaderUtils.loadAllProperties("config.properties");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
     @Override
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException,IOException{
             doPost(req,resp);

@@ -69,16 +69,8 @@ public class WeiXinServiceOrderServlet extends AbstractServlet {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private List<String> other=Lists.newArrayList("user_id","order_time","arrive_time","service_man_id");
     private String serviceUrl;
-    @Override
-    public void init() throws ServletException {
-        try {
-            Properties properties= PropertiesLoaderUtils.loadAllProperties("config.properties");
-            serviceUrl = properties.getProperty("haier.service.order.url","http://115.28.231.67:8080/api/haier/1.0/order/newOrder");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+    SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -96,22 +88,25 @@ public class WeiXinServiceOrderServlet extends AbstractServlet {
         order.setAddress(req.getParameter("address"));
         String req_time = req.getParameter("require_service_date");
 
-//        if(Strings.isNullOrEmpty(req_time)){
-//            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date不能为空''}");
-//            return;
-//        }
-//        try {
-//            order.setRequire_service_date(sdf.parse(req_time));
-//        } catch (ParseException e) {
-//            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date转换问题 '}");
-//            return;
-//        }
+        if(Strings.isNullOrEmpty(req_time)){
+            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date不能为空''}");
+            return;
+        }
+        try {
+            order.setRequire_service_date(sdf.parse(req_time));
+        } catch (ParseException e) {
+            e.printStackTrace();
+            ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'参数date转换问题 '}");
+            return;
+        }
         order.setService_time(req.getParameter("service_time"));
         order.setService_type(req.getParameter("service_type"));
 //        order.set
-        logger.info("order : "+order.toString());
+
         try {
-            String result = HEHttpClients.httpPostExecute(serviceUrl, ObjectUtils.toMap(order),getWXHeader());
+            serviceUrl = properties.getProperty("haier.service.order.url","http://115.28.231.67:3027/api/haier/1.0/order/newOrder");
+            logger.info("order : "+order.toString()+"\r\n"+serviceUrl);
+            String result = HEHttpClients.httpJsonPostExecute(serviceUrl, ObjectUtils.toMap(order),getWXHeader());
             ResponseUtils.returnInfo(resp,200,result);
             return;
         } catch (Exception e) {

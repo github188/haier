@@ -20,10 +20,10 @@ function initList(offset, status)
 	$.ajax({ 
 		type:"POST", 
 		// url:"http://115.28.231.67:3027/api/haier/1.0/order/getOrderList",
-		url:"",
+		url:"serviceOrderList",
 		// contentType: "application/json; charset=utf-8",
 		// dataType:"json", 
-		data: JSON.stringify(jsonData),
+		data: jsonData,
 		success:function(data){
 	   		var code = typeof data.code != 'undefined' ? data.code : '';
 	   		if(code.toString() == '0') {

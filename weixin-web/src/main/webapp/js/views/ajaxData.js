@@ -41,8 +41,7 @@ function initTime(){
 }
 
 function initCity(){
-	var abc='<%=request%>'
-	$.ajax({ 
+	$.ajax({
 		type:"POST", 
 		url:"data/city.json", 
 		dataType:"json", 
@@ -541,7 +540,7 @@ function sendData(){
 		// contentType: "application/json; charset=utf-8",
 
 		// dataType:"json",
-		data: JSON.stringify(jsonData),
+		data: jsonData,
 		success:function(data){
 	   //		mui.toast('信息提交成功');
 	   		var btnArray = ['确认', '取消'];
@@ -709,7 +708,7 @@ function addMaintenceData(){
 		url:"serviceOrder",
 		// contentType: "application/json; charset=utf-8",
 		// dataType:"json",
-		data: JSON.stringify(jsonData),
+		data: jsonData,
 		success:function(data){
 	   //		mui.toast('信息提交成功');
 	   		var btnArray = ['确认', '取消'];

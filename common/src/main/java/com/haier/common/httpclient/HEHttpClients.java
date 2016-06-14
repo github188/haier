@@ -132,7 +132,31 @@ public class HEHttpClients extends HEAbstractHttpClient{
             response.close();
         }
     }
+    /**
+     *
+     * @param url
+     * @param params
+     * @return
+     * @throws Exception
+     */
+    public static String httpJsonPostExecute(String url,Map<String,Object> params,Header header) throws Exception {
+        CloseableHttpClient client = getHttpClient();
 
+        HttpPost post = getJsonHttpPost(url, params);
+        post.setHeader(header);
+        CloseableHttpResponse response=null;
+
+        try{
+            response=client.execute(post);
+            checkHeader(response.getStatusLine());
+            return toString(response.getEntity());
+        }catch (Exception e){
+            e.printStackTrace();
+            throw e;
+        }finally {
+            response.close();
+        }
+    }
     public static String httpPostStream(String url,String body) throws Exception {
         CloseableHttpClient client = getHttpClient();
         HttpPost post = getStreamtpPost(url, body);

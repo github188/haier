@@ -35,7 +35,7 @@ public class WeiXinServiceOrdersServlet extends AbstractServlet {
         maps.put("pageNumber",pageNumber);
         maps.put("pageSize",pageSize);
         try {
-            String result = HEHttpClients.httpPostExecute(serviceUrl, maps,getWXHeader());
+            String result = HEHttpClients.httpJsonPostExecute(serviceUrl, maps,getWXHeader());
             ResponseUtils.returnInfo(resp,200,result);
             return;
         } catch (Exception e) {
