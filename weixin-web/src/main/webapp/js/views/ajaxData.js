@@ -238,6 +238,10 @@ function ajax_areaa_Data(obj,sheng_val,shi_val){
 function addData(){
 	var user_id = $("#user_id").val();
 	var openId = $("#openId").val();
+	//if(openId=='null' || typeof(openId)=='undefined' || openId==null){
+	//	alert("用户授权失败");
+	//	return false;
+	//}
 	if(user_id == '') {
 		//判断用户是否存在,user_id为空说明不存在,需用跳转注册页面
 		$.ajax({ 
@@ -248,7 +252,7 @@ function addData(){
 			// dataType:"json",
 			success:function(data){
 		   		var user_id = typeof(data.info.user_id) != 'undefined' ? data.info.user_id : '';
-		   		if( ! user_id.length ) {
+		   		if( user_id.length < 1) {
 		   			window.location.href='register.jsp?openId='+openId;
 		   		} else {
 		   			$("#user_id").val(user_id);
@@ -563,171 +567,202 @@ function sendData(){
 }
 
 function addMaintenceData(){
-	var infoaddress = $("#infoaddress").val();
-	$("#infoaddress-hidden").val($("#sheng-hidden").val()+$("#shi-hidden").val()+$("#area-hidden").val()+infoaddress);
-	//var jsonData = $("#item1mobile :input").serializeArray();
-	
-   	var pinpai = $.trim($("#pinpai-hidden").val());
-  	var type1 = $.trim($("#type1-hidden").val());
-  	var type2 = $.trim($("#type2-hidden").val());
-  	var infowrong = $.trim($("#infowrong").val());
-  	var contact = $.trim($("#contact").val());
-  	var phone = $.trim($("#phone").val());
-  	var Address = $.trim($("#Address").val());
-  	var sheng = $.trim($("#sheng-hidden").val());
-  	var shi = $.trim($("#shi-hidden").val());
-  	var area = $.trim($("#area-hidden").val());
-  	var newdate = $.trim($("#newdate-hidden").val());
-  	var newtime = $.trim($("#newdate-front-after-hidden").val());
-  	
-  	if(pinpai == '') {
-  		mui.alert('请输入产品品牌', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-		if(type1 == '') {
-  		mui.alert('请输入产品大类', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(type2 == '') {
-  		mui.alert('请输入产品小类', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(infowrong == '') {
-  		mui.alert('请输入故障描述', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(contact == '') {
-  		mui.alert('请输入联系人', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(phone == '') {
-  		mui.alert('请输入联系电话', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	/*
-  	if(Address == '') {
-  		mui.alert('请输入服务地址', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	*/
-  	if(sheng == '') {
-  		mui.alert('请输入省', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(shi == '') {
-  		mui.alert('请输入市', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(area == '') {
-  		mui.alert('请输入区', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(infoaddress == '') {
-  		mui.alert('请输入详细地址', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(newdate == '') {
-  		mui.alert('请输入预约日期', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	if(newtime == '') {
-  		mui.alert('请输入预约时间', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  	var bTime = checkTime(newdate, newtime);
-  	if(!bTime){
-  		mui.alert('预约时间应在当前时间3个小时之后', '输入提示', function() 
-	    {
-	      return false;
-	    });
-	    return false;
-  	}
-  		
-	var jsonData = {
-		"product_id":$("#type2-hidden").val(),
-		"service_type":"T01",
-		"require_service_date":$("#newdate-hidden").val(),
-		"contact_name":$("#contact").val(),
-		"mobile_phone":$("#phone").val(),
-		"district":$("#area-hidden").val(),
-		"require_service_desc":infowrong,
-		"service_time":$("#newdate-front-after-hidden").val(),
-		"address":$("#infoaddress").val(),
-		//"infowrong":infowrong,
-	};
 
-	//jQuery.each( jsonData, function(i, field){
-	//	  alert(field.value);
-	//});
-	//alert(JSON.stringify(jsonData));
-	$.ajax({ 
-		type:"POST", 
-		// url:"http://hrfwtest.haier.net/api/haier/1.0/order/newOrder",
-		url:"serviceOrder",
-		// contentType: "application/json; charset=utf-8",
-		// dataType:"json",
-		data: jsonData,
-		success:function(data){
-	   //		mui.toast('信息提交成功');
-	   		var btnArray = ['确认', '取消'];
-		    mui.confirm('您的服务单已经提交成功，服务兵将尽快与您联系，感谢等待！', '提交服务单', btnArray, function(e) 
-		    {		    	
-		    		
-		        if (e.index == 1) 
-		        {
-		        	 
-		         //   info.innerText = '取消';
-		         
-		        } 
-		        else 
-		        {
-		        	window.location.href='maintence.jsp?openId='+openId;
-		         //   info.innerText = '确认';
-		        }
-		    });
-	   	}
-	});
+	var user_id = $("#user_id").val();
+	var openId = $("#openId").val();
+	//if(openId=='null' || typeof(openId)=='undefined' || openId==null){
+	//	alert("用户授权失败");
+	//	return false;
+	//}
+	if(user_id == '') {
+		//判断用户是否存在,user_id为空说明不存在,需用跳转注册页面
+		$.ajax({
+			type:"GET",
+			// url:"http://hrfwtest.haier.net/api/haier/1.0/wxuser/isExist/"+openId,
+			url:"wxuser?type=isExist&openId="+openId,
+			// contentType: "application/json; charset=utf-8",
+			// dataType:"json",
+			success:function(data){
+				var user_id = typeof(data.info.user_id) != 'undefined' ? data.info.user_id : '';
+				if( user_id.length < 1) {
+					window.location.href='register.jsp?openId='+openId;
+				} else {
+					$("#user_id").val(user_id);
+					sendMaintenceData();
+				}
+			}
+		});
+	} else {
+		sendMaintenceData();
+	}
 }
 
+	function sendMaintenceData(){
+		var infoaddress = $("#infoaddress").val();
+		$("#infoaddress-hidden").val($("#sheng-hidden").val()+$("#shi-hidden").val()+$("#area-hidden").val()+infoaddress);
+		//var jsonData = $("#item1mobile :input").serializeArray();
+
+		var pinpai = $.trim($("#pinpai-hidden").val());
+		var type1 = $.trim($("#type1-hidden").val());
+		var type2 = $.trim($("#type2-hidden").val());
+		var infowrong = $.trim($("#infowrong").val());
+		var contact = $.trim($("#contact").val());
+		var phone = $.trim($("#phone").val());
+		var Address = $.trim($("#Address").val());
+		var sheng = $.trim($("#sheng-hidden").val());
+		var shi = $.trim($("#shi-hidden").val());
+		var area = $.trim($("#area-hidden").val());
+		var newdate = $.trim($("#newdate-hidden").val());
+		var newtime = $.trim($("#newdate-front-after-hidden").val());
+
+		if(pinpai == '') {
+			mui.alert('请输入产品品牌', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(type1 == '') {
+			mui.alert('请输入产品大类', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(type2 == '') {
+			mui.alert('请输入产品小类', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(infowrong == '') {
+			mui.alert('请输入故障描述', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(contact == '') {
+			mui.alert('请输入联系人', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(phone == '') {
+			mui.alert('请输入联系电话', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		/*
+		 if(Address == '') {
+		 mui.alert('请输入服务地址', '输入提示', function()
+		 {
+		 return false;
+		 });
+		 return false;
+		 }
+		 */
+		if(sheng == '') {
+			mui.alert('请输入省', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(shi == '') {
+			mui.alert('请输入市', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(area == '') {
+			mui.alert('请输入区', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(infoaddress == '') {
+			mui.alert('请输入详细地址', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(newdate == '') {
+			mui.alert('请输入预约日期', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		if(newtime == '') {
+			mui.alert('请输入预约时间', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+		var bTime = checkTime(newdate, newtime);
+		if(!bTime){
+			mui.alert('预约时间应在当前时间3个小时之后', '输入提示', function()
+			{
+				return false;
+			});
+			return false;
+		}
+
+		var jsonData = {
+			"product_id":$("#type2-hidden").val(),
+			"service_type":"T01",
+			"require_service_date":$("#newdate-hidden").val(),
+			"contact_name":$("#contact").val(),
+			"mobile_phone":$("#phone").val(),
+			"district":$("#area-hidden").val(),
+			"require_service_desc":infowrong,
+			"service_time":$("#newdate-front-after-hidden").val(),
+			"address":$("#infoaddress").val(),
+			"user_id":$("#user_id").val()
+			//"infowrong":infowrong,
+		};
+
+		//jQuery.each( jsonData, function(i, field){
+		//	  alert(field.value);
+		//});
+		//alert(JSON.stringify(jsonData));
+		$.ajax({
+			type:"POST",
+			// url:"http://hrfwtest.haier.net/api/haier/1.0/order/newOrder",
+			url:"serviceOrder",
+			// contentType: "application/json; charset=utf-8",
+			// dataType:"json",
+			data: jsonData,
+			success:function(data){
+				//		mui.toast('信息提交成功');
+				var btnArray = ['确认', '取消'];
+				mui.confirm('您的服务单已经提交成功，服务兵将尽快与您联系，感谢等待！', '提交服务单', btnArray, function(e)
+				{
+
+					if (e.index == 1)
+					{
+
+						//   info.innerText = '取消';
+
+					}
+					else
+					{
+						window.location.href='maintence.jsp?openId='+openId;
+						//   info.innerText = '确认';
+					}
+				});
+			}
+		});
+	}
 
 /*判断输入是否为合法的手机号码*/
  function isphone2(inpurStr)

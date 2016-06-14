@@ -77,9 +77,6 @@ public class WeiXinServiceOrderServlet extends AbstractServlet {
         ServiceOrder order = new ServiceOrder();
         order.setContact_name(req.getParameter("contact_name"));
         String user_id=req.getParameter("user_id");
-        if(user_id==null){
-            user_id="1";
-        }
         order.setUser_id(Integer.parseInt(user_id));
         order.setDistrict(req.getParameter("district"));
         order.setMobile_phone(req.getParameter("mobile_phone"));
