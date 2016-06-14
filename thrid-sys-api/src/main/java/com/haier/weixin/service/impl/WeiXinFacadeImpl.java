@@ -4,6 +4,8 @@ import com.alibaba.fastjson.JSONObject;
 import com.haier.weixin.domain.WeiXinResponse;
 import com.haier.weixin.service.AbstractWeiXinConfig;
 import com.haier.weixin.service.WeiXinFacade;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class WeiXinFacadeImpl extends AbstractWeiXinConfig implements WeiXinFacade {
+    Logger logger = LoggerFactory.getLogger(getClass());
     @Override
     public WeiXinResponse subscribe(String context,String from) throws Exception {
         String json= getSubscribeJson(context,from);
@@ -21,6 +24,7 @@ public class WeiXinFacadeImpl extends AbstractWeiXinConfig implements WeiXinFaca
     @Override
     public WeiXinResponse userRegister(String context,String from) throws Exception {
         String json= getUserRegisterJson(context,from);
+
         String response = getHttpClient().processor(getAppName(),json);
         return JSONObject.parseObject(response,WeiXinResponse.class);
     }

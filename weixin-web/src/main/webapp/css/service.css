@@ -23,14 +23,14 @@ ul.service-list li.view{
 }
 ul.service-list li .service-title {
 	width: 100%;
-	height:86px;
-	line-height:86px;
+	height:43px;
+	line-height:43px;
 	border-bottom:solid 1px #EDEDED;
 	overflow: hidden;
 }
-.service-type{float:left;color:#32BEFF;width:15%;padding-left:10px;height:86px;line-height:86px;}
-.service-phone{float:left;width:30%;height:86px;line-height:86px;}
-.service-time{float:right;width:55%;height:86px;line-height:86px;}
+.service-type{float:left;color:#32BEFF;width:25%;padding-left:10px;height:43px;line-height:43px;}
+.service-phone{float:left;width:75%;height:43px;line-height:43px;}
+.service-time{float:right;width:55%;height:43px;line-height:43px;}
 ul.service-list-view li .service-list-view-title {
 	width: 100%;
 	height:46px;
@@ -274,4 +274,12 @@ ul.service-tree li{
 	line-height:20px;
 	padding:0px;
 	margin:0px 0px 3px 0;
+}
+
+.pagelist{
+	width:100%;
+	height:50px;
+	line-height: 25px;
+	text-align: center;
+	margin-top: 10px;
 }

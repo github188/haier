@@ -4,6 +4,7 @@
 <head>
 	<%
 		String openId = request.getParameter("openId");
+		System.out.println(openId);
 		if(null == openId){
 			openId="";
 		}
@@ -43,18 +44,18 @@
 <input type="hidden" name="user_id" id="user_id" value="">
 	<header class="mui-bar mui-bar-nav">
 	    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left title-back">返回</a>
-	    <h1 class="mui-title" ><a href="javascript:;" onclick="addData()">送货安装</a></h1>
+	    <h1 class="mui-title" >一键安装</h1>
 	  <!--  <a id="maintence" class="mui-icon mui-icon-more icon-mark mui-pull-right"></a> -->  
 	</header>
 	<nav class="mui-bar mui-bar-tab">
 		<div style="width:80%;margin:0 auto">    
-	    	<button id="add" onclick="addData()" type="button" class="mui-btn mui-btn-primary" style="width:100%;background-color: #32beff;border:0">立即提交</button>
+	    	<button id="add" type="button" class="mui-btn mui-btn-primary" style="width:100%;background-color: #32beff;border:0">立即提交</button>
 	   </div>
 	</nav>
 	<div class="mui-content">
 			<div id="slider" class="mui-slider">
 				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
-					<a class="mui-control-item  mui-active" href="#item1mobile">
+					<a class="mui-control-item  mui-active" href="#item1mobile" style="color:#32BEFF;">
 						新机报装
 					</a>
 					<!--
@@ -62,9 +63,9 @@
 						移机报装
 					</a>
                     -->
-					<a class="mui-control-item" href="javascript:;" style="color:#CCCCCC;">
+					<div class="mui-control-item" style="color:#CCCCCC;" disabled="disabled" readonly>
 						移机报装
-					</a>
+					</div>
 				</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 				<div class="mui-slider-group">
@@ -158,20 +159,27 @@
 									
 								</div>
 								
-								<div style="width:100%;height:50px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
+								<!--<div style="width:100%;height:50px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
 									<div style="width:25%;height:50px;float:left;padding-top:15px;"><span class="triangle">*</span><span class="color1">预约时间</span></div>
 									<div style="width:35%;height:50px;float: left;padding-right:30px;">
-										<div id="newdate-font" class="color2 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
+										<div id="newdate-font" class="color2 dates" data-options='{"type":"hour"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
 										<input id="newdate-font-hidden" type="hidden"/>
 									</div>
 									
 									<div class="color1" style="width:5%;height:50px;float: left;text-align: right;padding-top:15px;">到</div>
 									<div style="width:35%;height:50px;float: left;padding-right:30px;border-bottom: 1px solid #dcdcdc;">
-										<div id="newdate-after" class="color2 dates" data-options='{"type":"time"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
+										<div id="newdate-after" class="color2 dates" data-options='{"type":"hour"}' style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
 										<input id="newdate-after-hidden" type="hidden"/>
 									</div>
 									<input id="newdate-front-after-hidden" name="service_time" type="hidden"/>
-									
+								</div>-->
+								
+								<div style="width:100%;height:50px;border-bottom: 1px solid #dcdcdc;padding-left:30px;">
+									<div style="width:25%;height:50px;float:left;padding-top:15px;"><span class="triangle">*</span><span class="color1">预约时间</span></div>
+									<div style="width:75%;height:50px;float: left;padding-right:30px;">
+										<div id="newdate-front-after" class="color2" style="background:url(images/arrow-down.png) right center no-repeat;background-size:12px 6px;border:0;line-height:50px;width:100%;height:50px;padding-left: 5px;">请输入</div>
+										<input id="newdate-front-after-hidden" type="hidden"/>
+									</div>
 								</div>
 								
 								<!--<div style="width:100%;height:40px;padding-left:30px;">
@@ -335,6 +343,7 @@
 					</div>
 				</div>
 			</div>
+
 		</div>
 		
 		<script>
@@ -393,12 +402,18 @@
 						ajax_areaa_Data(this,sheng_hidden.value,shi_hidden.value);
 					}, false);
 					
+					
+					var newdate = doc.getElementById('newdate-front-after');
+					newdate.addEventListener('tap', function(event) {
+						ajax_time_Data(this);
+					}, false);
+					
 				});
 	
 				//跳转新页面
 				/*document.getElementById('maintence').addEventListener('tap',function(){
 					mui.openWindow({
-					    url: 'pages/maintence.jsp',
+					    url: 'pages/maintence.html',
 					    id: 'maintence',
 
 					    extras: {
@@ -407,7 +422,9 @@
 					    
 					})
 				})*/
-				
+				document.getElementById('add').addEventListener('tap',function(){
+					addData();
+				})
 				var btns = $('.dates');
 				btns.each(function(i, btn) {
 					btn.addEventListener('tap', function() {

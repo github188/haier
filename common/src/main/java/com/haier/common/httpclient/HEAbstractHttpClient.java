@@ -50,8 +50,8 @@ import java.util.Objects;
 public abstract  class HEAbstractHttpClient {
     private static String defaultUTF="utf-8";
     private static Charset UTF_8=Charset.forName(defaultUTF);
-    private static int socket_timeout=60000;
-    private static int connection_timeout=60000;
+    private static int socket_timeout=120000;
+    private static int connection_timeout=120000;
     private static final int DEFAULT_MAX_NUM_PER_ROUTE = 20;
     private static final int DEFAULT_MAX_TOTAL_NUM = 50;
 

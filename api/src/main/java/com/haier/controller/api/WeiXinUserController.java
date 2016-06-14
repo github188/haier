@@ -8,6 +8,8 @@ import com.haier.common.response.ResponseMsg;
 import com.haier.controller.BaseController;
 import com.haier.domain.User;
 import com.haier.service.UserService;
+import com.haier.weixin.domain.WeiXinResponse;
+import com.haier.weixin.service.WeiXinFacade;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,14 +61,21 @@ public class WeiXinUserController extends BaseController {
 //        message.setInfo(info);
 //        return message;
     }
+    @Autowired
+    private WeiXinFacade weiXinFacade;
     @RequestMapping(path="/sendCode/{openId}/{user}",method= RequestMethod.GET)
     @org.springframework.web.bind.annotation.ResponseBody
     public ResponseBody sendCode(@PathVariable String openId,@PathVariable String user) {
         if (Strings.isNullOrEmpty(openId) ||Strings.isNullOrEmpty(user)) {
             return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE, ResponseConstantCode.INVALID_PARAMETER_DESC);
         }
+
+
         try {
-            userService.sendQrcode(openId,user);
+            WeiXinResponse response = weiXinFacade.userRegister(user,openId);
+            if(response.getIsAskNextRequest().equals("false")){
+                //已经注册
+            }
             return getSuccess();
         } catch (Exception e) {
             e.printStackTrace();
