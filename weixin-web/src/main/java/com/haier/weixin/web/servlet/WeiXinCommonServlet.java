@@ -36,14 +36,17 @@ public class WeiXinCommonServlet extends HttpServlet{
             String type = req.getParameter("type");
             String code = req.getParameter("code");
             boolean needCode = false;
-            if("brand".equals(type)){
-                serviceUrl = properties.getProperty("haier.service.common.brand.url","");
-            }else if("type".equals(type)){
-                needCode = true;
-                serviceUrl = properties.getProperty("haier.service.common.type.url","")+"/"+code;
-            }else if("subType".equals(type)){
-                needCode = true;
-                serviceUrl = properties.getProperty("haier.service.common.subType.url","")+"/"+code;
+            switch(type){
+                case "brand":
+                    serviceUrl = properties.getProperty("haier.service.common.brand.url","");break;
+                case "type":
+                    needCode = true;
+                    serviceUrl = properties.getProperty("haier.service.common.type.url","")+"/"+code;
+                    break;
+                case "subType":
+                    needCode = true;
+                    serviceUrl = properties.getProperty("haier.service.common.subType.url","")+"/"+code;
+                    break;
             }
             if(needCode && Strings.isNullOrEmpty(code)){
                     ResponseUtils.returnInfo(resp, 500, "{'code':-3,'message':'parameter is null'}");
