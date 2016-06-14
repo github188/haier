@@ -1,5 +1,6 @@
 import com.alibaba.fastjson.JSON;
 import com.haier.common.httpclient.HEHttpClients;
+import com.haier.domain.ServiceOrder;
 
 import javax.net.ssl.HttpsURLConnection;
 import java.io.BufferedReader;
@@ -7,6 +8,8 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URL;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,7 +19,7 @@ public class TestMain {
 		{
 //			// 绑定驾驶证
 			put("getOrderList",
-					"{\"user_id\":\"1\",\"status\":\"1\",\"pageNumber\":\"1\",\"pageSize\":\"10\"}");
+					"{\"user_id\":\"7\",\"status\":\"0\",\"pageNumber\":\"1\",\"pageSize\":\"10\"}");
 			put("getOidProductInfo",
 					"{\"oidContent\":\"http://oid.haier.com/oid?ewm=D006iM$MFTKA$AM$M$cM$KM$KKM$=$AM$Kv=Y$AM$$K$KA$KKM$FATMAK$FK=$KMKKYKKL4\"}");
 		}
@@ -33,8 +36,22 @@ public class TestMain {
 //		 "http://114.247.102.206:8070/ehualu-appServer/handle.json");
 
 		//String sessionId = "JSESSIONID=2A4D10F0F01DCBF57775284928483A42;";
+//		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//		ServiceOrder serviceOrder = new ServiceOrder();
+//		serviceOrder.setProduct_id("16");
+//		serviceOrder.setUser_id(1);
+//        serviceOrder.setService_type("T01");
+//        serviceOrder.setRequire_service_date(format.parse("2016-06-14 08:00:00"));
+//        serviceOrder.setContact_name("雷晓武");
+//        serviceOrder.setMobile_phone("15022086097");
+//        serviceOrder.setDistrict("120103");
+//        serviceOrder.setAddress("天津市河西区福建路4号");
+//        serviceOrder.setRequire_service_desc("安装");
+//        serviceOrder.setOrder_time(new Date());
+//        serviceOrder.setService_time("2016-06-05 17:00:00-2016-06-05 17:00:00");
+//		String param = JSON.toJSONString(serviceOrder);
 
-		String param = (String) paramMap.get("getOrderList");
+		String param = (String)paramMap.get("getOrderList");
 
 		String resp = connectHttpUri(url.toString(),JSON.parseObject(param,HashMap.class));
 

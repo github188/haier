@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,20 +36,23 @@ public class ServiceOrderController extends BaseController {
     @org.springframework.web.bind.annotation.ResponseBody
     public ResponseBody newOrder(@RequestBody ServiceOrder serviceOrder){
         serviceOrder.setApply_id(ApplyIdGenerate.getDefaultApplyId());
-        if(serviceOrder.check()){
-            return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
-        }
-//        serviceOrder.setApply_id("leixwksdjaflsd");
 //        serviceOrder.setProduct_id("16");
 //        serviceOrder.setService_type("T01");
-//        serviceOrder.setRequire_time(new Date());
-//        serviceOrder.setCotact_name("雷晓武");
+//        serviceOrder.setRequire_service_date(new Date());
+//        serviceOrder.setContact_name("雷晓武");
 //        serviceOrder.setMobile_phone("15022086097");
 //        serviceOrder.setDistrict("120103");
-//        serviceOrder.setService_address("天津市河西区福建路4号");
+//        serviceOrder.setAddress("天津市河西区福建路4号");
 //        serviceOrder.setRequire_service_desc("安装");
 //        serviceOrder.setOrder_time(new Date());
 //        serviceOrder.setService_time("2016-06-05 17:00:00-2016-06-05 17:00:00");
+        if(serviceOrder.getUser_id()==0){
+            return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,"parameter user_id not found");
+        }
+        if(serviceOrder.check()){
+            return new ResponseMsg(ResponseConstantCode.INVALID_PARAMETER_CODE,ResponseConstantCode.INVALID_PARAMETER_DESC);
+        }
+
         try{
             orderService.saveOrder(serviceOrder);
         }catch(Exception ex){

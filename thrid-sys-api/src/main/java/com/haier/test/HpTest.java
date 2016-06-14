@@ -27,16 +27,18 @@ public class HpTest {
 //        Map<String,String> maps = Maps.newHashMap();
 //        maps.put()
 
-//        ApplicationContext ap = new ClassPathXmlApplicationContext("applicationThridSys.xml");
-//        HPFacade facade = ap.getBean(HPFacade.class);
-//        try {
-//            HPWoWholeInfoResponse result = facade.executeWoWholeInfo("BXK1160610146230");
-//            System.out.print(result.toString());
-////            HPAddWoDataResponse response = facade.executeAddWoData(getAddRequest());
-////            System.out.print(response.toString());
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
+        ApplicationContext ap = new ClassPathXmlApplicationContext("applicationThridSys.xml");
+        HPFacade facade = ap.getBean(HPFacade.class);
+        try {
+            //12345678907
+//            HPWoListResponse result = facade.executeWoList("17612287688");
+            HPWoWholeInfoResponse result = facade.executeWoWholeInfo("BXK1160613148932");
+            System.out.print(result.toString());
+//            HPAddWoDataResponse response = facade.executeAddWoData(getAddRequest());
+//            System.out.print(response.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     public static HPAddWoDataRequest getAddRequest(){
         return HPAddWoDataRequestBuilder.create()

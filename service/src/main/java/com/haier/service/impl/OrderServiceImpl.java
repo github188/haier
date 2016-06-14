@@ -48,13 +48,17 @@ public class OrderServiceImpl implements OrderService {
     @Transactional(readOnly = false,rollbackFor = Exception.class)
     @Override
     public ServiceOrderPage getOrderListPage(ServiceOrderPage page) throws Exception {
-        User user = userDao.findUserById(page.getUser_id());
-        HPWoListResponse json = hpFacade.executeWoList(user.getPhone());
-        if(!json.getCode().equals("200")){
-            throw new Exception(json.getMsg()+" hp 获取工单失败");
+        List<ServiceOrder> orderList = orderDao.findServiceOrdersByUserId(page.getUser_id());
+        User user = new User();
+        user.setId(page.getUser_id());
+        for(ServiceOrder order:orderList){
+            //更新用户的所有订单
+            HPWoWholeInfoResponse json = hpFacade.executeWoWholeInfo(order.getOrder_code());
+            if(!json.getCode().equals("200")){
+                throw new Exception(json.getMsg()+" hp 获取工单失败");
+            }
+            orderDao.updateOrderServiceStatus(user,json.getData());
         }
-        orderDao.updateOrderServiceStatus(user,json.getData());
-
         page = orderDao.getOrderListPage(page);
 
         return page;

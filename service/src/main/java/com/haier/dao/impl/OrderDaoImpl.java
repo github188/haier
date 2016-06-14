@@ -35,8 +35,9 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
         final StringBuilder sql = new StringBuilder("insert into t_service_order(" +
                 "apply_id,order_code,");
         sql.append("product_id,user_id,he_type,require_time,order_time,arrive_time,work_man_id,");
-        sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time,if_evaluate)");
-        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
+
+        sql.append("contact_name,mobile_phone,district,service_address,require_desc,service_time,if_evaluate,updatetime)");
+        sql.append(" values(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)");
         KeyHolder keyHolder = new GeneratedKeyHolder();
         super.getJdbcTemplate().update(new PreparedStatementCreator() {
             @Override
@@ -60,30 +61,24 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 ps.setString(14, order.getRequire_service_desc());
                 ps.setString(15, order.getService_time());
                 ps.setString(16, order.getIfEvaluate());
+                ps.setTimestamp(17, new Timestamp(order.getUpdatetime().getTime()));
                 return ps;
             }
         }, keyHolder);
     }
 
     @Override
-    public void updateOrderServiceStatus(User user, final List<HPWoListData> hpwoList) {
+    public void updateOrderServiceStatus(User user,final HPWoWholeInfo info) {
 
-        StringBuilder sql = new StringBuilder("update t_service_order set status = ?,status_desc = ? where mobile_phone='");
-        sql.append(user.getPhone());
+        StringBuilder sql = new StringBuilder("update t_service_order set status = ?,status_desc = ? where user_id='");
+        sql.append(user.getId());
         sql.append("' and order_code = ?");
-        super.getJdbcTemplate().batchUpdate(sql.toString(), new BatchPreparedStatementSetter(){
-
+        super.getJdbcTemplate().update(sql.toString(), new PreparedStatementSetter() {
             @Override
-            public void setValues(PreparedStatement preparedStatement, int i) throws SQLException {
-                HPWoListData data = hpwoList.get(i);
-                preparedStatement.setString(1,data.getWo_status());
-                preparedStatement.setString(2,data.getWo_status_zy());
-                preparedStatement.setString(3,data.getWo_id());
-            }
-
-            @Override
-            public int getBatchSize() {
-                return hpwoList.size();
+            public void setValues(PreparedStatement preparedStatement) throws SQLException {
+                preparedStatement.setString(1,info.getWo_status());
+                preparedStatement.setString(2,info.getWo_status_name());
+                preparedStatement.setString(3,info.getOrder_id());
             }
         });
     }
@@ -104,8 +99,12 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
 
         Long count = (Long)result.get("recordnum");
 
-        StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
+        StringBuilder sql = new StringBuilder("select distinct t1.*,t2.code product_id,t2.name product_name," +
+                "t3.code type_code,t3.name type_name from t_service_order t1" +
+                ",t_product_subcategory t2,t_product_category t3 where user_id = ");
         sql.append(page.getUser_id());
+        sql.append(" and t1.product_id=t2.code");
+        sql.append(" and t2.category_code=t3.code");
         if("1".equals(page.getStatus())){
             sql.append(" and status = '3'");
         }else{
@@ -141,6 +140,9 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 serviceOrder.setStatus(resultSet.getString("status"));
                 serviceOrder.setStatusDesc(resultSet.getString("status_desc"));
                 serviceOrder.setIfEvaluate(resultSet.getString("if_evaluate"));
+                serviceOrder.setProduct_name(resultSet.getString("product_name"));
+                serviceOrder.setType_code(resultSet.getString("type_code"));
+                serviceOrder.setType_name(resultSet.getString("type_name"));
                 return serviceOrder;
             }
         });
@@ -192,6 +194,22 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
                 return trace;
             }
         });
+    }
+
+    @Override
+    public List<ServiceOrder> findServiceOrdersByUserId(int userId) throws Exception{
+        StringBuilder sql = new StringBuilder("select * from t_service_order where user_id = ");
+        sql.append(userId);
+
+        List<ServiceOrder> list = super.getBySqlRowMapper(sql.toString(), new RowMapper<ServiceOrder>() {
+            @Override
+            public ServiceOrder mapRow(ResultSet resultSet, int i) throws SQLException {
+                ServiceOrder serviceOrder = new ServiceOrder();
+                serviceOrder.setOrder_code(resultSet.getString("order_code"));
+                return serviceOrder;
+            }
+        });
+       return list;
     }
 
     private void updateOrInsertOrderTrace(String orderCode, HPWoWholeInfo info,String type) throws Exception{
