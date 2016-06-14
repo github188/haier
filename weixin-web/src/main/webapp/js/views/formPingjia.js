@@ -1,5 +1,6 @@
 $(function () {
- initBtn();
+	initBtn();
+	initOrderTrack();
 });
 
 
@@ -36,7 +37,7 @@ function initBtn(){
 		//alert(JSON.stringify(jsonData));
 		$.ajax({ 
 			type:"POST", 
-			url:"http://hrfwtest.haier.net/api/haier/1.0/order/newOrder", 
+			url:"http://115.28.231.67:3027/api/haier/1.0/order/newOrder", 
 			contentType: "application/json; charset=utf-8",
 			dataType:"json", 
 			data: JSON.stringify(jsonData),
@@ -51,4 +52,58 @@ function initBtn(){
 		alert('语音录入');
 	
 	});
+}
+
+function initOrderTrack()
+{
+	var orderCode = $("#orderCode").val();
+	var jsonData = {
+		"orderCode":orderCode
+	};
+
+	if(orderCode != '') {
+		$.ajax({ 
+			type:"GET",
+			url:"serviceOrderListTracker",
+			//contentType: "application/json; charset=utf-8",
+			dataType:"json",
+			data: jsonData,
+			success:function(data){
+		   	//	alert(JSON.stringify(data));
+		   		var code = typeof data.code != 'undefined' ? data.code : '';
+		   		if(code.toString() == '0') {
+		   			//返回成功
+		   			var html = '';
+		   			var status = '';
+		   			var classname = '';
+		   			$.each( data.info, function(i, n){
+			   			status = n.status;
+			   			classname = status == '0' ? 'tree-active' : 'tree';
+			   			html += '<li class="clearfix">';
+						html += '	<div class="service-itme-name '+classname+'"><span>'+n.description+'</span></div>';
+						html += '	<div class="service-itme-content">';
+						html += '		<p>'+time2Ymd(n.updatetime)+'</p>';
+						html += '	</div>';
+						html += '	<hr>';
+						html += '</li>';
+					});
+					$("#serviceTract").html(html);
+			   	} else {
+			   		mui.toast(data.message);
+			   	}
+		   	}
+		});
+		
+	}
+}
+
+function time2Ymd(time){
+	var date = new Date(time);
+	Y = date.getFullYear() + '-';
+	M = (date.getMonth()+1 < 10 ? '0'+(date.getMonth()+1) : date.getMonth()+1) + '-';
+	D = date.getDate() + ' ';
+	h = date.getHours() + ':';
+	m = date.getMinutes() + ':';
+	s = date.getSeconds();
+	return Y+M+D+h+m+s;
 }

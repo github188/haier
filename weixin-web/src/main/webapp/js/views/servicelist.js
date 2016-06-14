@@ -61,7 +61,7 @@ function initList(offset, status)
 					html += '		<div class="service-phone">'+time2Ymd(n.require_service_date)+" "+n.service_time+'</div>	';
 					html += '	</div>';
 					html += '	<div class="service-content clearfix">';
-					html += '		<div class="detaillink"><a href="">追踪</a></div>';
+					html += '		<div class="detaillink"><a href="service_tree.jsp?order_code='+encodeURI(n.order_code)+'&service_type_name='+encodeURI(encodeURI(service_type_name))+'&address='+encodeURI(n.address)+'&contact_name='+encodeURI(n.contact_name)+'&mobile_phone='+encodeURI(n.mobile_phone)+'&product_name='+encodeURI(encodeURI(n.product_name))+'&type_name='+encodeURI(encodeURI(n.type_name))+'&service_time='+encodeURI(n.service_time)+'&statusDesc='+encodeURI(encodeURI(n.statusDesc))+'&require_service_desc='+encodeURI(encodeURI(n.require_service_desc))+'">追踪</a></div>';
 					html += '		<div class="service-item clearfix">';
 					html += '			<div class="service-content-pic"><img src="images/service/product.png" style="width:80px;"></div>';
 					html += '			<div class="service-content-text">';

@@ -76,7 +76,7 @@ public class RedirectPageServlet extends HttpServlet {
         }
 //        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
         resp.sendRedirect(responseJsp+"?openId="+wxAccessDomain.getOpenid());//.forward(req,resp);
-        //resp.sendRedirect(responseJsp+"?openId=oZqEpv9ujQa9Q2wkQYhexn-UhU0M");
+      //  resp.sendRedirect(responseJsp+"?openId=oZqEpv9ujQa9Q2wkQYhexn-UhU0M");
 //      resp.sendRedirect(responseJsp+"?openId="+1);//.forward(req,resp);
     }
 
