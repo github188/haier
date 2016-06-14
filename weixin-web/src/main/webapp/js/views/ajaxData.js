@@ -694,8 +694,6 @@ function addMaintenceData(){
 		"address":$("#infoaddress").val(),
 		//"infowrong":infowrong,
 	};
-	
- 	alert(jsonData.require_service_desc);
 
 	//jQuery.each( jsonData, function(i, field){
 	//	  alert(field.value);
