@@ -8,6 +8,7 @@ import com.haier.domain.UserProduct;
 import com.haier.test.Test;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.PreparedStatementCreator;
+import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
@@ -346,11 +347,17 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     }
 
     @Override
-    public String isExistWithOpenId(String openId) throws Exception {
-        List<String>  result = getBySqlRowMapper("select id from t_user where user_source_id='" + openId + "'", new RowMapper<String>() {
+    public String isExistWithOpenId(final String openId) throws Exception {
+        StringBuilder sql = new StringBuilder("select id from t_user where user_source_id=？");
+        List<String>  result = super.getJdbcTemplate().query("", new PreparedStatementSetter() {
             @Override
-            public String mapRow(ResultSet rs, int rowNum) throws SQLException {
-                return rs.getString(1);
+            public void setValues(PreparedStatement preparedStatement) throws SQLException {
+                preparedStatement.setString(1,openId);
+            }
+        }, new RowMapper<String>() {
+            @Override
+            public String mapRow(ResultSet resultSet, int i) throws SQLException {
+                return resultSet.getString(1);
             }
         });
         if(null == result ||result.size()==0){
