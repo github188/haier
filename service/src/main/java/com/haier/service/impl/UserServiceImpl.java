@@ -126,11 +126,13 @@ public class UserServiceImpl implements UserService{
                     return userDao.wxRegister(openId,phone,code,phone,"");
                 }
 
+            }else{
+                String str = response.getBody().getContent();
+                throw new Exception("微信激活失败!"+str);
             }
-            return "";
         }catch (Exception e){
             e.printStackTrace();
-            throw new Exception("微信激活注册失败");
+            throw new Exception("微信激活注册失败!");
         }
     }
 }

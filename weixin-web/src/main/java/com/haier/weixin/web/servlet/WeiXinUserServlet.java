@@ -3,6 +3,8 @@ package com.haier.weixin.web.servlet;
 
 import com.haier.common.httpclient.HEHttpClients;
 import com.haier.weixin.web.utils.ResponseUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +15,7 @@ import java.io.IOException;
  * Created by 雷晓武 on 2016/6/14.
  */
 public class WeiXinUserServlet extends AbstractServlet{
-
+    private Logger logger = LoggerFactory.getLogger(getClass());
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -40,6 +42,7 @@ public class WeiXinUserServlet extends AbstractServlet{
         try {
 
             String result = HEHttpClients.httpGetExecute(url,getWXHeader());
+            logger.debug("wx user operation ="+type+" \t return msg:"+result);
             ResponseUtils.returnInfo(resp,200,result);
         } catch (Exception e) {
             e.printStackTrace();

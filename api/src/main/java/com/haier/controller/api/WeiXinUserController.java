@@ -97,7 +97,7 @@ public class WeiXinUserController extends BaseController {
             return responseMsg;
         } catch (Exception e) {
             e.printStackTrace();
-            return new ResponseMsg(ResponseConstantCode.INTERNAL_ERROR_CODE,ResponseConstantCode.INTERNAL_ERROR_DESC);
+            return new ResponseMsg("30",e.getMessage());
         }
     }
 

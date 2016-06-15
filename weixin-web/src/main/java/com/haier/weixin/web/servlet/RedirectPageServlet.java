@@ -24,14 +24,14 @@ import java.util.Properties;
 public class RedirectPageServlet extends HttpServlet {
     private Logger logger = LoggerFactory.getLogger(getClass());
     private Properties properties;
-    private String access_token_url="";
+//    private
     private String refresh_token_url="";
     //https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b17940db3bd4c51&redirect_uri=http://hrfwtest.haier.net/weixin-web/redirect?heType=index&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect
     @Override
     public void init() throws ServletException{
         try {
             properties= PropertiesLoaderUtils.loadAllProperties("config.properties");
-            access_token_url=properties.getProperty("wx.fetch.access.tocken","https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6b17940db3bd4c51&secret=aac91e95b920141d4fe8e3d6483931ae&code={0}&grant_type=authorization_code");
+
             refresh_token_url="https://api.weixin.qq.com/sns/oauth2/refresh_token?appid=wx6b17940db3bd4c51&grant_type=refresh_token&refresh_token=REFRESH_TOKEN";
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +43,9 @@ public class RedirectPageServlet extends HttpServlet {
 
         String type=req.getParameter("heType");
         String code=req.getParameter("code");
+        logger.info(code +" \t code =======" );
+
+//        logger.error(req.getParameterValues("code"));
         if(Strings.isNullOrEmpty(code)){
                 String urlFormat= URLDecoder.decode("http://hrfwtest.haier.net/weixin-web/redirect?heType="+type,"utf-8");
                 resp.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b17940db3bd4c51&redirect_uri="+urlFormat+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");
@@ -51,7 +54,7 @@ public class RedirectPageServlet extends HttpServlet {
 //            req.getRequestDispatcher("error.jsp").forward(req,resp);
             return;
         }
-
+        String access_token_url=properties.getProperty("wx.fetch.access.tocken","https://api.weixin.qq.com/sns/oauth2/access_token?appid=wx6b17940db3bd4c51&secret=aac91e95b920141d4fe8e3d6483931ae&code={0}&grant_type=authorization_code");
         access_token_url=MessageFormat.format(access_token_url,code);
         WXAccessDomain wxAccessDomain;
         try {
