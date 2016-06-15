@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLDecoder;
 import java.text.MessageFormat;
 import java.util.Properties;
 
@@ -43,9 +44,14 @@ public class RedirectPageServlet extends HttpServlet {
         String type=req.getParameter("heType");
         String code=req.getParameter("code");
         if(Strings.isNullOrEmpty(code)){
-            req.getRequestDispatcher("error.jsp").forward(req,resp);
+                String urlFormat= URLDecoder.decode("http://hrfwtest.haier.net/weixin-web/redirect?heType="+type,"utf-8");
+                resp.sendRedirect("https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx6b17940db3bd4c51&redirect_uri="+urlFormat+"&response_type=code&scope=snsapi_base&state=STATE#wechat_redirect");
+////                String wxResponseRefresh=HEHttpClients.httpGetExecute(refresh_token_url);
+////                wxAccessDomain = JSONObject.parseObject(wxResponseRefresh,WXAccessDomain.class);
+//            req.getRequestDispatcher("error.jsp").forward(req,resp);
             return;
         }
+
         access_token_url=MessageFormat.format(access_token_url,code);
         WXAccessDomain wxAccessDomain;
         try {
@@ -53,16 +59,14 @@ public class RedirectPageServlet extends HttpServlet {
            String wxResponse=HEHttpClients.httpGetExecute(access_token_url);
             logger.error(wxResponse);
             wxAccessDomain=JSONObject.parseObject(wxResponse,WXAccessDomain.class);
-            if(Strings.isNullOrEmpty(wxAccessDomain.getOpenid())){
-                String wxResponseRefresh=HEHttpClients.httpGetExecute(refresh_token_url);
-                wxAccessDomain = JSONObject.parseObject(wxResponseRefresh,WXAccessDomain.class);
-            }
+
             logger.info(wxAccessDomain.toString());
         } catch (Exception e) {
             e.printStackTrace();
             ResponseUtils.returnInfo(resp,500,"{'code':-3,'message':'wx系统异常'"+e.getMessage()+"'}");
             return;
         }
+//        if(wxAccessDomain.getOpenid())
         String responseJsp="index.jsp";
         switch (type){
             //维修
@@ -79,9 +83,11 @@ public class RedirectPageServlet extends HttpServlet {
             default:
                 break;
         }
-//        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
-        resp.sendRedirect(responseJsp+"?openId="+wxAccessDomain.getOpenid());//.forward(req,resp);
-      //  resp.sendRedirect(responseJsp+"?openId=oZqEpv9ujQa9Q2wkQYhexn-UhU0M");
+
+//            req.getSession().setAttribute("wx-openId",wxAccessDomain.getExpires_in());
+        req.getRequestDispatcher(responseJsp+"?openId="+wxAccessDomain.getOpenid()).forward(req,resp);
+//            resp.sendRedirect(responseJsp + "?openId=" + wxAccessDomain.getOpenid());//.forward(req,resp);
+            //  resp.sendRedirect(responseJsp+"?openId=oZqEpv9ujQa9Q2wkQYhexn-UhU0M");
 //      resp.sendRedirect(responseJsp+"?openId="+1);//.forward(req,resp);
     }
 
