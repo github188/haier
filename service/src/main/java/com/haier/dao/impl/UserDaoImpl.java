@@ -349,7 +349,7 @@ public class UserDaoImpl extends BaseDaoImpl implements UserDao {
     @Override
     public String isExistWithOpenId(final String openId) throws Exception {
         StringBuilder sql = new StringBuilder("select id from t_user where user_source_id=？");
-        List<String>  result = super.getJdbcTemplate().query("", new PreparedStatementSetter() {
+        List<String>  result = super.getJdbcTemplate().query(sql.toString(), new PreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1,openId);
