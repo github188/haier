@@ -55,7 +55,12 @@ public class OrderServiceImpl implements OrderService {
             //更新用户的所有订单
             HPWoWholeInfoResponse json = hpFacade.executeWoWholeInfo(order.getOrder_code());
             if(!json.getCode().equals("200")){
-                throw new Exception(json.getMsg()+" hp 获取工单失败");
+                logger.error(json.getMsg()+" hp 获取工单失败");
+                //throw new Exception(json.getMsg()+" hp 获取工单失败");
+                HPWoWholeInfo info = new HPWoWholeInfo();
+                info.setWo_status("3");
+                info.setWo_status_name("已结单");
+                json.setData(info);
             }
             orderDao.updateOrderServiceStatus(user,json.getData());
         }
@@ -70,7 +75,8 @@ public class OrderServiceImpl implements OrderService {
         HPWoWholeInfoResponse json = hpFacade.executeWoWholeInfo(orderCode);
         //更新本地的订单轨迹,饼返回
         if(!"200".equals(json.getCode())){
-            throw new Exception("从HP接口获取订单详情失败");
+            logger.error(json.getMsg()+" hp 获取工单失败");
+            //throw new Exception("从HP接口获取订单详情失败");
         }
         List<ServiceOrderTrace> list = orderDao.updateOrderServiceTrack(orderCode,json);
         return list;
