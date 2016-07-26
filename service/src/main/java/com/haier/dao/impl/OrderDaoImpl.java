@@ -155,18 +155,21 @@ public class OrderDaoImpl extends BaseDaoImpl implements OrderDao{
     public List<ServiceOrderTrace> updateOrderServiceTrack(final String orderCode, HPWoWholeInfoResponse json) throws Exception{
         HPWoWholeInfo info = json.getData();
         StringBuilder querysql = new StringBuilder("select * from t_service_track where order_code = ? order by status asc");
-        if(!Strings.isNullOrEmpty(info.getCall_time())){
-            updateOrInsertOrderTrace(orderCode,info,"0");
+        if("200".equals(json.getCode())){
+            if(!Strings.isNullOrEmpty(info.getCall_time())){
+                updateOrInsertOrderTrace(orderCode,info,"0");
+            }
+            if(!Strings.isNullOrEmpty(info.getAssign_date())){
+                updateOrInsertOrderTrace(orderCode,info,"1");
+            }
+            if(!Strings.isNullOrEmpty(info.getEnter_time())){
+                updateOrInsertOrderTrace(orderCode,info,"2");
+            }
+            if(!Strings.isNullOrEmpty(info.getServer_close_time())){
+                updateOrInsertOrderTrace(orderCode,info,"3");
+            }
         }
-        if(!Strings.isNullOrEmpty(info.getAssign_date())){
-            updateOrInsertOrderTrace(orderCode,info,"1");
-        }
-        if(!Strings.isNullOrEmpty(info.getEnter_time())){
-            updateOrInsertOrderTrace(orderCode,info,"2");
-        }
-        if(!Strings.isNullOrEmpty(info.getServer_close_time())){
-            updateOrInsertOrderTrace(orderCode,info,"3");
-        }
+
         return super.getJdbcTemplate().query(querysql.toString(), new PreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement) throws SQLException {
