@@ -1,0 +1,33 @@
+.area {
+	margin: 20px auto 0px auto;
+}
+.mui-input-group:first-child {
+	margin-top: 20px;
+}
+.mui-input-group label {
+	width: 22%;
+}
+.mui-input-row label~input,
+.mui-input-row label~select,
+.mui-input-row label~textarea {
+	width: 78%;
+}
+.mui-checkbox input[type=checkbox],
+.mui-radio input[type=radio] {
+	top: 6px;
+}
+.mui-content-padded {
+	margin-top: 25px;
+}
+.mui-btn {
+	padding: 10px;
+}
+.mui-input-row label~input, .mui-input-row label~select, .mui-input-row label~textarea{
+	margin-top: 1px;
+}
+.mui-icon-clear{margin-top:20px;}
+.register-input-password .mui-icon-clear{margin-right:50px;}
+.register-input-password-see{background:url(../images/login/see.png) right center no-repeat;border:0;display:block;width:40px;height:40px}
+.register-input-password-seeno{background:url(../images/login/nosee.png) right center no-repeat;border:0;display:block;width:40px;height:40px}
+.sending{background-color: #ccc;}
+.nosend{background-color: #32beff;}

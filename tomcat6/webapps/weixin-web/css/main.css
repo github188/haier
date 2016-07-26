@@ -1,0 +1,20 @@
+html,body{
+	font-size: 12px;
+}
+.mui-bar .mui-icon{
+	font-size:17px;
+	padding-top:14px;
+}
+a{color: #000000;}
+a:default{color:#000;}
+a:link{color:#000000}
+a:active{color: #000000;}
+span.triangle{color:#F7B52C}
+.color1{color: #333}
+.color2{color: #888}
+.color3{color: #ccc}
+.bg-color{background: #eee}
+
+.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active{
+	color:#32beff;
+}

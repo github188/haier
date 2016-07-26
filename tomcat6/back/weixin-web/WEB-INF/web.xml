@@ -1,0 +1,72 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+         version="2.5">
+    <display-name>Archetype Created Web Application</display-name>
+    <session-config>
+        <session-timeout>30</session-timeout>
+    </session-config>
+    <servlet>
+        <servlet-name>serviceOrder</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinServiceOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>serviceOrder</servlet-name>
+        <url-pattern>/serviceOrder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>serviceOrderListTracker</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinServiceTrackerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>serviceOrderListTracker</servlet-name>
+        <url-pattern>/serviceOrderListTracker</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>serviceOrderList</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinServiceOrdersServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>serviceOrderList</servlet-name>
+        <url-pattern>/serviceOrderList</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>common</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinCommonServlet</servlet-class>
+    </servlet>
+
+
+
+    <servlet-mapping>
+        <servlet-name>common</servlet-name>
+        <url-pattern>/common</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>qrGetProductInfo</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinQRServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>qrGetProductInfo</servlet-name>
+        <url-pattern>/qrGetProductInfo</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>redirect</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.RedirectPageServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>redirect</servlet-name>
+        <url-pattern>/redirect</url-pattern>
+    </servlet-mapping>
+    <!-- 微信用户-->
+    <servlet>
+        <servlet-name>wxuser</servlet-name>
+        <servlet-class>com.haier.weixin.web.servlet.WeiXinUserServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>wxuser</servlet-name>
+        <url-pattern>/wxuser</url-pattern>
+    </servlet-mapping>
+
+</web-app>

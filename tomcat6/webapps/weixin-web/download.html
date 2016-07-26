@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html class="ui-page-login">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link href="css/mui.min.css" rel="stylesheet" />
+		<link href="css/download.css" rel="stylesheet" />
+		
+
+		<script src="js/mui.min.js"></script>
+	</head>
+
+	<body>
+		<div class="mui-content1" >
+			<div style="text-align: center;width:80%;height:140px;vertical-align:middle;margin:10px auto;overflow: hidden;">
+				<img src="images/download/slogan.png" style="width:60%;height:auto;top:40px;margin-top: 20px; " />
+			</div>
+			<div style="text-align: center;width:80%;vertical-align:middle;margin:10px auto;">
+				<img src="images/download/phone.jpg" height="80%" width="80%"/>  
+			</div>
+			<div id="formbackground" style="position:absolute; width:100%; height:200px; z-index:2;bottom:0px;overflow: hidden;">  
+				<img src="images/download/cloud.png" height="200" width="100%"/>  
+			</div>
+
+            
+			<div style="position:fixed; width:100%; height:130px; z-index:3;bottom:10px;overflow: hidden;">
+				<div class="mui-content-padded">
+					<a href="app-release.apk" id='download_android' class="mui-btn mui-btn-block mui-btn-primary btn_android" style="width:100%;background-color: #50AB4C;border:-20">下载Android版</a>
+				</div>
+				<div class="mui-content-padded">
+					<a href="HaierService.ipa" id='download_apple' class="mui-btn mui-btn-block mui-btn-primary btn_iphone" style="width:100%;background-color: #232323;border:-20">下载iphone版</a>
+				</div>
+			</div>
+
+		</div>
+		<script src="js/mui.min.js"></script>
+		<script src="js/app.js"></script>
+		<script>
+			(function($, doc) {
+				$.init();
+			}(mui, document));
+		</script>
+	</body>
+
+</html>
